@@ -156,6 +156,18 @@ export function PortfolioSection() {
               <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600" />
 
               <div>
+                {/* Real Live Website Screenshot Box */}
+                <div className="w-full h-36 md:h-40 rounded-none overflow-hidden mb-4 relative border border-purple-900/20 bg-purple-950">
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+                  />
+                  <div className="absolute top-2 right-2 px-2.5 py-1 bg-[#3B0764] text-white text-[9px] font-bold tracking-wider uppercase border border-purple-400/30 shadow-md">
+                    LIVE CLIENT PROJECT
+                  </div>
+                </div>
+
                 <div className="flex items-center justify-between mb-3 pt-1">
                   <span className="text-[11px] font-extrabold tracking-wider text-purple-900 dark:text-purple-300 uppercase">
                     {project.category}
