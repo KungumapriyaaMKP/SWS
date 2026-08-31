@@ -186,19 +186,8 @@ export function ServicesSection() {
                 </div>
               </div>
 
-              {/* Bottom Tags & Action */}
-              <div className="relative z-10 pt-8 mt-6 border-t border-purple-900/15 dark:border-white/10">
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {service.tags.map((tag, i) => (
-                    <span
-                      key={i}
-                      className="px-3 py-1.5 text-xs font-bold text-purple-950 dark:text-purple-200 bg-purple-100/70 dark:bg-white/10 border border-purple-300/60 dark:border-white/20 shadow-xs"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
+              {/* Bottom Action */}
+              <div className="relative z-10 pt-6 mt-6 border-t border-purple-900/15 dark:border-white/10">
                 <button
                   onClick={() => handleInquiry(service.title)}
                   className="w-full py-3.5 px-6 bg-[#3B0764] dark:bg-purple-600 hover:bg-purple-950 dark:hover:bg-purple-700 text-white flex items-center justify-between text-xs font-bold tracking-widest uppercase transition-all duration-300 shadow-md group/btn"
