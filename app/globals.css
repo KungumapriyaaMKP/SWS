@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-main: #FAF8F5;
+  --bg-card: rgba(255, 255, 255, 0.75);
+  --text-main: #16131D;
+  --text-secondary: #5A5468;
+  --brand-violet: #826EA0;
+  --brand-rose: #B88FA5;
+  --brand-sage: #7C9082;
+  --glass-border: rgba(152, 132, 182, 0.16);
+  --glass-shadow: 0 14px 40px -10px rgba(22, 19, 29, 0.06);
+}
+
+.dark {
+  --bg-main: #0A0810;
+  --bg-card: rgba(22, 17, 33, 0.7);
+  --text-main: #FAF8F5;
+  --text-secondary: #9F99B0;
+  --brand-violet: #9884B6;
+  --brand-rose: #C8A2C8;
+  --brand-sage: #8A9F90;
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 14px 40px -10px rgba(0, 0, 0, 0.35);
+}
+
+html {
+  scroll-behavior: auto !important;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(152, 132, 182, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(152, 132, 182, 0.6);
+}
+
+/* Text Selection */
+::selection {
+  background: rgba(184, 143, 165, 0.25);
+  color: inherit;
+}
+
+/* Sublime Glass Utility Classes */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  transform: translateZ(0);
+}
+
+.glass-panel-interactive {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  transform: translateZ(0);
+  will-change: transform, background-color, border-color;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-interactive:hover {
+  border-color: rgba(152, 132, 182, 0.4);
+  transform: translateY(-5px) translateZ(0);
+  box-shadow: 0 20px 45px -12px rgba(130, 110, 160, 0.14);
+}
+
+.glass-navbar {
+  background: rgba(250, 248, 245, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(152, 132, 182, 0.14);
+}
+
+.dark .glass-navbar {
+  background: rgba(10, 8, 16, 0.88);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Sublime Gradient Text Utilities */
+.text-gradient-hero {
+  background: linear-gradient(135deg, #7A61A2 0%, #B88FA5 50%, #7C9082 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark .text-gradient-hero {
+  background: linear-gradient(135deg, #C8B6E2 0%, #E2C4B9 50%, #A7F3D0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Ambient Ambient Glows */
+.ambient-glow-1 {
+  position: absolute;
+  width: 650px;
+  height: 650px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(184, 143, 165, 0.1) 0%, rgba(250, 248, 245, 0) 70%);
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.ambient-glow-2 {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(152, 132, 182, 0.1) 0%, rgba(250, 248, 245, 0) 70%);
+  filter: blur(90px);
+  pointer-events: none;
+}
+
+/* Accessible reduced motion override */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
