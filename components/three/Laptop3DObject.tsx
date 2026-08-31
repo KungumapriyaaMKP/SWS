@@ -30,7 +30,7 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
   });
 
   return (
-    <group ref={laptopGroupRef} position={[0, -0.1, 0]} scale={[1.35, 1.35, 1.35]}>
+    <group ref={laptopGroupRef} position={[0, -0.15, 0]} scale={[1.05, 1.05, 1.05]}>
       {/* Studio Lighting */}
       <ambientLight intensity={1.6} />
       <directionalLight position={[5, 8, 6]} intensity={3.0} color="#ffffff" />
