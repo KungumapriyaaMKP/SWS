@@ -25,88 +25,88 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
     if (ctx) {
       // Soft Pastel Lilac Studio Background Gradient
       const grad = ctx.createLinearGradient(0, 0, 1024, 640);
-      grad.addColorStop(0, '#FAF5FC');
-      grad.addColorStop(0.5, '#F4EBF8');
+      grad.addColorStop(0, '#FFFFFF');
+      grad.addColorStop(0.5, '#F8F2FC');
       grad.addColorStop(1, '#EAE0F2');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, 1024, 640);
 
-      // Outer Border Line
-      ctx.strokeStyle = 'rgba(152, 132, 182, 0.4)';
-      ctx.lineWidth = 6;
-      ctx.strokeRect(10, 10, 1004, 620);
-
       // Top Browser Bar
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-      ctx.fillRect(20, 20, 984, 50);
-
-      // Browser Dots
-      ctx.fillStyle = '#EC4899';
-      ctx.beginPath();
-      ctx.arc(50, 45, 8, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = '#F59E0B';
-      ctx.beginPath();
-      ctx.arc(75, 45, 8, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = '#10B981';
-      ctx.beginPath();
-      ctx.arc(100, 45, 8, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Browser URL Text
       ctx.fillStyle = '#3B0764';
-      ctx.font = 'bold 16px sans-serif';
-      ctx.fillText('sumya-web-studio.com', 130, 50);
+      ctx.fillRect(0, 0, 1024, 54);
+
+      // Browser Window Dots
+      ctx.fillStyle = '#FF5F56';
+      ctx.beginPath();
+      ctx.arc(35, 27, 7, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#FFBD2E';
+      ctx.beginPath();
+      ctx.arc(60, 27, 7, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#27C93F';
+      ctx.beginPath();
+      ctx.arc(85, 27, 7, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Browser URL Box
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+      ctx.fillRect(115, 14, 450, 26);
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = 'bold 14px sans-serif';
+      ctx.fillText('https://sumyawebstudio.com', 130, 32);
 
       // Live Badge Right
-      ctx.fillStyle = '#9333EA';
-      ctx.fillRect(800, 32, 180, 26);
+      ctx.fillStyle = '#EC4899';
+      ctx.fillRect(820, 14, 170, 26);
       ctx.fillStyle = '#FFFFFF';
       ctx.font = 'bold 12px sans-serif';
-      ctx.fillText('LIVE STUDIO PLATFORM', 812, 50);
+      ctx.fillText('LIVE STUDIO PLATFORM', 834, 31);
 
       // Brand Pill Badge Center
-      ctx.fillStyle = 'rgba(147, 51, 234, 0.12)';
-      ctx.fillRect(380, 110, 260, 36);
+      ctx.fillStyle = 'rgba(59, 7, 100, 0.1)';
+      ctx.fillRect(380, 100, 260, 40);
       ctx.fillStyle = '#3B0764';
-      ctx.font = 'bold 14px sans-serif';
-      ctx.fillText('🌸 SUMYA WEB STUDIO', 420, 133);
+      ctx.font = 'bold 15px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('🌸 SUMYA WEB STUDIO', 512, 125);
 
       // Main Headline Text
       ctx.fillStyle = '#16131D';
-      ctx.font = 'bold 36px Georgia, serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('WE BUILD DIGITAL EXPERIENCES', 512, 220);
+      ctx.font = 'bold 44px Georgia, serif';
+      ctx.fillText('WE BUILD DIGITAL EXPERIENCES', 512, 210);
 
       ctx.fillStyle = '#3B0764';
-      ctx.font = 'italic bold 42px Georgia, serif';
-      ctx.fillText('THAT GROW BUSINESSES.', 512, 280);
+      ctx.font = 'italic bold 48px Georgia, serif';
+      ctx.fillText('THAT GROW BUSINESSES.', 512, 275);
 
       // Subtitle
-      ctx.fillStyle = '#5A5468';
-      ctx.font = '500 20px sans-serif';
+      ctx.fillStyle = '#423C50';
+      ctx.font = 'bold 22px sans-serif';
       ctx.fillText('Websites • Executive Portfolios • AI Solutions • Custom Software', 512, 340);
 
       // Primary CTA Button
       ctx.fillStyle = '#3B0764';
-      ctx.fillRect(352, 400, 150, 48);
+      ctx.fillRect(332, 400, 170, 52);
       ctx.fillStyle = '#FFFFFF';
-      ctx.font = 'bold 15px sans-serif';
-      ctx.fillText('Start a Project →', 427, 430);
+      ctx.font = 'bold 16px sans-serif';
+      ctx.fillText('Start a Project →', 417, 432);
 
       // Secondary CTA Button
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(522, 400, 170, 52);
       ctx.strokeStyle = '#3B0764';
-      ctx.lineWidth = 2;
-      ctx.strokeRect(522, 400, 150, 48);
+      ctx.lineWidth = 3;
+      ctx.strokeRect(522, 400, 170, 52);
       ctx.fillStyle = '#16131D';
-      ctx.font = 'bold 15px sans-serif';
-      ctx.fillText('Explore Work', 597, 430);
+      ctx.font = 'bold 16px sans-serif';
+      ctx.fillText('Explore Work', 607, 432);
 
       // Bottom Status Line
-      ctx.strokeStyle = 'rgba(152, 132, 182, 0.3)';
+      ctx.strokeStyle = 'rgba(59, 7, 100, 0.2)';
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.moveTo(40, 570);
@@ -119,7 +119,7 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
       ctx.fill();
 
       ctx.fillStyle = '#3B0764';
-      ctx.font = 'bold 14px sans-serif';
+      ctx.font = 'bold 15px sans-serif';
       ctx.textAlign = 'left';
       ctx.fillText('SYSTEM ACTIVE: 60 FPS', 78, 600);
 
@@ -137,13 +137,13 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
   useFrame((state, delta) => {
     if (laptopGroupRef.current) {
       // Natural 3/4 perspective matching user reference image
-      const targetRotX = 0.22 + mousePos.y * 0.2 + scrollProgress * 0.2;
-      const targetRotY = -0.45 + mousePos.x * 0.3 + Math.sin(state.clock.elapsedTime * 0.5) * 0.04;
+      const targetRotX = 0.25 + mousePos.y * 0.15 + scrollProgress * 0.15;
+      const targetRotY = -0.42 + mousePos.x * 0.25 + Math.sin(state.clock.elapsedTime * 0.5) * 0.03;
       
       laptopGroupRef.current.rotation.x = THREE.MathUtils.lerp(laptopGroupRef.current.rotation.x, targetRotX, delta * 3);
       laptopGroupRef.current.rotation.y = THREE.MathUtils.lerp(laptopGroupRef.current.rotation.y, targetRotY, delta * 3);
       
-      laptopGroupRef.current.position.y = THREE.MathUtils.lerp(laptopGroupRef.current.position.y, scrollProgress * 0.6, delta * 3);
+      laptopGroupRef.current.position.y = THREE.MathUtils.lerp(laptopGroupRef.current.position.y, scrollProgress * 0.5, delta * 3);
     }
   });
 
@@ -158,12 +158,12 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
   return (
     <group ref={laptopGroupRef} position={[0, -0.1, 0]} scale={[1.15, 1.15, 1.15]}>
       {/* Studio Lighting */}
-      <ambientLight intensity={1.5} />
-      <directionalLight position={[5, 8, 6]} intensity={2.8} color="#ffffff" />
+      <ambientLight intensity={1.6} />
+      <directionalLight position={[5, 8, 6]} intensity={3.0} color="#ffffff" />
       <pointLight position={[-4, 3, 2]} intensity={3.5} color="#D88EA8" distance={8} />
       <pointLight position={[4, -2, 2]} intensity={3.5} color="#9884B6" distance={8} />
 
-      <Float speed={1.2} rotationIntensity={0.12} floatIntensity={0.25}>
+      <Float speed={1.2} rotationIntensity={0.1} floatIntensity={0.2}>
         {/* ==================== 1. SOFT PASTEL LILAC LAPTOP BASE ==================== */}
         <group position={[0, -0.5, 0]}>
           {/* Main Bottom Body Chassis */}
@@ -221,17 +221,18 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
           {/* Hinge Cylinders */}
           <mesh position={[-1.2, 0.08, -1.18]} rotation={[0, 0, Math.PI / 2]}>
             <cylinderGeometry args={[0.05, 0.05, 0.25, 16]} />
-            <meshStandardMaterial color="#7A61A2" />
+            <meshStandardMaterial color="#3B0764" />
           </mesh>
           <mesh position={[1.2, 0.08, -1.18]} rotation={[0, 0, Math.PI / 2]}>
             <cylinderGeometry args={[0.05, 0.05, 0.25, 16]} />
-            <meshStandardMaterial color="#7A61A2" />
+            <meshStandardMaterial color="#3B0764" />
           </mesh>
         </group>
 
-        {/* ==================== 2. UPRIGHT DISPLAY LID WITH NATIVE CANVAS TEXTURE ==================== */}
-        <group position={[0, -0.42, -1.18]} rotation={[-1.57, 0, 0]}>
-          {/* Lid Back Shell */}
+        {/* ==================== 2. UPRIGHT DISPLAY LID (ANGLED BACK 105 DEGREES) ==================== */}
+        {/* Hinged at back of keyboard [0, -0.42, -1.18], rotation.x = -0.55 rad tilts the lid UP & slightly back */}
+        <group position={[0, -0.42, -1.18]} rotation={[-0.55, 0, 0]}>
+          {/* Lid Back Shell (Extending UPWARDS along +Y from hinge) */}
           <mesh position={[0, 1.15, 0]}>
             <boxGeometry args={[3.6, 2.35, 0.08]} />
             <meshPhysicalMaterial
@@ -242,19 +243,19 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
             />
           </mesh>
 
-          {/* White Front Bezel Frame */}
+          {/* Crisp White Bezel Front Frame */}
           <mesh position={[0, 1.15, 0.042]}>
             <boxGeometry args={[3.54, 2.28, 0.005]} />
             <meshStandardMaterial color="#FFFFFF" roughness={0.1} />
           </mesh>
 
-          {/* Screen Display Plane (100% Native WebGL - Fixed to Lid Mesh) */}
+          {/* Screen Display Plane (100% Native WebGL Canvas Texture) */}
           <mesh position={[0, 1.15, 0.046]}>
             <planeGeometry args={[3.38, 2.12]} />
             {screenTexture ? (
               <meshBasicMaterial map={screenTexture} />
             ) : (
-              <meshBasicMaterial color="#FAF5FC" />
+              <meshBasicMaterial color="#FFFFFF" />
             )}
           </mesh>
         </group>
