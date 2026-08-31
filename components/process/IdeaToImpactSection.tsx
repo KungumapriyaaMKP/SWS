@@ -77,111 +77,93 @@ export function IdeaToImpactSection() {
           </p>
         </div>
 
-        {/* Grid Layout: Dynamic Connector Track + Stages Navigation + 3D Canvas */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Left Stages List with Dynamic Passing Arrow Track */}
-          <div className="lg:col-span-6 relative pl-8 md:pl-10">
-            {/* Dynamic Vertical Connector Rail */}
-            <div className="absolute left-3.5 md:left-4 top-6 bottom-6 w-1 bg-purple-900/15 dark:bg-white/10 rounded-full overflow-hidden">
-              {/* Active Animated Energy Beam */}
-              <div
-                className="w-full bg-gradient-to-b from-purple-600 via-pink-600 to-rose-600 transition-all duration-500 ease-out"
-                style={{ height: `${arrowPositionPercent}%` }}
-              />
-            </div>
-
-            {/* Dynamic Passing Arrow Head Indicator */}
+        {/* Timeline Layout: Centered Dynamic Connector Track + Stages Navigation */}
+        <div className="max-w-4xl mx-auto relative pl-8 md:pl-10">
+          {/* Dynamic Vertical Connector Rail */}
+          <div className="absolute left-3.5 md:left-4 top-6 bottom-6 w-1 bg-purple-900/15 dark:bg-white/10 rounded-full overflow-hidden">
+            {/* Active Animated Energy Beam */}
             <div
-              className="absolute left-1 md:left-1.5 w-6 h-6 rounded-full bg-[#3B0764] dark:bg-purple-500 border-2 border-white dark:border-ebony text-white flex items-center justify-center shadow-lg transition-all duration-500 ease-out z-20"
-              style={{ top: `calc(${arrowPositionPercent}% * 0.85 + 16px)` }}
-            >
-              <ArrowDown className="w-3.5 h-3.5 animate-bounce text-pink-300" />
-            </div>
-
-            {/* Stage Boxes */}
-            <div className="flex flex-col gap-5">
-              {stages.map((stage, idx) => {
-                const isActive = activeStage === stage.id;
-                const isPassed = activeStage >= stage.id;
-
-                return (
-                  <div
-                    key={stage.id}
-                    onClick={() => setActiveStage(stage.id)}
-                    className={`cursor-pointer p-6 rounded-none transition-all duration-300 flex items-center justify-between border-2 relative overflow-hidden group ${
-                      isActive
-                        ? 'bg-white dark:bg-[#120E1F] border-purple-600 dark:border-purple-400 shadow-2xl scale-[1.02]'
-                        : isPassed
-                        ? 'bg-white/90 dark:bg-ebony-light/80 border-purple-900/25 dark:border-purple-500/20 shadow-md'
-                        : 'bg-white/70 dark:bg-ebony-light/40 border-purple-900/10 dark:border-white/5 opacity-70 hover:opacity-100'
-                    }`}
-                  >
-                    {/* Left Active Accent Bar */}
-                    {isActive && (
-                      <div className="absolute top-0 bottom-0 left-0 w-1.5 bg-gradient-to-b from-purple-600 to-rose-600" />
-                    )}
-
-                    <div className="flex items-center gap-4">
-                      {/* Icon */}
-                      <div
-                        className={`p-3.5 rounded-none transition-all duration-300 ${
-                          isActive
-                            ? 'bg-[#3B0764] text-white shadow-md'
-                            : 'bg-purple-100 dark:bg-white/10 text-purple-950 dark:text-purple-300'
-                        }`}
-                      >
-                        {stage.icon}
-                      </div>
-
-                      {/* Label & Subtitle */}
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <h4
-                            className={`font-serif text-xl font-bold ${
-                              isActive ? 'text-purple-950 dark:text-white' : 'text-purple-900/80 dark:text-zinc-300'
-                            }`}
-                          >
-                            {stage.label}
-                          </h4>
-                          {isActive && (
-                            <ChevronRight className="w-4 h-4 text-pink-600 dark:text-pink-400 animate-pulse" />
-                          )}
-                        </div>
-                        <p className="text-xs text-purple-900/70 dark:text-zinc-400 font-medium mt-0.5">
-                          {stage.sub}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Stage Number Badge */}
-                    <span
-                      className={`font-mono text-xs px-3 py-1.5 font-bold tracking-wider rounded-none border transition-colors ${
-                        isActive
-                          ? 'bg-purple-950 text-white border-purple-800'
-                          : 'bg-purple-100/70 dark:bg-white/10 text-purple-950 dark:text-purple-200 border-purple-300/60 dark:border-white/20'
-                      }`}
-                    >
-                      STAGE 0{stage.id + 1}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+              className="w-full bg-gradient-to-b from-purple-600 via-pink-600 to-rose-600 transition-all duration-500 ease-out"
+              style={{ height: `${arrowPositionPercent}%` }}
+            />
           </div>
 
-          {/* Right 3D Visualizer */}
-          <div className="lg:col-span-6 h-[420px] md:h-[520px] rounded-none bg-white dark:bg-[#120E1F] border-2 border-purple-900/20 dark:border-purple-400/30 shadow-2xl relative overflow-hidden flex items-center justify-center">
-            <IdeaToImpact3DCanvas activeStage={activeStage} />
+          {/* Dynamic Passing Arrow Head Indicator */}
+          <div
+            className="absolute left-1 md:left-1.5 w-6 h-6 rounded-full bg-[#3B0764] dark:bg-purple-500 border-2 border-white dark:border-ebony text-white flex items-center justify-center shadow-lg transition-all duration-500 ease-out z-20"
+            style={{ top: `calc(${arrowPositionPercent}% * 0.85 + 16px)` }}
+          >
+            <ArrowDown className="w-3.5 h-3.5 animate-bounce text-pink-300" />
+          </div>
 
-            {/* Stage Indicator Overlay */}
-            <div className="absolute bottom-6 left-6 right-6 px-6 py-3.5 rounded-none bg-white/90 dark:bg-ebony/90 border border-purple-900/20 flex items-center justify-between pointer-events-none shadow-md backdrop-blur-md">
-              <span className="text-xs font-bold tracking-widest text-purple-950 dark:text-purple-300 uppercase">
-                ACTIVE STAGE: {stages[activeStage].label}
-              </span>
-              <span className="text-xs font-mono font-bold text-purple-900 dark:text-zinc-300">
-                {activeStage + 1} / 5 STAGES
-              </span>
-            </div>
+          {/* Stage Boxes */}
+          <div className="flex flex-col gap-5">
+            {stages.map((stage, idx) => {
+              const isActive = activeStage === stage.id;
+              const isPassed = activeStage >= stage.id;
+
+              return (
+                <div
+                  key={stage.id}
+                  onClick={() => setActiveStage(stage.id)}
+                  className={`cursor-pointer p-6 rounded-none transition-all duration-300 flex items-center justify-between border-2 relative overflow-hidden group ${
+                    isActive
+                      ? 'bg-white dark:bg-[#120E1F] border-purple-600 dark:border-purple-400 shadow-2xl scale-[1.02]'
+                      : isPassed
+                      ? 'bg-white/90 dark:bg-ebony-light/80 border-purple-900/25 dark:border-purple-500/20 shadow-md'
+                      : 'bg-white/70 dark:bg-ebony-light/40 border-purple-900/10 dark:border-white/5 opacity-70 hover:opacity-100'
+                  }`}
+                >
+                  {/* Left Active Accent Bar */}
+                  {isActive && (
+                    <div className="absolute top-0 bottom-0 left-0 w-1.5 bg-gradient-to-b from-purple-600 to-rose-600" />
+                  )}
+
+                  <div className="flex items-center gap-4">
+                    {/* Icon */}
+                    <div
+                      className={`p-3.5 rounded-none transition-all duration-300 ${
+                        isActive
+                          ? 'bg-[#3B0764] text-white shadow-md'
+                          : 'bg-purple-100 dark:bg-white/10 text-purple-950 dark:text-purple-300'
+                      }`}
+                    >
+                      {stage.icon}
+                    </div>
+
+                    {/* Label & Subtitle */}
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h4
+                          className={`font-serif text-xl font-bold ${
+                            isActive ? 'text-purple-950 dark:text-white' : 'text-purple-900/80 dark:text-zinc-300'
+                          }`}
+                        >
+                          {stage.label}
+                        </h4>
+                        {isActive && (
+                          <ChevronRight className="w-4 h-4 text-pink-600 dark:text-pink-400 animate-pulse" />
+                        )}
+                      </div>
+                      <p className="text-xs text-purple-900/70 dark:text-zinc-400 font-medium mt-0.5">
+                        {stage.sub}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Stage Number Badge */}
+                  <span
+                    className={`font-mono text-xs px-3 py-1.5 font-bold tracking-wider rounded-none border transition-colors ${
+                      isActive
+                        ? 'bg-purple-950 text-white border-purple-800'
+                        : 'bg-purple-100/70 dark:bg-white/10 text-purple-950 dark:text-purple-200 border-purple-300/60 dark:border-white/20'
+                    }`}
+                  >
+                    STAGE 0{stage.id + 1}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
