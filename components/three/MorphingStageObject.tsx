@@ -147,21 +147,6 @@ export function MorphingStageObject({ activeStage }: MorphingStageObjectProps) {
           />
         </mesh>
       </Float>
-
-      {/* Floating Interactive Studio Info Card below the 3D Lotus */}
-      <Html position={[0, -2.1, 0]} center transform distanceFactor={6} zIndexRange={[100, 0]}>
-        <div className="px-5 py-3 glass-panel border-2 border-purple-900/30 bg-white/95 shadow-xl flex flex-col items-center text-center whitespace-nowrap pointer-events-none select-none min-w-[260px]">
-          <div className="flex items-center gap-2 mb-1">
-            <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
-            <span className="text-[11px] font-extrabold tracking-widest text-[#3B0764] uppercase">
-              {currentInfo.title}
-            </span>
-          </div>
-          <span className="text-xs font-semibold text-purple-950">
-            {currentInfo.desc}
-          </span>
-        </div>
-      </Html>
     </group>
   );
 }
