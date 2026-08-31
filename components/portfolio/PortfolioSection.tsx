@@ -123,51 +123,57 @@ export function PortfolioSection() {
               key={project.id}
               data-cursor="project"
               onClick={() => setSelectedProject(project)}
-              className="w-full lg:w-[500px] xl:w-[560px] flex-shrink-0 cursor-pointer group glass-panel-interactive p-6 md:p-8 rounded-3xl flex flex-col justify-between shadow-glass-light"
+              className="w-full lg:w-[480px] xl:w-[520px] flex-shrink-0 cursor-pointer group bg-white dark:bg-[#120E1F] border-2 border-purple-900/20 dark:border-purple-400/30 p-6 md:p-8 rounded-none flex flex-col justify-between shadow-2xl hover:border-purple-600 transition-all duration-300 relative overflow-hidden"
             >
+              {/* Top Gradient Accent */}
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600" />
+
               <div>
                 {/* Visual Glass Showcase Header */}
-                <div className="w-full h-56 md:h-64 rounded-2xl overflow-hidden mb-6 relative border border-purple-500/20 bg-gradient-to-br from-purple-200/40 via-pink-100/30 to-white dark:from-purple-900/40 dark:to-bg-card flex items-center justify-center group-hover:border-pink-500/50 transition-colors">
-                  <div className="text-center p-6 transform group-hover:scale-105 transition-transform duration-500">
-                    <span className="text-xs font-mono tracking-widest text-purple-700 dark:text-purple-400 block mb-2 font-bold">CASE STUDY</span>
-                    <span className="font-display text-2xl font-bold text-purple-950 dark:text-white block">{project.name}</span>
+                <div className="w-full h-44 md:h-48 rounded-none overflow-hidden mb-6 relative border border-purple-900/15 bg-gradient-to-br from-purple-100 via-pink-50 to-white dark:from-purple-950/60 dark:to-ebony flex items-center justify-center group-hover:border-purple-500 transition-colors">
+                  <div className="text-center p-4 transform group-hover:scale-105 transition-transform duration-500">
+                    <span className="text-[11px] font-mono tracking-widest text-purple-800 dark:text-purple-300 block mb-1 font-bold">
+                      CASE STUDY
+                    </span>
+                    <span className="font-serif text-xl font-bold text-purple-950 dark:text-white block px-2 leading-tight">
+                      {project.name}
+                    </span>
                   </div>
-                  <div className="absolute inset-0 bg-rose-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 </div>
 
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-bold tracking-wider text-purple-800 dark:text-purple-400 uppercase">
+                <div className="flex items-center justify-between mb-2 pt-1">
+                  <span className="text-xs font-bold tracking-wider text-purple-900 dark:text-purple-300 uppercase">
                     {project.category}
                   </span>
-                  <div className="w-8 h-8 rounded-full glass-panel flex items-center justify-center group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 group-hover:text-white transition-colors">
+                  <div className="w-7 h-7 bg-purple-100 dark:bg-white/10 text-purple-950 dark:text-purple-200 flex items-center justify-center group-hover:bg-[#3B0764] group-hover:text-white transition-colors">
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </div>
 
-                <h3 className="font-display text-2xl font-bold text-purple-950 dark:text-white mb-3 group-hover:text-pink-600 dark:group-hover:text-purple-300 transition-colors">
+                <h3 className="font-serif text-2xl font-bold text-purple-950 dark:text-white mb-2.5 group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">
                   {project.name}
                 </h3>
 
-                <p className="text-purple-900/80 dark:text-text-secondary text-sm leading-relaxed mb-6 font-medium">
+                <p className="text-purple-900/80 dark:text-zinc-300 text-xs md:text-sm leading-relaxed mb-6 font-medium">
                   {project.description}
                 </p>
               </div>
 
-              <div>
-                <div className="flex flex-wrap gap-2 pt-4 border-t border-white/10">
+              <div className="pt-4 border-t border-purple-900/15 dark:border-white/10">
+                <div className="flex flex-wrap gap-1.5 mb-4">
                   {project.techStack.map((tech, i) => (
                     <span
                       key={i}
-                      className="px-2.5 py-0.5 rounded-full text-[11px] font-medium text-zinc-300 bg-white/5 border border-white/10"
+                      className="px-2.5 py-1 text-[11px] font-bold text-purple-950 dark:text-purple-200 bg-purple-100/70 dark:bg-white/10 border border-purple-300/60 dark:border-white/20"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
 
-                <div className="mt-6 flex items-center gap-2 text-xs font-semibold text-purple-300 group-hover:text-white transition-colors">
+                <div className="w-full py-3 px-4 bg-[#3B0764] dark:bg-purple-600 hover:bg-purple-950 text-white flex items-center justify-between text-xs font-bold tracking-widest uppercase transition-all duration-300">
                   <span>View Case Study</span>
-                  <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  <ArrowUpRight className="w-4 h-4 text-pink-300 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </div>
               </div>
             </div>
