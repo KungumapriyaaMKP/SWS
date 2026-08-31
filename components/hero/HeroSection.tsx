@@ -120,14 +120,21 @@ export function HeroSection() {
           </div>
 
           {/* Verified Trust Line */}
-          <div ref={trustBadgeRef} className="pt-6 flex items-center gap-3 border-t border-luxury-lavender/15 w-full max-w-md">
-            <div className="flex items-center text-luxury-gold gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-luxury-gold text-luxury-gold" />
-              ))}
+          <div ref={trustBadgeRef} className="pt-6 flex flex-wrap items-center gap-3 border-t border-purple-900/15 w-full max-w-md">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[#3B0764] text-white text-xs font-bold tracking-wider uppercase border border-purple-400/40 shadow-md">
+              <span className="text-[#F59E0B] font-extrabold">5.0</span>
+              <div className="flex items-center text-[#F59E0B] gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className="w-3.5 h-3.5 fill-[#F59E0B] text-[#F59E0B] animate-pulse"
+                    style={{ animationDelay: `${i * 0.2}s` }}
+                  />
+                ))}
+              </div>
             </div>
-            <span className="text-xs text-ebony-muted dark:text-text-secondary font-medium tracking-wide">
-              Trusted by ambitious businesses worldwide
+            <span className="text-xs text-purple-950 font-bold tracking-wide">
+              5.0 Rated Studio • Trusted Worldwide
             </span>
           </div>
         </div>
