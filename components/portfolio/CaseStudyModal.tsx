@@ -12,6 +12,7 @@ export interface ProjectData {
   solution: string;
   techStack: string[];
   image: string;
+  liveUrl?: string;
   outcomes: string[];
 }
 
@@ -45,12 +46,13 @@ export function CaseStudyModal({ project, onClose }: CaseStudyModalProps) {
           </h2>
         </div>
 
-        {/* Featured Image Gradient Box */}
-        <div className="w-full h-64 md:h-80 rounded-2xl overflow-hidden mb-8 relative border border-white/10 bg-gradient-to-br from-purple-950/60 via-indigo-950/40 to-bg-card flex items-center justify-center">
-          <div className="text-center p-8">
-            <span className="text-purple-400 font-mono text-sm tracking-widest block mb-2">SYSTEM PREVIEW</span>
-            <h3 className="font-display text-2xl font-bold text-white">{project.name} Digital Platform</h3>
-          </div>
+        {/* Featured Image Showcase Box */}
+        <div className="w-full h-64 md:h-80 rounded-2xl overflow-hidden mb-8 relative border border-white/10 bg-black flex items-center justify-center">
+          <img
+            src={project.image}
+            alt={project.name}
+            className="w-full h-full object-cover opacity-90"
+          />
         </div>
 
         {/* Overview & Challenge */}
@@ -95,7 +97,7 @@ export function CaseStudyModal({ project, onClose }: CaseStudyModalProps) {
         </div>
 
         {/* Action Footer */}
-        <div className="pt-6 border-t border-white/10 flex items-center justify-between">
+        <div className="pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
           <button
             onClick={onClose}
             className="px-6 py-2.5 rounded-full text-xs font-semibold text-zinc-400 hover:text-white transition-colors"
@@ -103,17 +105,31 @@ export function CaseStudyModal({ project, onClose }: CaseStudyModalProps) {
             Close Window
           </button>
 
-          <button
-            onClick={() => {
-              onClose();
-              const contact = document.querySelector('#contact');
-              if (contact) contact.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="px-6 py-2.5 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-purple-600 to-indigo-600 shadow-violet-glow flex items-center gap-2"
-          >
-            <span>Request Similar System</span>
-            <ExternalLink className="w-4 h-4" />
-          </button>
+          <div className="flex items-center gap-3">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-2.5 rounded-full text-xs font-bold text-purple-950 bg-white hover:bg-zinc-200 transition-colors flex items-center gap-2 shadow-lg"
+              >
+                <span>Visit Live Site</span>
+                <ExternalLink className="w-4 h-4 text-purple-950" />
+              </a>
+            )}
+
+            <button
+              onClick={() => {
+                onClose();
+                const contact = document.querySelector('#contact');
+                if (contact) contact.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="px-6 py-2.5 rounded-full text-xs font-bold text-white bg-[#3B0764] hover:bg-purple-950 flex items-center gap-2"
+            >
+              <span>Request Similar Project</span>
+              <ExternalLink className="w-4 h-4 text-pink-300" />
+            </button>
+          </div>
         </div>
       </div>
     </div>
