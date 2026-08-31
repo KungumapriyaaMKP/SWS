@@ -73,15 +73,15 @@ export function PortfolioSection() {
     if (isMobile) return;
 
     const ctx = gsap.context(() => {
-      const scrollWidth = target.scrollWidth - window.innerWidth + 80;
+      const scrollWidth = target.scrollWidth - window.innerWidth + 100;
 
       gsap.to(target, {
         x: -scrollWidth,
         ease: 'power1.out',
         scrollTrigger: {
           trigger: trigger,
-          start: 'top top+=60',
-          end: () => `+=${scrollWidth * 0.8}`,
+          start: 'top top+=120',
+          end: () => `+=${scrollWidth * 0.75}`,
           pin: true,
           anticipatePin: 1,
           fastScrollEnd: true,
@@ -95,47 +95,47 @@ export function PortfolioSection() {
   }, []);
 
   return (
-    <section id="work" ref={triggerRef} className="relative py-24 overflow-hidden transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 mb-12">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <section id="work" ref={triggerRef} className="relative py-16 overflow-hidden transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 mb-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-purple-500/20 text-[11px] font-bold tracking-widest text-purple-800 dark:text-purple-300 uppercase mb-4 shadow-glass-light">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-none glass-panel border border-luxury-lavender/30 text-[11px] font-bold tracking-widest text-ebony dark:text-silk-100 uppercase mb-3 shadow-glass-silk">
               SELECTED WORK
             </div>
-            <h2 className="font-display text-3xl md:text-5xl font-extrabold tracking-tight text-purple-950 dark:text-white leading-tight">
-              WORK THAT <span className="text-gradient-hero">SPEAKS FOR ITSELF.</span>
+            <h2 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-ebony dark:text-silk-100 leading-tight">
+              WORK THAT <span className="text-gradient-hero italic font-normal">SPEAKS FOR ITSELF.</span>
             </h2>
           </div>
-          <p className="text-purple-900/70 dark:text-text-secondary text-sm md:text-base max-w-md font-medium">
+          <p className="text-ebony-muted dark:text-text-secondary text-sm md:text-base max-w-md font-medium">
             Every project is built around a clear business goal—not just a beautiful interface.
           </p>
         </div>
       </div>
 
       {/* Track */}
-      <div className="w-full overflow-hidden">
+      <div className="w-full overflow-hidden pb-10">
         <div
           ref={targetRef}
-          className="flex flex-col lg:flex-row gap-8 px-4 md:px-8 max-w-7xl lg:max-w-none mx-auto lg:mx-0 w-full lg:w-max"
+          className="flex flex-col lg:flex-row gap-6 px-4 md:px-8 max-w-7xl lg:max-w-none mx-auto lg:mx-0 w-full lg:w-max"
         >
           {projects.map((project) => (
             <div
               key={project.id}
               data-cursor="project"
               onClick={() => setSelectedProject(project)}
-              className="w-full lg:w-[480px] xl:w-[520px] flex-shrink-0 cursor-pointer group bg-white dark:bg-[#120E1F] border-2 border-purple-900/20 dark:border-purple-400/30 p-6 md:p-8 rounded-none flex flex-col justify-between shadow-2xl hover:border-purple-600 transition-all duration-300 relative overflow-hidden"
+              className="w-full lg:w-[440px] xl:w-[480px] flex-shrink-0 cursor-pointer group bg-white dark:bg-[#120E1F] border-2 border-purple-900/20 dark:border-purple-400/30 p-6 rounded-none flex flex-col justify-between shadow-2xl hover:border-purple-600 transition-all duration-300 relative overflow-hidden"
             >
               {/* Top Gradient Accent */}
               <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600" />
 
               <div>
                 {/* Visual Glass Showcase Header */}
-                <div className="w-full h-44 md:h-48 rounded-none overflow-hidden mb-6 relative border border-purple-900/15 bg-gradient-to-br from-purple-100 via-pink-50 to-white dark:from-purple-950/60 dark:to-ebony flex items-center justify-center group-hover:border-purple-500 transition-colors">
-                  <div className="text-center p-4 transform group-hover:scale-105 transition-transform duration-500">
-                    <span className="text-[11px] font-mono tracking-widest text-purple-800 dark:text-purple-300 block mb-1 font-bold">
+                <div className="w-full h-36 md:h-40 rounded-none overflow-hidden mb-4 relative border border-purple-900/15 bg-gradient-to-br from-purple-100 via-pink-50 to-white dark:from-purple-950/60 dark:to-ebony flex items-center justify-center group-hover:border-purple-500 transition-colors">
+                  <div className="text-center p-3 transform group-hover:scale-105 transition-transform duration-500">
+                    <span className="text-[10px] font-mono tracking-widest text-purple-800 dark:text-purple-300 block mb-1 font-bold">
                       CASE STUDY
                     </span>
-                    <span className="font-serif text-xl font-bold text-purple-950 dark:text-white block px-2 leading-tight">
+                    <span className="font-serif text-lg font-bold text-purple-950 dark:text-white block px-2 leading-tight">
                       {project.name}
                     </span>
                   </div>
