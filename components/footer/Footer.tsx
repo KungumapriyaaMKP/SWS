@@ -2,6 +2,7 @@
 
 import { ArrowUp } from 'lucide-react';
 import { Logo } from '../navigation/Logo';
+import { RatingInteraction } from '@/components/ui/emoji-rating';
 
 export function Footer() {
   const scrollToTop = () => {
@@ -20,6 +21,11 @@ export function Footer() {
     <footer className="relative bg-bg-darkest text-white pt-16 pb-12 px-4 md:px-8 border-t border-white/5">
       {/* Animated Top Gradient Line */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
+
+      {/* Interactive Rate Us Feedback Widget */}
+      <div className="max-w-7xl mx-auto mb-12 pb-10 border-b border-white/10 flex flex-col items-center justify-center">
+        <RatingInteraction />
+      </div>
 
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
         {/* Brand */}

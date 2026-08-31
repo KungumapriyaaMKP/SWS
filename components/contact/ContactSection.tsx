@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Send, Mail, MapPin, CheckCircle2, ArrowRight } from 'lucide-react';
+import { RatingInteraction } from '@/components/ui/emoji-rating';
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
