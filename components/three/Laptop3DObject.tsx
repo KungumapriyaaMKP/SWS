@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Float, Html } from '@react-three/drei';
 import * as THREE from 'three';
@@ -12,7 +12,125 @@ interface Laptop3DObjectProps {
 
 export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }: Laptop3DObjectProps) {
   const laptopGroupRef = useRef<THREE.Group>(null);
-  const lidRef = useRef<THREE.Group>(null);
+
+  // Generate crisp native WebGL screen texture (Guaranteed 100% attached to lid)
+  const screenTexture = useMemo(() => {
+    if (typeof window === 'undefined') return null;
+
+    const canvas = document.createElement('canvas');
+    canvas.width = 1024;
+    canvas.height = 640;
+    const ctx = canvas.getContext('2d');
+
+    if (ctx) {
+      // Soft Pastel Lilac Studio Background Gradient
+      const grad = ctx.createLinearGradient(0, 0, 1024, 640);
+      grad.addColorStop(0, '#FAF5FC');
+      grad.addColorStop(0.5, '#F4EBF8');
+      grad.addColorStop(1, '#EAE0F2');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1024, 640);
+
+      // Outer Border Line
+      ctx.strokeStyle = 'rgba(152, 132, 182, 0.4)';
+      ctx.lineWidth = 6;
+      ctx.strokeRect(10, 10, 1004, 620);
+
+      // Top Browser Bar
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+      ctx.fillRect(20, 20, 984, 50);
+
+      // Browser Dots
+      ctx.fillStyle = '#EC4899';
+      ctx.beginPath();
+      ctx.arc(50, 45, 8, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#F59E0B';
+      ctx.beginPath();
+      ctx.arc(75, 45, 8, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#10B981';
+      ctx.beginPath();
+      ctx.arc(100, 45, 8, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Browser URL Text
+      ctx.fillStyle = '#3B0764';
+      ctx.font = 'bold 16px sans-serif';
+      ctx.fillText('sumya-web-studio.com', 130, 50);
+
+      // Live Badge Right
+      ctx.fillStyle = '#9333EA';
+      ctx.fillRect(800, 32, 180, 26);
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = 'bold 12px sans-serif';
+      ctx.fillText('LIVE STUDIO PLATFORM', 812, 50);
+
+      // Brand Pill Badge Center
+      ctx.fillStyle = 'rgba(147, 51, 234, 0.12)';
+      ctx.fillRect(380, 110, 260, 36);
+      ctx.fillStyle = '#3B0764';
+      ctx.font = 'bold 14px sans-serif';
+      ctx.fillText('🌸 SUMYA WEB STUDIO', 420, 133);
+
+      // Main Headline Text
+      ctx.fillStyle = '#16131D';
+      ctx.font = 'bold 36px Georgia, serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('WE BUILD DIGITAL EXPERIENCES', 512, 220);
+
+      ctx.fillStyle = '#3B0764';
+      ctx.font = 'italic bold 42px Georgia, serif';
+      ctx.fillText('THAT GROW BUSINESSES.', 512, 280);
+
+      // Subtitle
+      ctx.fillStyle = '#5A5468';
+      ctx.font = '500 20px sans-serif';
+      ctx.fillText('Websites • Executive Portfolios • AI Solutions • Custom Software', 512, 340);
+
+      // Primary CTA Button
+      ctx.fillStyle = '#3B0764';
+      ctx.fillRect(352, 400, 150, 48);
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = 'bold 15px sans-serif';
+      ctx.fillText('Start a Project →', 427, 430);
+
+      // Secondary CTA Button
+      ctx.strokeStyle = '#3B0764';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(522, 400, 150, 48);
+      ctx.fillStyle = '#16131D';
+      ctx.font = 'bold 15px sans-serif';
+      ctx.fillText('Explore Work', 597, 430);
+
+      // Bottom Status Line
+      ctx.strokeStyle = 'rgba(152, 132, 182, 0.3)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(40, 570);
+      ctx.lineTo(984, 570);
+      ctx.stroke();
+
+      ctx.fillStyle = '#10B981';
+      ctx.beginPath();
+      ctx.arc(60, 595, 6, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#3B0764';
+      ctx.font = 'bold 14px sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('SYSTEM ACTIVE: 60 FPS', 78, 600);
+
+      ctx.textAlign = 'right';
+      ctx.fillText('SUMYA WEB STUDIO © 2026', 984, 600);
+    }
+
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.needsUpdate = true;
+    return texture;
+  }, []);
 
   const cardSeparation = 1 + scrollProgress * 1.3;
 
@@ -39,7 +157,7 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
 
   return (
     <group ref={laptopGroupRef} position={[0, -0.1, 0]} scale={[1.15, 1.15, 1.15]}>
-      {/* Studio Ambient & Directional Lighting */}
+      {/* Studio Lighting */}
       <ambientLight intensity={1.5} />
       <directionalLight position={[5, 8, 6]} intensity={2.8} color="#ffffff" />
       <pointLight position={[-4, 3, 2]} intensity={3.5} color="#D88EA8" distance={8} />
@@ -111,8 +229,8 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
           </mesh>
         </group>
 
-        {/* ==================== 2. UPRIGHT DISPLAY LID (UPRIGHT OPEN ANGLE) ==================== */}
-        <group ref={lidRef} position={[0, -0.42, -1.18]} rotation={[-1.57, 0, 0]}>
+        {/* ==================== 2. UPRIGHT DISPLAY LID WITH NATIVE CANVAS TEXTURE ==================== */}
+        <group position={[0, -0.42, -1.18]} rotation={[-1.57, 0, 0]}>
           {/* Lid Back Shell */}
           <mesh position={[0, 1.15, 0]}>
             <boxGeometry args={[3.6, 2.35, 0.08]} />
@@ -130,59 +248,15 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
             <meshStandardMaterial color="#FFFFFF" roughness={0.1} />
           </mesh>
 
-          {/* Inner Screen Display Base */}
+          {/* Screen Display Plane (100% Native WebGL - Fixed to Lid Mesh) */}
           <mesh position={[0, 1.15, 0.046]}>
             <planeGeometry args={[3.38, 2.12]} />
-            <meshBasicMaterial color="#FAF5FC" />
+            {screenTexture ? (
+              <meshBasicMaterial map={screenTexture} />
+            ) : (
+              <meshBasicMaterial color="#FAF5FC" />
+            )}
           </mesh>
-
-          {/* Live Studio Interface Display on Screen */}
-          <Html
-            transform
-            distanceFactor={2.7}
-            position={[0, 1.15, 0.048]}
-            zIndexRange={[100, 0]}
-          >
-            <div className="w-[660px] h-[415px] rounded-lg bg-gradient-to-br from-[#FAF5FC] via-[#F4EBF8] to-[#EAE0F2] border-2 border-purple-300 p-6 flex flex-col justify-between text-purple-950 select-none overflow-hidden shadow-2xl">
-              {/* Top Browser Bar */}
-              <div className="flex items-center justify-between border-b border-purple-300/40 pb-3">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-rose-400" />
-                  <div className="w-3 h-3 rounded-full bg-amber-400" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-400" />
-                  <span className="text-[11px] font-mono text-purple-800 ml-2 tracking-widest uppercase font-bold">
-                    sumya-web-studio.com
-                  </span>
-                </div>
-                <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-md bg-purple-500/15 text-purple-900 border border-purple-400/40 font-bold">
-                  LIVE STUDIO PLATFORM
-                </span>
-              </div>
-
-              {/* Aesthetic Landscape Showcase inside Screen */}
-              <div className="my-auto space-y-3 px-2 text-center">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/15 border border-purple-400/40 text-[10px] font-bold text-purple-900 uppercase tracking-widest">
-                  🌸 SUMYA WEB STUDIO
-                </div>
-                <h3 className="font-serif text-3xl font-bold tracking-tight text-purple-950 leading-tight">
-                  DIGITAL PRODUCTS BUILT TO <br />
-                  <span className="text-gradient-hero italic font-normal">MOVE BUSINESSES FORWARD.</span>
-                </h3>
-                <p className="text-xs text-purple-900/80 max-w-md mx-auto leading-relaxed font-semibold">
-                  Websites • Executive Portfolios • AI Solutions • Custom Software
-                </p>
-              </div>
-
-              {/* Bottom Status */}
-              <div className="flex items-center justify-between text-[10px] font-mono text-purple-800 border-t border-purple-300/40 pt-2.5 font-bold">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  SYSTEM ACTIVE: 60 FPS
-                </span>
-                <span>SUMYA WEB STUDIO © 2026</span>
-              </div>
-            </div>
-          </Html>
         </group>
       </Float>
 
