@@ -149,37 +149,37 @@ export function ServicesSection() {
           {services.map((service) => (
             <div
               key={service.id}
-              className="service-bento-card glass-panel-interactive p-8 md:p-10 rounded-3xl relative flex flex-col justify-between group shadow-glass-silk border border-luxury-lavender/20"
+              className="service-bento-card relative flex flex-col justify-between p-8 md:p-10 bg-white dark:bg-[#120E1F] border-2 border-purple-900/20 dark:border-purple-400/30 shadow-2xl hover:shadow-purple-900/10 hover:border-purple-600 transition-all duration-300 group overflow-hidden"
             >
-              {/* Card Gradient Background Accent */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} rounded-3xl pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity duration-500`} />
+              {/* Top Accent Stripe */}
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600" />
 
               <div className="relative z-10 space-y-6">
                 {/* Header Row */}
-                <div className="flex items-center justify-between">
-                  <span className="font-serif text-3xl md:text-4xl font-bold text-luxury-lavender dark:text-luxury-dustyrose">
+                <div className="flex items-center justify-between pt-2">
+                  <span className="font-serif text-4xl font-bold text-purple-950 dark:text-purple-300">
                     {service.number}
                   </span>
-                  <div className="p-3.5 rounded-2xl glass-panel border border-luxury-lavender/25 group-hover:border-luxury-dustyrose/50 transition-colors shadow-sm">
+                  <div className="p-3.5 bg-purple-50 dark:bg-white/5 border border-purple-200 dark:border-purple-500/30 text-purple-900 dark:text-purple-300 shadow-sm">
                     {service.icon}
                   </div>
                 </div>
 
                 {/* Title & Description */}
                 <div>
-                  <h3 className="font-serif text-2xl md:text-3xl font-bold text-ebony dark:text-silk-100 mb-3 group-hover:text-luxury-deepviolet dark:group-hover:text-luxury-dustyrose transition-colors">
+                  <h3 className="font-serif text-2xl md:text-3xl font-bold text-purple-950 dark:text-white mb-3 group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-ebony-muted dark:text-text-secondary text-sm md:text-base leading-relaxed font-medium">
+                  <p className="text-purple-900/80 dark:text-zinc-300 text-sm md:text-base leading-relaxed font-medium">
                     {service.description}
                   </p>
                 </div>
 
                 {/* Key Benefits Checklist */}
-                <div className="space-y-2 pt-2">
+                <div className="space-y-2.5 pt-2">
                   {service.highlights.map((highlight, i) => (
-                    <div key={i} className="flex items-center gap-2.5 text-xs font-semibold text-ebony dark:text-zinc-200">
-                      <CheckCircle2 className="w-4 h-4 text-luxury-dustyrose flex-shrink-0" />
+                    <div key={i} className="flex items-center gap-2.5 text-xs font-bold text-purple-950 dark:text-zinc-200">
+                      <CheckCircle2 className="w-4 h-4 text-pink-600 dark:text-pink-400 flex-shrink-0" />
                       <span>{highlight}</span>
                     </div>
                   ))}
@@ -187,12 +187,12 @@ export function ServicesSection() {
               </div>
 
               {/* Bottom Tags & Action */}
-              <div className="relative z-10 pt-8 mt-6 border-t border-luxury-lavender/15">
+              <div className="relative z-10 pt-8 mt-6 border-t border-purple-900/15 dark:border-white/10">
                 <div className="flex flex-wrap gap-2 mb-6">
                   {service.tags.map((tag, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 rounded-full text-xs font-semibold text-ebony/80 dark:text-zinc-300 bg-white/60 dark:bg-white/5 border border-luxury-lavender/20 shadow-xs"
+                      className="px-3 py-1.5 text-xs font-bold text-purple-950 dark:text-purple-200 bg-purple-100/70 dark:bg-white/10 border border-purple-300/60 dark:border-white/20 shadow-xs"
                     >
                       {tag}
                     </span>
@@ -201,10 +201,10 @@ export function ServicesSection() {
 
                 <button
                   onClick={() => handleInquiry(service.title)}
-                  className="w-full py-3 px-5 rounded-2xl glass-panel border border-luxury-lavender/30 hover:border-luxury-dustyrose/60 flex items-center justify-between text-xs font-bold tracking-wider text-ebony dark:text-silk-100 group/btn transition-all duration-300"
+                  className="w-full py-3.5 px-6 bg-[#3B0764] dark:bg-purple-600 hover:bg-purple-950 dark:hover:bg-purple-700 text-white flex items-center justify-between text-xs font-bold tracking-widest uppercase transition-all duration-300 shadow-md group/btn"
                 >
-                  <span className="uppercase">Start {service.title}</span>
-                  <ArrowUpRight className="w-4 h-4 text-luxury-dustyrose transition-transform duration-300 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1" />
+                  <span>Start {service.title}</span>
+                  <ArrowUpRight className="w-4 h-4 text-pink-300 transition-transform duration-300 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1" />
                 </button>
               </div>
             </div>
