@@ -103,11 +103,10 @@ export function HeroSection() {
               ref={primaryBtnRef}
               data-cursor="cta"
               onClick={() => scrollToSection('#contact')}
-              className="group relative px-8 py-4 rounded-none text-xs font-bold tracking-widest uppercase text-white bg-gradient-to-r from-luxury-deepviolet via-luxury-dustyrose to-luxury-lavender shadow-rose-subtle hover:shadow-luxury-glow transition-all duration-300 flex items-center gap-3 overflow-hidden"
+              className="group relative px-8 py-4 rounded-none text-xs font-bold tracking-widest uppercase text-white bg-[#3B0764] hover:bg-[#2A0548] shadow-lg transition-all duration-300 flex items-center gap-3 overflow-hidden"
             >
               <span className="relative z-10">Start a Project</span>
               <ArrowRight className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
-              <div className="absolute inset-0 bg-gradient-to-r from-luxury-dustyrose to-luxury-deepviolet opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </button>
 
             <button

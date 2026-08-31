@@ -69,11 +69,10 @@ export function FinalCTASection() {
               ref={primaryBtnRef}
               data-cursor="cta"
               onClick={scrollToContact}
-              className="group relative px-8 py-4 rounded-full text-sm font-bold tracking-wide text-white bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 shadow-rose-glow hover:shadow-lavender-glow transition-all duration-300 flex items-center gap-3 overflow-hidden"
+              className="group relative px-8 py-4 rounded-none text-xs font-bold tracking-widest uppercase text-white bg-[#3B0764] hover:bg-[#2A0548] shadow-lg transition-all duration-300 flex items-center gap-3 overflow-hidden"
             >
               <span className="relative z-10">START A PROJECT</span>
               <ArrowRight className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
-              <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </button>
 
             <button
