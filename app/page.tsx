@@ -11,20 +11,29 @@ import { AboutSection } from '@/components/about/AboutSection';
 import { SocialProofSection } from '@/components/proof/SocialProofSection';
 import { FinalCTASection } from '@/components/cta/FinalCTASection';
 import { ContactSection } from '@/components/contact/ContactSection';
+import { BotanicalFlourish } from '@/components/botanical/BotanicalFlourish';
 
 export default function Home() {
   useSmoothScroll();
 
   return (
-    <div className="relative w-full overflow-hidden bg-[#F6F0FA] dark:bg-[#0B0813] text-purple-950 dark:text-white transition-colors duration-500">
+    <div className="relative w-full overflow-hidden bg-[#FAF8F5] dark:bg-[#0A0810] text-ebony dark:text-silk-100 transition-colors duration-500">
       <HeroSection />
+      <BotanicalFlourish variant="divider" />
       <ServicesSection />
+      <BotanicalFlourish variant="divider" />
       <IdeaToImpactSection />
+      <BotanicalFlourish variant="divider" />
       <PortfolioSection />
+      <BotanicalFlourish variant="divider" />
       <WhySumyaSection />
+      <BotanicalFlourish variant="divider" />
       <ProcessSection />
+      <BotanicalFlourish variant="divider" />
       <AboutSection />
+      <BotanicalFlourish variant="divider" />
       <SocialProofSection />
+      <BotanicalFlourish variant="divider" />
       <FinalCTASection />
       <ContactSection />
     </div>

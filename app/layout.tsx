@@ -7,6 +7,7 @@ import { PageLoader } from '@/components/animations/PageLoader';
 import { ScrollProgressBar } from '@/components/animations/ScrollProgressBar';
 import { CustomCursor } from '@/components/animations/CustomCursor';
 import { PixelCursorTrail } from '@/components/ui/pixel-trail';
+import { BotanicalParticles } from '@/components/botanical/BotanicalParticles';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -73,6 +74,7 @@ export default function RootLayout({
         <ScrollProgressBar />
         <CustomCursor />
         <PixelCursorTrail />
+        <BotanicalParticles />
         <Navbar />
         <main>{children}</main>
         <Footer />

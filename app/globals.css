@@ -152,9 +152,27 @@ section {
   width: 700px;
   height: 700px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(152, 132, 182, 0.1) 0%, rgba(250, 248, 245, 0) 70%);
+  background: radial-gradient(circle, rgba(124, 144, 130, 0.12) 0%, rgba(250, 248, 245, 0) 70%);
   filter: blur(90px);
   pointer-events: none;
+}
+
+/* Botanical Leaf & Petal Ambient Drift */
+@keyframes botanical-drift {
+  0% {
+    transform: translateY(0px) rotate(0deg) scale(0.95);
+  }
+  50% {
+    transform: translateY(-28px) rotate(18deg) scale(1.05);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg) scale(0.95);
+  }
+}
+
+.animate-botanical-drift {
+  animation: botanical-drift linear infinite;
+  will-change: transform;
 }
 
 /* Accessible reduced motion override */
