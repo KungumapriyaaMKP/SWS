@@ -125,13 +125,14 @@ section {
 
 /* Sublime Gradient Text Utilities */
 .text-gradient-hero {
-  background: linear-gradient(135deg, #7A61A2 0%, #B88FA5 50%, #7C9082 100%);
+  background: linear-gradient(135deg, #3B0764 0%, #701548 50%, #1A4331 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-weight: 700;
 }
 
 .dark .text-gradient-hero {
-  background: linear-gradient(135deg, #C8B6E2 0%, #E2C4B9 50%, #A7F3D0 100%);
+  background: linear-gradient(135deg, #E9D5FF 0%, #FBCFE8 50%, #A7F3D0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
