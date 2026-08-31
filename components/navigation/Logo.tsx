@@ -17,17 +17,15 @@ export function Logo({ className = '', showText = true, size = 'md' }: LogoProps
 
   return (
     <div className={`flex items-center gap-3.5 ${className}`}>
-      {/* Pristine Lotus Brand Mark Container */}
-      <div className="relative rounded-none overflow-hidden glass-panel p-1.5 border border-luxury-lavender/20 flex items-center justify-center bg-white/80 dark:bg-ebony-light/80 shadow-glass-silk transition-all duration-300">
-        <Image
-          src="/logo.png"
-          alt="Sumya Web Studio Logo"
-          width={180}
-          height={180}
-          className={`${imageSizes[size]} object-contain`}
-          priority
-        />
-      </div>
+      {/* Pristine Lotus Brand Mark without background */}
+      <Image
+        src="/logo.png"
+        alt="Sumya Web Studio Logo"
+        width={180}
+        height={180}
+        className={`${imageSizes[size]} object-contain`}
+        priority
+      />
 
       {showText && (
         <div className="flex flex-col">
