@@ -80,7 +80,7 @@ export function PortfolioSection() {
         ease: 'power1.out',
         scrollTrigger: {
           trigger: trigger,
-          start: 'top top+=120',
+          start: 'top top+=100',
           end: () => `+=${scrollWidth * 0.75}`,
           pin: true,
           anticipatePin: 1,
@@ -95,7 +95,7 @@ export function PortfolioSection() {
   }, []);
 
   return (
-    <section id="work" ref={triggerRef} className="relative py-16 overflow-hidden transition-colors duration-300">
+    <section id="work" ref={triggerRef} className="relative pt-28 md:pt-36 pb-20 overflow-hidden transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 md:px-8 mb-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
@@ -113,7 +113,7 @@ export function PortfolioSection() {
       </div>
 
       {/* Track */}
-      <div className="w-full overflow-hidden pb-10">
+      <div className="w-full overflow-hidden pb-16 pt-2">
         <div
           ref={targetRef}
           className="flex flex-col lg:flex-row gap-6 px-4 md:px-8 max-w-7xl lg:max-w-none mx-auto lg:mx-0 w-full lg:w-max"
@@ -130,12 +130,12 @@ export function PortfolioSection() {
 
               <div>
                 {/* Visual Glass Showcase Header */}
-                <div className="w-full h-36 md:h-40 rounded-none overflow-hidden mb-4 relative border border-purple-900/15 bg-gradient-to-br from-purple-100 via-pink-50 to-white dark:from-purple-950/60 dark:to-ebony flex items-center justify-center group-hover:border-purple-500 transition-colors">
+                <div className="w-full h-28 md:h-32 rounded-none overflow-hidden mb-4 relative border border-purple-900/15 bg-gradient-to-br from-purple-100 via-pink-50 to-white dark:from-purple-950/60 dark:to-ebony flex items-center justify-center group-hover:border-purple-500 transition-colors">
                   <div className="text-center p-3 transform group-hover:scale-105 transition-transform duration-500">
                     <span className="text-[10px] font-mono tracking-widest text-purple-800 dark:text-purple-300 block mb-1 font-bold">
                       CASE STUDY
                     </span>
-                    <span className="font-serif text-lg font-bold text-purple-950 dark:text-white block px-2 leading-tight">
+                    <span className="font-serif text-base font-bold text-purple-950 dark:text-white block px-2 leading-tight">
                       {project.name}
                     </span>
                   </div>
