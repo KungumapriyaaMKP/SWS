@@ -9,8 +9,13 @@ interface IdeaToImpact3DCanvasProps {
 }
 
 export function IdeaToImpact3DCanvas({ activeStage }: IdeaToImpact3DCanvasProps) {
+  const [mounted, setMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -26,6 +31,10 @@ export function IdeaToImpact3DCanvas({ activeStage }: IdeaToImpact3DCanvasProps)
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
+
+  if (!mounted) {
+    return <div ref={containerRef} className="w-full h-full min-h-[350px] md:min-h-[480px]" />;
+  }
 
   return (
     <div ref={containerRef} className="w-full h-full min-h-[350px] md:min-h-[480px] relative pointer-events-auto">

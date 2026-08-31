@@ -9,9 +9,14 @@ interface Hero3DCanvasProps {
 }
 
 export function Hero3DCanvas({ scrollProgress = 0 }: Hero3DCanvasProps) {
+  const [mounted, setMounted] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -40,6 +45,10 @@ export function Hero3DCanvas({ scrollProgress = 0 }: Hero3DCanvasProps) {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [isVisible]);
+
+  if (!mounted) {
+    return <div ref={containerRef} className="w-full h-full min-h-[400px] md:min-h-[600px]" />;
+  }
 
   return (
     <div ref={containerRef} className="w-full h-full min-h-[400px] md:min-h-[600px] relative pointer-events-auto flex items-center justify-center">
