@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Float, Html, useTexture } from '@react-three/drei';
+import { Float, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface Laptop3DObjectProps {
@@ -15,8 +15,6 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
   
   // Load the user's authentic Crumbs & Coffee project showcase image texture
   const screenTexture = useTexture('/crumbs-and-coffee.png');
-
-  const cardSeparation = 1 + scrollProgress * 0.4;
 
   useFrame((state, delta) => {
     if (laptopGroupRef.current) {
@@ -31,16 +29,8 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
     }
   });
 
-  const cardsData = [
-    { label: 'WEBSITE DEVELOPMENT', pos: [-1.75, 1.6, 0.5] as [number, number, number] },
-    { label: 'EXECUTIVE PORTFOLIOS', pos: [1.75, 1.5, -0.4] as [number, number, number] },
-    { label: 'AI SOLUTIONS', pos: [-1.85, -0.5, 0.8] as [number, number, number] },
-    { label: 'CUSTOM SOFTWARE', pos: [2.8, -0.6, -0.5] as [number, number, number] },
-    { label: 'BUSINESS AUTOMATION', pos: [0, -2.1, 0.8] as [number, number, number] },
-  ];
-
   return (
-    <group ref={laptopGroupRef} position={[0, 0.1, 0]} scale={[0.88, 0.88, 0.88]}>
+    <group ref={laptopGroupRef} position={[0, -0.1, 0]} scale={[1.35, 1.35, 1.35]}>
       {/* Studio Lighting */}
       <ambientLight intensity={1.6} />
       <directionalLight position={[5, 8, 6]} intensity={3.0} color="#ffffff" />
@@ -139,27 +129,6 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
           </mesh>
         </group>
       </Float>
-
-      {/* Floating Translucent Glass UI Fragments around Laptop */}
-      {cardsData.map((card, idx) => {
-        const [x, y, z] = card.pos;
-        const scaledX = x * cardSeparation;
-        const scaledY = y * cardSeparation;
-        const scaledZ = z * cardSeparation;
-
-        return (
-          <Float key={idx} speed={1.5 + idx * 0.3} rotationIntensity={0.2} floatIntensity={0.5}>
-            <group position={[scaledX, scaledY, scaledZ]}>
-              <Html transform distanceFactor={5} zIndexRange={[100, 0]} position={[0, 0, 0]}>
-                <div className="px-4 py-2 glass-panel text-xs font-bold tracking-wider text-ebony border border-luxury-champagne/30 shadow-glass-silk flex items-center gap-2 whitespace-nowrap backdrop-blur-md pointer-events-none select-none bg-white/90">
-                  <span className="w-2 h-2 rounded-full bg-luxury-dustyrose animate-pulse" />
-                  {card.label}
-                </div>
-              </Html>
-            </group>
-          </Float>
-        );
-      })}
     </group>
   );
 }
