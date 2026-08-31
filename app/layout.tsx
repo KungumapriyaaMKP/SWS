@@ -55,6 +55,8 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
+              document.documentElement.classList.remove('dark');
+              localStorage.removeItem('theme');
               window.addEventListener('error', function(e) {
                 if (e.message && (e.message.indexOf('Loading chunk') !== -1 || e.message.indexOf('ChunkLoadError') !== -1)) {
                   window.location.reload();

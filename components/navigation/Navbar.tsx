@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { useMagneticButton } from '@/hooks/useMagneticButton';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { Logo } from './Logo';
-import { ThemeToggle } from './ThemeToggle';
 import RandomLetterSwapNav from '@/components/ui/m-random-letter-swap-1';
 
 export function Navbar() {
@@ -71,9 +70,8 @@ export function Navbar() {
             />
           </div>
 
-          {/* Right Controls: Theme Toggle & Desktop CTA */}
+          {/* Right Controls: Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <ThemeToggle />
             <button
               ref={btnRef}
               data-cursor="cta"
@@ -81,23 +79,21 @@ export function Navbar() {
                 const target = document.querySelector('#contact');
                 if (target) target.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="group relative px-7 py-3 rounded-none text-xs font-bold tracking-widest uppercase text-white bg-gradient-to-r from-luxury-deepviolet via-luxury-dustyrose to-luxury-lavender shadow-rose-subtle hover:shadow-luxury-glow transition-all duration-300 flex items-center gap-2 overflow-hidden"
+              className="group relative px-7 py-3 rounded-none text-xs font-bold tracking-widest uppercase text-white bg-[#3B0764] hover:bg-purple-950 shadow-md transition-all duration-300 flex items-center gap-2 overflow-hidden"
             >
               <span className="relative z-10">Start a Project</span>
               <ArrowRight className="w-3.5 h-3.5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
-              <div className="absolute inset-0 bg-gradient-to-r from-luxury-dustyrose to-luxury-deepviolet opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </button>
           </div>
 
           {/* Mobile Right Controls */}
           <div className="md:hidden flex items-center gap-3">
-            <ThemeToggle />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl glass-panel text-purple-950 dark:text-white focus:outline-none"
+              className="p-2 rounded-none glass-panel text-purple-950 focus:outline-none"
               aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6 text-purple-600" /> : <Menu className="w-6 h-6 text-purple-950 dark:text-zinc-200" />}
+              {mobileMenuOpen ? <X className="w-6 h-6 text-purple-600" /> : <Menu className="w-6 h-6 text-purple-950" />}
             </button>
           </div>
         </div>
