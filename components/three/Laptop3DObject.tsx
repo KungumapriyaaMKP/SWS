@@ -132,7 +132,7 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
     return texture;
   }, []);
 
-  const cardSeparation = 1 + scrollProgress * 1.3;
+  const cardSeparation = 1 + scrollProgress * 0.4;
 
   useFrame((state, delta) => {
     if (laptopGroupRef.current) {
@@ -148,11 +148,11 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
   });
 
   const cardsData = [
-    { label: 'WEBSITE DEVELOPMENT', pos: [-2.6, 1.8, 0.5] as [number, number, number] },
-    { label: 'EXECUTIVE PORTFOLIOS', pos: [2.6, 1.7, -0.4] as [number, number, number] },
-    { label: 'AI SOLUTIONS', pos: [-2.8, -0.5, 0.8] as [number, number, number] },
-    { label: 'CUSTOM SOFTWARE', pos: [2.8, -0.6, -0.5] as [number, number, number] },
-    { label: 'BUSINESS AUTOMATION', pos: [0, -2.4, 0.8] as [number, number, number] },
+    { label: 'WEBSITE DEVELOPMENT', pos: [-1.75, 1.6, 0.5] as [number, number, number] },
+    { label: 'EXECUTIVE PORTFOLIOS', pos: [1.75, 1.5, -0.4] as [number, number, number] },
+    { label: 'AI SOLUTIONS', pos: [-1.85, -0.5, 0.8] as [number, number, number] },
+    { label: 'CUSTOM SOFTWARE', pos: [1.85, -0.6, -0.5] as [number, number, number] },
+    { label: 'BUSINESS AUTOMATION', pos: [0, -2.1, 0.8] as [number, number, number] },
   ];
 
   return (
