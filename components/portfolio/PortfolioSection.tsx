@@ -80,7 +80,7 @@ export function PortfolioSection() {
         ease: 'power1.out',
         scrollTrigger: {
           trigger: trigger,
-          start: 'top top+=100',
+          start: 'top top+=80',
           end: () => `+=${scrollWidth * 0.75}`,
           pin: true,
           anticipatePin: 1,
@@ -95,25 +95,25 @@ export function PortfolioSection() {
   }, []);
 
   return (
-    <section id="work" ref={triggerRef} className="relative pt-28 md:pt-36 pb-20 overflow-hidden transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 mb-8">
+    <section id="work" ref={triggerRef} className="relative pt-24 pb-12 overflow-hidden transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 mb-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-none glass-panel border border-luxury-lavender/30 text-[11px] font-bold tracking-widest text-ebony dark:text-silk-100 uppercase mb-3 shadow-glass-silk">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-none glass-panel border border-luxury-lavender/30 text-[11px] font-bold tracking-widest text-ebony dark:text-silk-100 uppercase mb-2 shadow-glass-silk">
               SELECTED WORK
             </div>
-            <h2 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-ebony dark:text-silk-100 leading-tight">
+            <h2 className="font-serif text-2xl md:text-4xl font-bold tracking-tight text-ebony dark:text-silk-100 leading-tight">
               WORK THAT <span className="text-gradient-hero italic font-normal">SPEAKS FOR ITSELF.</span>
             </h2>
           </div>
-          <p className="text-ebony-muted dark:text-text-secondary text-sm md:text-base max-w-md font-medium">
+          <p className="text-ebony-muted dark:text-text-secondary text-xs md:text-sm max-w-md font-medium">
             Every project is built around a clear business goal—not just a beautiful interface.
           </p>
         </div>
       </div>
 
       {/* Track */}
-      <div className="w-full overflow-hidden pb-16 pt-2">
+      <div className="w-full overflow-hidden pb-12 pt-1">
         <div
           ref={targetRef}
           className="flex flex-col lg:flex-row gap-6 px-4 md:px-8 max-w-7xl lg:max-w-none mx-auto lg:mx-0 w-full lg:w-max"
@@ -123,26 +123,14 @@ export function PortfolioSection() {
               key={project.id}
               data-cursor="project"
               onClick={() => setSelectedProject(project)}
-              className="w-full lg:w-[440px] xl:w-[480px] flex-shrink-0 cursor-pointer group bg-white dark:bg-[#120E1F] border-2 border-purple-900/20 dark:border-purple-400/30 p-6 rounded-none flex flex-col justify-between shadow-2xl hover:border-purple-600 transition-all duration-300 relative overflow-hidden"
+              className="w-full lg:w-[400px] xl:w-[440px] flex-shrink-0 cursor-pointer group bg-white dark:bg-[#120E1F] border-2 border-purple-900/20 dark:border-purple-400/30 p-5 md:p-6 rounded-none flex flex-col justify-between shadow-2xl hover:border-purple-600 transition-all duration-300 relative overflow-hidden"
             >
               {/* Top Gradient Accent */}
               <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600" />
 
               <div>
-                {/* Visual Glass Showcase Header */}
-                <div className="w-full h-28 md:h-32 rounded-none overflow-hidden mb-4 relative border border-purple-900/15 bg-gradient-to-br from-purple-100 via-pink-50 to-white dark:from-purple-950/60 dark:to-ebony flex items-center justify-center group-hover:border-purple-500 transition-colors">
-                  <div className="text-center p-3 transform group-hover:scale-105 transition-transform duration-500">
-                    <span className="text-[10px] font-mono tracking-widest text-purple-800 dark:text-purple-300 block mb-1 font-bold">
-                      CASE STUDY
-                    </span>
-                    <span className="font-serif text-base font-bold text-purple-950 dark:text-white block px-2 leading-tight">
-                      {project.name}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between mb-2 pt-1">
-                  <span className="text-xs font-bold tracking-wider text-purple-900 dark:text-purple-300 uppercase">
+                <div className="flex items-center justify-between mb-3 pt-1">
+                  <span className="text-[11px] font-extrabold tracking-wider text-purple-900 dark:text-purple-300 uppercase">
                     {project.category}
                   </span>
                   <div className="w-7 h-7 bg-purple-100 dark:bg-white/10 text-purple-950 dark:text-purple-200 flex items-center justify-center group-hover:bg-[#3B0764] group-hover:text-white transition-colors">
@@ -150,11 +138,11 @@ export function PortfolioSection() {
                   </div>
                 </div>
 
-                <h3 className="font-serif text-2xl font-bold text-purple-950 dark:text-white mb-2.5 group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">
+                <h3 className="font-serif text-xl md:text-2xl font-bold text-purple-950 dark:text-white mb-2.5 group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">
                   {project.name}
                 </h3>
 
-                <p className="text-purple-900/80 dark:text-zinc-300 text-xs md:text-sm leading-relaxed mb-6 font-medium">
+                <p className="text-purple-900/80 dark:text-zinc-300 text-xs leading-relaxed mb-4 font-medium">
                   {project.description}
                 </p>
               </div>
@@ -164,7 +152,7 @@ export function PortfolioSection() {
                   {project.techStack.map((tech, i) => (
                     <span
                       key={i}
-                      className="px-2.5 py-1 text-[11px] font-bold text-purple-950 dark:text-purple-200 bg-purple-100/70 dark:bg-white/10 border border-purple-300/60 dark:border-white/20"
+                      className="px-2 py-0.5 text-[10px] font-bold text-purple-950 dark:text-purple-200 bg-purple-100/70 dark:bg-white/10 border border-purple-300/60 dark:border-white/20"
                     >
                       {tech}
                     </span>
