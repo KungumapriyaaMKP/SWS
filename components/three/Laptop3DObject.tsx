@@ -1,8 +1,8 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Float, Html, useTexture } from '@react-three/drei';
+import { Float, Html } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface Laptop3DObjectProps {
@@ -12,20 +12,20 @@ interface Laptop3DObjectProps {
 
 export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }: Laptop3DObjectProps) {
   const laptopGroupRef = useRef<THREE.Group>(null);
-  const texture = useTexture('/laptop-mockup.png');
+  const lidRef = useRef<THREE.Group>(null);
 
   const cardSeparation = 1 + scrollProgress * 1.3;
 
   useFrame((state, delta) => {
     if (laptopGroupRef.current) {
       // Natural 3/4 perspective matching user reference image
-      const targetRotX = 0.2 + mousePos.y * 0.2 + scrollProgress * 0.25;
-      const targetRotY = -0.4 + mousePos.x * 0.3 + Math.sin(state.clock.elapsedTime * 0.6) * 0.05;
+      const targetRotX = 0.22 + mousePos.y * 0.2 + scrollProgress * 0.2;
+      const targetRotY = -0.45 + mousePos.x * 0.3 + Math.sin(state.clock.elapsedTime * 0.5) * 0.04;
       
       laptopGroupRef.current.rotation.x = THREE.MathUtils.lerp(laptopGroupRef.current.rotation.x, targetRotX, delta * 3);
       laptopGroupRef.current.rotation.y = THREE.MathUtils.lerp(laptopGroupRef.current.rotation.y, targetRotY, delta * 3);
       
-      laptopGroupRef.current.position.y = THREE.MathUtils.lerp(laptopGroupRef.current.position.y, scrollProgress * 0.8, delta * 3);
+      laptopGroupRef.current.position.y = THREE.MathUtils.lerp(laptopGroupRef.current.position.y, scrollProgress * 0.6, delta * 3);
     }
   });
 
@@ -39,13 +39,13 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
 
   return (
     <group ref={laptopGroupRef} position={[0, -0.1, 0]} scale={[1.15, 1.15, 1.15]}>
-      {/* Studio Ambient & Point Lighting */}
-      <ambientLight intensity={1.2} />
-      <directionalLight position={[5, 8, 5]} intensity={2.5} color="#ffffff" />
-      <pointLight position={[-4, 3, 2]} intensity={4} color="#D88EA8" distance={8} />
-      <pointLight position={[4, -2, 2]} intensity={4} color="#9884B6" distance={8} />
+      {/* Studio Ambient & Directional Lighting */}
+      <ambientLight intensity={1.5} />
+      <directionalLight position={[5, 8, 6]} intensity={2.8} color="#ffffff" />
+      <pointLight position={[-4, 3, 2]} intensity={3.5} color="#D88EA8" distance={8} />
+      <pointLight position={[4, -2, 2]} intensity={3.5} color="#9884B6" distance={8} />
 
-      <Float speed={1.2} rotationIntensity={0.15} floatIntensity={0.3}>
+      <Float speed={1.2} rotationIntensity={0.12} floatIntensity={0.25}>
         {/* ==================== 1. SOFT PASTEL LILAC LAPTOP BASE ==================== */}
         <group position={[0, -0.5, 0]}>
           {/* Main Bottom Body Chassis */}
@@ -79,7 +79,7 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
                 position={[-1.4 + col * 0.215, 0.08, -0.85 + row * 0.25]}
               >
                 <boxGeometry args={[0.18, 0.015, 0.2]} />
-                <meshStandardMaterial color="#FFFFFF" roughness={0.3} />
+                <meshStandardMaterial color="#FFFFFF" roughness={0.25} />
               </mesh>
             ))
           )}
@@ -102,17 +102,17 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
 
           {/* Hinge Cylinders */}
           <mesh position={[-1.2, 0.08, -1.18]} rotation={[0, 0, Math.PI / 2]}>
-            <cylinderGeometry args={[0.04, 0.04, 0.25, 16]} />
-            <meshStandardMaterial color="#A58AA8" />
+            <cylinderGeometry args={[0.05, 0.05, 0.25, 16]} />
+            <meshStandardMaterial color="#7A61A2" />
           </mesh>
           <mesh position={[1.2, 0.08, -1.18]} rotation={[0, 0, Math.PI / 2]}>
-            <cylinderGeometry args={[0.04, 0.04, 0.25, 16]} />
-            <meshStandardMaterial color="#A58AA8" />
+            <cylinderGeometry args={[0.05, 0.05, 0.25, 16]} />
+            <meshStandardMaterial color="#7A61A2" />
           </mesh>
         </group>
 
-        {/* ==================== 2. UPRIGHT DISPLAY LID WITH REFERENCE RENDER ==================== */}
-        <group position={[0, -0.42, -1.18]} rotation={[-1.9, 0, 0]}>
+        {/* ==================== 2. UPRIGHT DISPLAY LID (UPRIGHT OPEN ANGLE) ==================== */}
+        <group ref={lidRef} position={[0, -0.42, -1.18]} rotation={[-1.57, 0, 0]}>
           {/* Lid Back Shell */}
           <mesh position={[0, 1.15, 0]}>
             <boxGeometry args={[3.6, 2.35, 0.08]} />
@@ -124,17 +124,65 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
             />
           </mesh>
 
-          {/* Bezel Front Frame */}
+          {/* White Front Bezel Frame */}
           <mesh position={[0, 1.15, 0.042]}>
             <boxGeometry args={[3.54, 2.28, 0.005]} />
             <meshStandardMaterial color="#FFFFFF" roughness={0.1} />
           </mesh>
 
-          {/* Screen Display Image Plane (Matching Reference Image) */}
-          <mesh position={[0, 1.16, 0.046]}>
+          {/* Inner Screen Display Base */}
+          <mesh position={[0, 1.15, 0.046]}>
             <planeGeometry args={[3.38, 2.12]} />
-            <meshBasicMaterial map={texture} />
+            <meshBasicMaterial color="#FAF5FC" />
           </mesh>
+
+          {/* Live Studio Interface Display on Screen */}
+          <Html
+            transform
+            distanceFactor={2.7}
+            position={[0, 1.15, 0.048]}
+            zIndexRange={[100, 0]}
+          >
+            <div className="w-[660px] h-[415px] rounded-lg bg-gradient-to-br from-[#FAF5FC] via-[#F4EBF8] to-[#EAE0F2] border-2 border-purple-300 p-6 flex flex-col justify-between text-purple-950 select-none overflow-hidden shadow-2xl">
+              {/* Top Browser Bar */}
+              <div className="flex items-center justify-between border-b border-purple-300/40 pb-3">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-rose-400" />
+                  <div className="w-3 h-3 rounded-full bg-amber-400" />
+                  <div className="w-3 h-3 rounded-full bg-emerald-400" />
+                  <span className="text-[11px] font-mono text-purple-800 ml-2 tracking-widest uppercase font-bold">
+                    sumya-web-studio.com
+                  </span>
+                </div>
+                <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-md bg-purple-500/15 text-purple-900 border border-purple-400/40 font-bold">
+                  LIVE STUDIO PLATFORM
+                </span>
+              </div>
+
+              {/* Aesthetic Landscape Showcase inside Screen */}
+              <div className="my-auto space-y-3 px-2 text-center">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/15 border border-purple-400/40 text-[10px] font-bold text-purple-900 uppercase tracking-widest">
+                  🌸 SUMYA WEB STUDIO
+                </div>
+                <h3 className="font-serif text-3xl font-bold tracking-tight text-purple-950 leading-tight">
+                  DIGITAL PRODUCTS BUILT TO <br />
+                  <span className="text-gradient-hero italic font-normal">MOVE BUSINESSES FORWARD.</span>
+                </h3>
+                <p className="text-xs text-purple-900/80 max-w-md mx-auto leading-relaxed font-semibold">
+                  Websites • Executive Portfolios • AI Solutions • Custom Software
+                </p>
+              </div>
+
+              {/* Bottom Status */}
+              <div className="flex items-center justify-between text-[10px] font-mono text-purple-800 border-t border-purple-300/40 pt-2.5 font-bold">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  SYSTEM ACTIVE: 60 FPS
+                </span>
+                <span>SUMYA WEB STUDIO © 2026</span>
+              </div>
+            </div>
+          </Html>
         </group>
       </Float>
 
