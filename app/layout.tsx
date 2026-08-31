@@ -69,7 +69,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-silk text-ebony antialiased selection:bg-dustyrose/30 selection:text-ebony transition-colors duration-500">
+      <body className="bg-white text-ebony antialiased selection:bg-dustyrose/30 selection:text-ebony transition-colors duration-500">
         <PageLoader />
         <ScrollProgressBar />
         <CustomCursor />

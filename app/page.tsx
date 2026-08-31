@@ -17,7 +17,7 @@ export default function Home() {
   useSmoothScroll();
 
   return (
-    <div className="relative w-full overflow-hidden bg-[#FAF8F5] dark:bg-[#0A0810] text-ebony dark:text-silk-100 transition-colors duration-500">
+    <div className="relative w-full overflow-hidden bg-white dark:bg-[#0A0810] text-ebony dark:text-silk-100 transition-colors duration-500">
       <HeroSection />
       <BotanicalFlourish variant="divider" />
       <ServicesSection />
