@@ -103,7 +103,7 @@ export function HeroSection() {
               ref={primaryBtnRef}
               data-cursor="cta"
               onClick={() => scrollToSection('#contact')}
-              className="group relative px-8 py-4 rounded-full text-xs font-bold tracking-widest uppercase text-white bg-gradient-to-r from-luxury-deepviolet via-luxury-dustyrose to-luxury-lavender shadow-rose-subtle hover:shadow-luxury-glow transition-all duration-300 flex items-center gap-3 overflow-hidden"
+              className="group relative px-8 py-4 rounded-none text-xs font-bold tracking-widest uppercase text-white bg-gradient-to-r from-luxury-deepviolet via-luxury-dustyrose to-luxury-lavender shadow-rose-subtle hover:shadow-luxury-glow transition-all duration-300 flex items-center gap-3 overflow-hidden"
             >
               <span className="relative z-10">Start a Project</span>
               <ArrowRight className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
@@ -113,7 +113,7 @@ export function HeroSection() {
             <button
               ref={secondaryBtnRef}
               onClick={() => scrollToSection('#work')}
-              className="px-7 py-4 rounded-full text-xs font-bold tracking-widest uppercase text-ebony dark:text-silk-100 glass-panel hover:glass-panel-interactive border border-luxury-lavender/30 transition-all duration-300 flex items-center gap-2 shadow-glass-silk"
+              className="px-7 py-4 rounded-none text-xs font-bold tracking-widest uppercase text-ebony dark:text-silk-100 glass-panel hover:glass-panel-interactive border border-luxury-lavender/30 transition-all duration-300 flex items-center gap-2 shadow-glass-silk"
             >
               <span>Explore Our Work</span>
               <ArrowDown className="w-4 h-4 text-luxury-dustyrose" />

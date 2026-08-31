@@ -33,7 +33,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2.5 rounded-full glass-panel hover:glass-panel-interactive border border-purple-500/20 text-purple-900 dark:text-purple-200 transition-all duration-300 flex items-center justify-center shadow-glass-light"
+      className="p-2.5 rounded-none glass-panel hover:glass-panel-interactive border border-purple-500/20 text-purple-900 dark:text-purple-200 transition-all duration-300 flex items-center justify-center shadow-glass-light"
       aria-label="Toggle theme mode"
       title={isDark ? 'Switch to Soft Lavender Theme' : 'Switch to Dark Velvet Theme'}
     >

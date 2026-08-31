@@ -62,7 +62,7 @@ export function Navbar() {
           </a>
 
           {/* Desktop Nav Links using RandomLetterSwapNav */}
-          <div className="hidden md:block px-8 py-3 rounded-full glass-panel border border-luxury-lavender/25 shadow-glass-silk">
+          <div className="hidden md:block px-8 py-3 rounded-none glass-panel border border-luxury-lavender/25 shadow-glass-silk">
             <RandomLetterSwapNav
               onNavClick={(href) => {
                 const target = document.querySelector(href);
@@ -81,7 +81,7 @@ export function Navbar() {
                 const target = document.querySelector('#contact');
                 if (target) target.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="group relative px-7 py-3 rounded-full text-xs font-bold tracking-widest uppercase text-white bg-gradient-to-r from-luxury-deepviolet via-luxury-dustyrose to-luxury-lavender shadow-rose-subtle hover:shadow-luxury-glow transition-all duration-300 flex items-center gap-2 overflow-hidden"
+              className="group relative px-7 py-3 rounded-none text-xs font-bold tracking-widest uppercase text-white bg-gradient-to-r from-luxury-deepviolet via-luxury-dustyrose to-luxury-lavender shadow-rose-subtle hover:shadow-luxury-glow transition-all duration-300 flex items-center gap-2 overflow-hidden"
             >
               <span className="relative z-10">Start a Project</span>
               <ArrowRight className="w-3.5 h-3.5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
