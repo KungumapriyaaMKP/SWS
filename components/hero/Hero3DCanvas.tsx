@@ -54,7 +54,7 @@ export function Hero3DCanvas({ scrollProgress = 0 }: Hero3DCanvasProps) {
     <div ref={containerRef} className="w-full h-full min-h-[400px] md:min-h-[600px] relative pointer-events-auto flex items-center justify-center">
       {isVisible && (
         <Canvas
-          camera={{ position: [0, 0, 7.8], fov: 40 }}
+          camera={{ position: [0, 0, 9.2], fov: 38 }}
           dpr={[1, 1.5]}
           gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         >
