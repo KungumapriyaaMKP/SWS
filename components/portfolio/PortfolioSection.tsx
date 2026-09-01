@@ -1,8 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useState } from 'react';
 import { CaseStudyModal, ProjectData } from './CaseStudyModal';
 import { ArrowUpRight } from 'lucide-react';
 
@@ -50,126 +48,85 @@ const projects: ProjectData[] = [
 
 export function PortfolioSection() {
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
-  const targetRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const target = targetRef.current;
-    const trigger = triggerRef.current;
-    if (!target || !trigger) return;
-
-    const isMobile = window.innerWidth < 1024;
-    if (isMobile) return;
-
-    const ctx = gsap.context(() => {
-      const scrollWidth = target.scrollWidth - window.innerWidth + 100;
-
-      gsap.to(target, {
-        x: -scrollWidth,
-        ease: 'power1.out',
-        scrollTrigger: {
-          trigger: trigger,
-          start: 'top top+=80',
-          end: () => `+=${scrollWidth * 0.75}`,
-          pin: true,
-          anticipatePin: 1,
-          fastScrollEnd: true,
-          scrub: 0.6,
-          invalidateOnRefresh: true,
-        },
-      });
-    }, trigger);
-
-    return () => ctx.revert();
-  }, []);
 
   return (
-    <section id="work" ref={triggerRef} className="relative pt-24 pb-12 overflow-hidden transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 mb-6">
+    <section id="work" className="relative py-20 px-4 md:px-8 bg-white transition-colors duration-300">
+      <div className="max-w-7xl mx-auto mb-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-none glass-panel border border-luxury-lavender/30 text-[11px] font-bold tracking-widest text-ebony dark:text-silk-100 uppercase mb-2 shadow-glass-silk">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-luxury-lavender/30 text-[11px] font-bold tracking-widest text-[#3B0764] uppercase mb-3 shadow-sm">
               SELECTED WORK
             </div>
-            <h2 className="font-serif text-2xl md:text-4xl font-bold tracking-tight text-ebony dark:text-silk-100 leading-tight">
+            <h2 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-purple-950 leading-tight">
               WORK THAT <span className="text-gradient-hero italic font-normal">SPEAKS FOR ITSELF.</span>
             </h2>
           </div>
-          <p className="text-ebony-muted dark:text-text-secondary text-xs md:text-sm max-w-md font-medium">
+          <p className="text-purple-900/70 text-xs md:text-sm max-w-md font-medium">
             Every project is built around a clear business goal, not just a beautiful interface.
           </p>
         </div>
       </div>
 
-      {/* Track */}
-      <div className="w-full overflow-hidden pb-12 pt-1">
-        <div
-          ref={targetRef}
-          className="flex flex-col lg:flex-row gap-6 px-4 md:px-8 max-w-7xl lg:max-w-none mx-auto lg:mx-0 w-full lg:w-max"
-        >
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              data-cursor="project"
-              onClick={() => setSelectedProject(project)}
-              className="w-full lg:w-[400px] xl:w-[440px] flex-shrink-0 cursor-pointer group bg-white dark:bg-[#120E1F] border-2 border-purple-900/20 dark:border-purple-400/30 p-5 md:p-6 rounded-none flex flex-col justify-between shadow-2xl hover:border-purple-600 transition-all duration-300 relative overflow-hidden"
-            >
-              {/* Top Gradient Accent */}
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600" />
-
-              <div>
-                {/* Real Live Website Screenshot Box */}
-                <div className="w-full h-36 md:h-40 rounded-none overflow-hidden mb-4 relative border border-purple-900/20 bg-purple-950">
-                  <img
-                    src={project.image}
-                    alt={project.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
-                  />
-                  <div className="absolute top-2 right-2 px-2.5 py-1 bg-[#3B0764] text-white text-[9px] font-bold tracking-wider uppercase border border-purple-400/30 shadow-md">
-                    LIVE CLIENT PROJECT
-                  </div>
+      {/* 3-Column Responsive Portfolio Grid */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        {projects.map((project) => (
+          <div
+            key={project.id}
+            data-cursor="project"
+            onClick={() => setSelectedProject(project)}
+            className="cursor-pointer group bg-white border border-purple-900/15 rounded-3xl p-6 flex flex-col justify-between shadow-xl hover:shadow-2xl hover:border-purple-600/40 transition-all duration-300 relative overflow-hidden"
+          >
+            <div>
+              {/* Screenshot Display Box */}
+              <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden mb-5 relative border border-purple-900/10 bg-purple-950/5">
+                <img
+                  src={project.image}
+                  alt={project.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95 group-hover:opacity-100"
+                />
+                <div className="absolute top-3 right-3 px-3 py-1 bg-[#3B0764] text-white text-[9px] font-bold tracking-widest uppercase rounded-full shadow-lg border border-purple-400/30">
+                  LIVE PROJECT
                 </div>
-
-                <div className="flex items-center justify-between mb-3 pt-1">
-                  <span className="text-[11px] font-extrabold tracking-wider text-purple-900 dark:text-purple-300 uppercase">
-                    {project.category}
-                  </span>
-                  <div className="w-7 h-7 bg-purple-100 dark:bg-white/10 text-purple-950 dark:text-purple-200 flex items-center justify-center group-hover:bg-[#3B0764] group-hover:text-white transition-colors">
-                    <ArrowUpRight className="w-4 h-4" />
-                  </div>
-                </div>
-
-                <h3 className="font-serif text-xl md:text-2xl font-bold text-purple-950 dark:text-white mb-2.5 group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">
-                  {project.name}
-                </h3>
-
-                <p className="text-purple-900/80 dark:text-zinc-300 text-xs leading-relaxed mb-4 font-medium">
-                  {project.description}
-                </p>
               </div>
 
-              <div className="pt-4 border-t border-purple-900/15 dark:border-white/10">
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  {project.techStack.map((tech, i) => (
-                    <span
-                      key={i}
-                      className="px-2 py-0.5 text-[10px] font-bold text-purple-950 dark:text-purple-200 bg-purple-100/70 dark:bg-white/10 border border-purple-300/60 dark:border-white/20"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+              {/* Category Pill */}
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[10px] font-extrabold tracking-wider text-[#3B0764] uppercase px-3 py-1 rounded-full bg-purple-100/70 border border-purple-300/40">
+                  {project.category}
+                </span>
+              </div>
 
-                <div className="w-full py-3 px-4 bg-[#3B0764] dark:bg-purple-600 hover:bg-purple-950 text-white flex items-center justify-between text-xs font-bold tracking-widest uppercase transition-all duration-300">
-                  <span>View Case Study</span>
-                  <ArrowUpRight className="w-4 h-4 text-pink-300 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </div>
+              {/* Title & Description */}
+              <h3 className="font-serif text-2xl font-bold text-purple-950 mb-2 group-hover:text-purple-700 transition-colors">
+                {project.name}
+              </h3>
+
+              <p className="text-purple-900/80 text-xs md:text-sm leading-relaxed mb-6 font-medium">
+                {project.description}
+              </p>
+            </div>
+
+            {/* Tech Stack & Action Footer */}
+            <div className="pt-4 border-t border-purple-900/10">
+              <div className="flex flex-wrap gap-1.5 mb-5">
+                {project.techStack.map((tech, i) => (
+                  <span
+                    key={i}
+                    className="px-2.5 py-0.5 text-[10px] font-bold text-purple-950 bg-purple-50 rounded-full border border-purple-200/60"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              {/* Subtle Refined Action Link */}
+              <div className="w-full py-2.5 px-4 bg-[#3B0764] group-hover:bg-purple-950 rounded-2xl text-white flex items-center justify-between text-xs font-bold tracking-wider uppercase transition-all duration-300 shadow-md">
+                <span>View Case Study</span>
+                <ArrowUpRight className="w-4 h-4 text-pink-300 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
 
       {/* Case Study Modal */}
