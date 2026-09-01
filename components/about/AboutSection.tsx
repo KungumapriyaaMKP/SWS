@@ -42,43 +42,17 @@ export function AboutSection() {
           </div>
         </div>
 
-        {/* Right Glass Graphic Display with Official Logo */}
-        <div className="lg:col-span-5 relative">
-          <div className="w-full min-h-[380px] rounded-3xl bg-white border border-purple-900/15 p-8 flex flex-col justify-between relative overflow-hidden shadow-xl hover:border-purple-600/40 transition-all duration-300">
-            {/* Top Bar with Logo */}
-            <div className="flex items-center justify-between border-b border-purple-900/10 pb-4">
-              <div className="flex items-center gap-3">
-                <img
-                  src="/logo.png"
-                  alt="Sumya Web Studio Logo"
-                  className="h-10 w-auto object-contain"
-                />
-                <span className="font-mono text-xs font-bold text-purple-950 tracking-wider">
-                  STUDIO MANIFESTO
-                </span>
-              </div>
-              <span className="w-2.5 h-2.5 rounded-full bg-pink-500 animate-pulse" />
-            </div>
+        {/* Right Graphic Display - Big Logo & Quote */}
+        <div className="lg:col-span-5 flex flex-col items-center justify-center text-center p-6 md:p-8">
+          <img
+            src="/logo.png"
+            alt="Sumya Web Studio Logo"
+            className="w-48 md:w-60 h-auto object-contain mb-6 hover:scale-105 transition-transform duration-500"
+          />
 
-            {/* Center Lotus Emblem Watermark & Manifesto Quote */}
-            <div className="my-6 relative z-10 flex flex-col items-center text-center">
-              <img
-                src="/logo.png"
-                alt="Sumya Lotus Emblem"
-                className="w-20 md:w-24 h-auto object-contain mb-4 opacity-90"
-              />
-
-              <blockquote className="font-serif text-base md:text-lg font-bold text-purple-950 leading-relaxed italic max-w-md">
-                “Our support doesn’t start at launch or end at delivery. We stand beside you at every single stage of building your product, ensuring your vision succeeds.”
-              </blockquote>
-            </div>
-
-            {/* Footer */}
-            <div className="flex items-center justify-between text-xs font-mono font-bold text-purple-900/60 border-t border-purple-900/10 pt-4">
-              <span>SUMYA WEB STUDIO</span>
-              <span>EST. 2026</span>
-            </div>
-          </div>
+          <blockquote className="font-serif text-lg md:text-xl font-bold text-purple-950 leading-relaxed italic max-w-md">
+            “Our support doesn’t start at launch or end at delivery. We stand beside you at every single stage of building your product, ensuring your vision succeeds.”
+          </blockquote>
         </div>
       </div>
     </section>
