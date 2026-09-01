@@ -19,11 +19,11 @@ export function AboutSection() {
             <span className="text-gradient-hero inline-block">BIG DIGITAL THINKING.</span>
           </h2>
 
-          <p className="text-purple-900/80 dark:text-text-secondary text-base md:text-lg leading-relaxed font-medium">
+          <p className="font-serif text-lg md:text-xl text-purple-950 leading-relaxed font-bold">
             Sumya Web Studio is a specialized digital product engineering firm. We combine high-end creative direction with deep software engineering to build websites, AI solutions, and custom software that drive measurable business growth.
           </p>
 
-          <p className="text-purple-900/70 dark:text-text-secondary text-sm md:text-base leading-relaxed">
+          <p className="font-sans text-base md:text-lg text-zinc-700 leading-relaxed font-medium">
             By keeping our team compact and elite, we eliminate agency bureaucracy. You work directly with senior product designers and software architects dedicated to turning complex problems into elegant, fast, and scalable digital products.
           </p>
 
