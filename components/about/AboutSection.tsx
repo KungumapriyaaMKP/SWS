@@ -55,21 +55,39 @@ export function AboutSection() {
           </div>
         </div>
 
-        {/* Right Glass Graphic Display */}
+        {/* Right Glass Graphic Display with Official Logo */}
         <div className="lg:col-span-5 relative">
-          <div className="w-full h-96 rounded-3xl glass-panel p-8 border border-white/10 flex flex-col justify-between relative overflow-hidden shadow-glass-card">
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-xs text-purple-400">STUDIO MANIFESTO</span>
-              <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+          <div className="w-full min-h-[380px] rounded-3xl bg-white border border-purple-900/15 p-8 flex flex-col justify-between relative overflow-hidden shadow-xl hover:border-purple-600/40 transition-all duration-300">
+            {/* Top Bar with Logo */}
+            <div className="flex items-center justify-between border-b border-purple-900/10 pb-4">
+              <div className="flex items-center gap-3">
+                <img
+                  src="/logo.png"
+                  alt="Sumya Web Studio Logo"
+                  className="h-10 w-auto object-contain"
+                />
+                <span className="font-mono text-xs font-bold text-purple-950 tracking-wider">
+                  STUDIO MANIFESTO
+                </span>
+              </div>
+              <span className="w-2.5 h-2.5 rounded-full bg-pink-500 animate-pulse" />
             </div>
 
-            <div className="space-y-4 my-auto">
-              <blockquote className="font-display text-xl font-semibold text-white leading-relaxed italic">
+            {/* Center Lotus Emblem Watermark & Manifesto Quote */}
+            <div className="my-6 relative z-10 flex flex-col items-center text-center">
+              <img
+                src="/logo.png"
+                alt="Sumya Lotus Emblem"
+                className="w-20 md:w-24 h-auto object-contain mb-4 opacity-90"
+              />
+
+              <blockquote className="font-serif text-lg md:text-xl font-bold text-purple-950 leading-relaxed italic max-w-sm">
                 “We build software that works. We turn ideas into products. Designed for people. Engineered for growth.”
               </blockquote>
             </div>
 
-            <div className="flex items-center justify-between text-xs text-zinc-400 border-t border-white/10 pt-4 font-mono">
+            {/* Footer */}
+            <div className="flex items-center justify-between text-xs font-mono font-bold text-purple-900/60 border-t border-purple-900/10 pt-4">
               <span>SUMYA WEB STUDIO</span>
               <span>EST. 2026</span>
             </div>
