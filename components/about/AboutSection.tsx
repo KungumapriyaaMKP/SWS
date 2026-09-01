@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, CheckCircle } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 
 export function AboutSection() {
   return (
@@ -39,19 +39,6 @@ export function AboutSection() {
                 <span className="text-xs font-bold text-purple-950 dark:text-zinc-200">{item}</span>
               </div>
             ))}
-          </div>
-
-          <div className="pt-4">
-            <button
-              onClick={() => {
-                const contact = document.querySelector('#contact');
-                if (contact) contact.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold text-white bg-purple-600/30 hover:bg-purple-600/50 border border-purple-500/40 transition-colors"
-            >
-              <span>Meet the Studio</span>
-              <ArrowRight className="w-4 h-4 text-purple-300" />
-            </button>
           </div>
         </div>
 
