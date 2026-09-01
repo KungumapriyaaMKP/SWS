@@ -34,9 +34,9 @@ const valueCards: ValueCardProps[] = [
   },
   {
     number: '04',
-    title: 'LONG-TERM PARTNER',
-    quote: '“We build relationships, not one-off websites.”',
-    description: 'We act as an integrated technical & creative extension of your company, continuously iterating and expanding your digital moat.',
+    title: 'EVERY STAGE SUPPORT',
+    quote: '“Our hands-on engineering support is right beside you at every stage of your product building.”',
+    description: 'From Day 1 discovery, UI wireframing, and 3D full-stack build to post-launch scaling—our senior team guides, supports, and refines your product at every step of the journey.',
     icon: <Handshake className="w-7 h-7 text-indigo-300" />,
   },
 ];

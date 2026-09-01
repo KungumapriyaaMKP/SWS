@@ -68,8 +68,8 @@ export function AboutSection() {
                 className="w-20 md:w-24 h-auto object-contain mb-4 opacity-90"
               />
 
-              <blockquote className="font-serif text-lg md:text-xl font-bold text-purple-950 leading-relaxed italic max-w-sm">
-                “We build software that works. We turn ideas into products. Designed for people. Engineered for growth.”
+              <blockquote className="font-serif text-base md:text-lg font-bold text-purple-950 leading-relaxed italic max-w-md">
+                “Our support doesn’t start at launch or end at delivery. We stand beside you at every single stage of building your product, ensuring your vision succeeds.”
               </blockquote>
             </div>
 
