@@ -98,7 +98,7 @@ export function PortfolioSection() {
             </h2>
           </div>
           <p className="text-ebony-muted dark:text-text-secondary text-xs md:text-sm max-w-md font-medium">
-            Every project is built around a clear business goal—not just a beautiful interface.
+            Every project is built around a clear business goal, not just a beautiful interface.
           </p>
         </div>
       </div>
