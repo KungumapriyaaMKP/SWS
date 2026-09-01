@@ -70,17 +70,7 @@ export function CaseStudyModal({ project, onClose }: CaseStudyModalProps) {
         {/* Engineering Solution */}
         <div className="mb-8 p-6 rounded-2xl glass-panel border border-white/10">
           <h4 className="font-display text-lg font-bold text-white mb-2">Engineering & Design Solution</h4>
-          <p className="text-text-secondary text-sm leading-relaxed mb-4">{project.solution}</p>
-          <div className="flex flex-wrap gap-2">
-            {project.techStack.map((tech, idx) => (
-              <span
-                key={idx}
-                className="px-3 py-1 rounded-full text-xs font-medium text-purple-300 bg-purple-950/40 border border-purple-500/20"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
+          <p className="text-text-secondary text-sm leading-relaxed">{project.solution}</p>
         </div>
 
         {/* Key Deliverables */}

@@ -10,7 +10,7 @@ interface MetricItem {
 
 const metrics: MetricItem[] = [
   { value: '99.8%', label: 'Lighthouse Performance Goal', sub: 'GPU & Edge Optimized' },
-  { value: '100%', label: 'TypeScript & Next.js Coverage', sub: 'Production Grade Code' },
+  { value: '100%', label: 'Full-Stack Architecture Coverage', sub: 'Production Grade Standards' },
   { value: '24/7', label: 'Continuous System Reliability', sub: 'Cloud & API Monitoring' },
   { value: '0.2s', label: 'Average Interaction Latency', sub: 'Ultra Fast Load Times' },
 ];

@@ -22,14 +22,14 @@ const valueCards: ValueCardProps[] = [
     number: '02',
     title: 'BUILT TO SCALE',
     quote: '“Architecture designed for where your business is going.”',
-    description: 'Clean modular codebases built with Next.js, cloud-native backend APIs, and micro-animations designed to handle scale effortlessly.',
+    description: 'Clean modular codebases built with modern cloud-native backend APIs and micro-animations designed to handle scale effortlessly.',
     icon: <Layers className="w-7 h-7 text-indigo-400" />,
   },
   {
     number: '03',
     title: 'DESIGN + ENGINEERING',
     quote: '“Beautiful interfaces backed by solid engineering.”',
-    description: 'We eliminate the gap between design and engineering. You get Awwwards-grade visuals powered by rock-solid TypeScript architecture.',
+    description: 'We eliminate the gap between design and engineering. You get Awwwards-grade visuals powered by rock-solid system architecture.',
     icon: <Sparkles className="w-7 h-7 text-purple-300" />,
   },
   {

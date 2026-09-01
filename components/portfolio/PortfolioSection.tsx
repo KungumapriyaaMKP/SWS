@@ -106,19 +106,8 @@ export function PortfolioSection() {
               </p>
             </div>
 
-            {/* Tech Stack & Action Footer */}
+            {/* Action Footer */}
             <div className="pt-4 border-t border-purple-900/10">
-              <div className="flex flex-wrap gap-1.5 mb-5">
-                {project.techStack.map((tech, i) => (
-                  <span
-                    key={i}
-                    className="px-2.5 py-0.5 text-[10px] font-bold text-purple-950 bg-purple-50 rounded-full border border-purple-200/60"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
               {/* Subtle Refined Action Link */}
               <div className="w-full py-2.5 px-4 bg-[#3B0764] group-hover:bg-purple-950 rounded-2xl text-white flex items-center justify-between text-xs font-bold tracking-wider uppercase transition-all duration-300 shadow-md">
                 <span>View Case Study</span>
