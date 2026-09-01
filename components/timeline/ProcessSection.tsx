@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 interface ProcessStep {
   number: string;
+  dayTag: string;
   title: string;
   description: string;
   details: string[];
@@ -14,33 +15,38 @@ interface ProcessStep {
 const steps: ProcessStep[] = [
   {
     number: '01',
-    title: 'DISCOVER',
-    description: 'Understand the business, users and goals.',
-    details: ['Stakeholder Workshops', 'Competitive Audit', 'Technical Architecture Planning'],
+    dayTag: 'DAY 1',
+    title: 'DISCOVER & BLUEPRINT',
+    description: 'Understand business goals, target audience, and technical scope.',
+    details: ['Stakeholder Alignment Workshop', 'Competitive Audit & Positioning', 'Technical Architecture & Sitemap'],
   },
   {
     number: '02',
-    title: 'STRATEGIZE',
-    description: 'Define the product structure and technology.',
-    details: ['User Flow Blueprinting', 'Tech Stack Selection', 'KPI & Conversion Mapping'],
+    dayTag: 'DAY 2',
+    title: 'UI/UX & WIREFRAMING',
+    description: 'Design user journeys and high-converting glass visual layouts.',
+    details: ['High-Conversion Wireframing', 'Typography & Brand Color System', 'Interactive User Flow Prototype'],
   },
   {
     number: '03',
-    title: 'DESIGN',
-    description: 'Create the experience and visual system.',
-    details: ['Wireframing & UX Testing', 'Glassmorphism Design System', 'Interactive Micro-prototypes'],
+    dayTag: 'DAYS 3 - 4',
+    title: '3D & FULL-STACK BUILD',
+    description: 'High-speed Next.js, 3D WebGL asset integration, and micro-interactions.',
+    details: ['Next.js App Router Architecture', '3D Model & WebGL Canvas Integration', 'GSAP Smooth Micro-Animations'],
   },
   {
     number: '04',
-    title: 'DEVELOP',
-    description: 'Build, integrate and test.',
-    details: ['Next.js & TypeScript Codebase', '3D Scene & GSAP Integration', 'Automated Testing & QA'],
+    dayTag: 'DAYS 5 - 6',
+    title: 'QA, SPEED & LIGHTHOUSE 90+',
+    description: 'Rigorous speed optimization, mobile responsiveness, and SEO tuning.',
+    details: ['Sub-Second Load Speed Tuning', 'Cross-Browser & Mobile QA Audit', 'SEO Metadata & OpenGraph Ingestion'],
   },
   {
     number: '05',
-    title: 'LAUNCH',
-    description: 'Deploy, optimize and improve.',
-    details: ['Global Edge Deployment', 'Lighthouse 90+ Auditing', 'Continuous Iteration & Growth'],
+    dayTag: 'DAY 7',
+    title: 'GO LIVE & HANDOFF',
+    description: 'Deploy to global CDN network and execute official project launch.',
+    details: ['Global Edge CDN Deployment', 'Lighthouse 90+ Certification', 'Complete Handoff & Launch Support'],
   },
 ];
 
@@ -93,35 +99,38 @@ export function ProcessSection() {
   }, []);
 
   return (
-    <section id="process" ref={containerRef} className="relative py-24 px-4 md:px-8 overflow-hidden transition-colors duration-300">
+    <section id="process" ref={containerRef} className="relative py-24 px-4 md:px-8 bg-white transition-colors duration-300">
       <div className="max-w-7xl mx-auto z-10">
         {/* Header */}
-        <div className="mb-20 text-center max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-purple-500/20 text-[11px] font-bold tracking-widest text-purple-800 dark:text-purple-300 uppercase mb-4 shadow-glass-light">
-            METHODOLOGY
+        <div className="mb-16 text-center max-w-3xl mx-auto">
+          {/* Highlight Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#3B0764] text-white text-xs font-bold tracking-widest uppercase mb-4 shadow-lg border border-purple-400/30">
+            <span>⚡ DELIVERED WITHIN 7 DAYS</span>
           </div>
-          <h2 className="font-display text-4xl md:text-6xl font-extrabold tracking-tight text-purple-950 dark:text-white">
-            HOW WE <span className="text-gradient-hero">BUILD.</span>
+
+          <h2 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-purple-950">
+            HOW WE <span className="text-gradient-hero italic font-normal">BUILD.</span>
           </h2>
-          <p className="text-purple-900/70 dark:text-text-secondary text-sm md:text-base mt-3 font-medium">
-            A structured 5-phase engineering workflow designed for speed, quality, and predictability.
+
+          <p className="text-purple-900/70 text-xs md:text-sm mt-3 font-medium max-w-xl mx-auto">
+            A structured 7-day engineering sprint designed for high speed, premium quality, and guaranteed launch predictability.
           </p>
         </div>
 
         {/* Vertical Timeline Container */}
         <div className="relative max-w-4xl mx-auto">
           {/* Background Empty Line */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-white/10 -translate-x-1/2" />
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-purple-900/10 -translate-x-1/2 rounded-full" />
 
           {/* Animated Glowing Progress Line */}
           <div
             ref={lineRef}
-            className="absolute left-4 md:left-1/2 top-0 w-0.5 bg-gradient-to-b from-purple-500 via-indigo-500 to-purple-400 -translate-x-1/2 shadow-violet-glow"
+            className="absolute left-4 md:left-1/2 top-0 w-1 bg-gradient-to-b from-purple-600 via-pink-600 to-rose-600 -translate-x-1/2 rounded-full shadow-md"
             style={{ height: '0%' }}
           />
 
           {/* Timeline Cards */}
-          <div className="space-y-16">
+          <div className="space-y-12">
             {steps.map((step, idx) => {
               const isEven = idx % 2 === 0;
               return (
@@ -132,34 +141,34 @@ export function ProcessSection() {
                   }`}
                 >
                   {/* Timeline Node Icon/Dot */}
-                  <div className="absolute left-4 md:left-1/2 top-6 -translate-x-1/2 w-8 h-8 rounded-full bg-bg-darkest border-2 border-purple-500 flex items-center justify-center shadow-violet-glow z-20">
-                    <div className="w-2.5 h-2.5 rounded-full bg-purple-400 animate-pulse" />
+                  <div className="absolute left-4 md:left-1/2 top-8 -translate-x-1/2 w-8 h-8 rounded-full bg-[#3B0764] border-2 border-white text-white flex items-center justify-center shadow-lg z-20">
+                    <div className="w-2.5 h-2.5 rounded-full bg-pink-400 animate-pulse" />
                   </div>
 
                   {/* Card Content */}
-                  <div className="w-full md:w-1/2 pl-12 md:pl-0 md:px-10">
-                    <div className="process-card glass-panel-interactive p-6 md:p-8 rounded-3xl relative">
+                  <div className="w-full md:w-1/2 pl-12 md:pl-0 md:px-8">
+                    <div className="process-card bg-white border border-purple-900/15 p-6 md:p-8 rounded-3xl relative shadow-xl hover:border-purple-600/40 transition-all duration-300">
                       <div className="flex items-center justify-between mb-4">
-                        <span className="font-mono text-2xl font-bold text-purple-400">
-                          {step.number}
+                        <span className="font-mono text-sm font-extrabold tracking-wider text-white bg-[#3B0764] px-3 py-1 rounded-full shadow-sm">
+                          {step.dayTag}
                         </span>
-                        <span className="text-xs font-semibold tracking-wider text-zinc-400 uppercase">
+                        <span className="text-[11px] font-extrabold tracking-wider text-purple-900/60 uppercase font-mono">
                           PHASE {step.number}
                         </span>
                       </div>
 
-                      <h3 className="font-display text-2xl font-bold text-white mb-2">
+                      <h3 className="font-serif text-xl md:text-2xl font-bold text-purple-950 mb-2">
                         {step.title}
                       </h3>
 
-                      <p className="text-text-secondary text-sm leading-relaxed mb-6">
+                      <p className="text-purple-900/80 text-xs md:text-sm leading-relaxed mb-5 font-medium">
                         {step.description}
                       </p>
 
-                      <div className="space-y-2 pt-4 border-t border-white/10">
+                      <div className="space-y-2 pt-4 border-t border-purple-900/10">
                         {step.details.map((item, i) => (
-                          <div key={i} className="flex items-center gap-2 text-xs text-zinc-300">
-                            <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+                          <div key={i} className="flex items-center gap-2.5 text-xs text-purple-950 font-medium">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#3B0764]" />
                             <span>{item}</span>
                           </div>
                         ))}
