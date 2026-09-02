@@ -132,7 +132,7 @@ export function HeroSection() {
           {/* Main Headline */}
           <h1
             ref={headlineRef}
-            className="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-ebony dark:text-silk-100 leading-[1.08]"
+            className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-ebony dark:text-silk-100 leading-[1.08]"
           >
             <span className="block overflow-hidden">
               <span className="hero-line block">WE BUILD DIGITAL{' '}</span>
@@ -231,7 +231,7 @@ export function HeroSection() {
         </div>
 
         {/* Right Side 3D Laptop Interactive Canvas */}
-        <div className="lg:col-span-5 w-full h-[400px] md:h-[500px] lg:h-[580px] relative">
+        <div className="lg:col-span-5 w-full h-[320px] sm:h-[400px] md:h-[500px] lg:h-[580px] relative">
           <Hero3DCanvas scrollProgress={scrollProgress} />
         </div>
       </div>

@@ -122,7 +122,7 @@ export function Navbar() {
                   const target = document.querySelector('#contact');
                   if (target) target.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="w-full max-w-xs py-4 rounded-full text-sm font-semibold tracking-wider text-white bg-gradient-to-r from-purple-600 to-indigo-600 shadow-violet-glow flex items-center justify-center gap-2"
+                className="w-full max-w-xs py-4 rounded-none text-xs font-bold tracking-widest uppercase text-white bg-[#3B0764] hover:bg-purple-950 shadow-md flex items-center justify-center gap-2"
               >
                 <span>Start a Project</span>
                 <ArrowRight className="w-4 h-4" />
