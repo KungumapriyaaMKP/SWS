@@ -54,21 +54,26 @@ export function SocialProofSection() {
           ))}
         </div>
 
-        {/* Capabilities Matrix */}
-        <div className="p-8 rounded-none glass-panel border border-luxury-lavender/25 shadow-glass-silk bg-white/80 dark:bg-ebony-light/80">
+        {/* Capabilities Matrix (Dynamic Horizontal Marquee Ticker) */}
+        <div className="p-8 rounded-none glass-panel border border-luxury-lavender/25 shadow-glass-silk bg-white/80 dark:bg-ebony-light/80 overflow-hidden relative">
           <div className="text-xs font-bold tracking-widest text-ebony dark:text-silk-100 uppercase mb-8 text-center">
             CORE TECHNOLOGIES & DOMAIN CAPABILITIES
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {capabilities.map((cap, i) => (
-              <div
-                key={i}
-                className="p-5 rounded-none glass-panel border border-luxury-lavender/25 flex flex-col items-center justify-center text-center gap-3 hover:border-luxury-dustyrose/50 transition-all bg-white dark:bg-ebony/90 shadow-xs"
-              >
-                {cap.icon}
-                <span className="text-xs font-bold text-ebony dark:text-silk-100 leading-snug">{cap.name}</span>
-              </div>
-            ))}
+
+          <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+            <div className="flex gap-4 animate-marquee py-2">
+              {[...capabilities, ...capabilities, ...capabilities].map((cap, i) => (
+                <div
+                  key={i}
+                  className="w-48 sm:w-56 p-5 rounded-none glass-panel border border-luxury-lavender/25 flex flex-col items-center justify-center text-center gap-3 hover:border-luxury-dustyrose/50 transition-all bg-white dark:bg-ebony/90 shadow-xs flex-shrink-0 cursor-pointer hover:scale-105"
+                >
+                  {cap.icon}
+                  <span className="text-xs font-bold text-ebony dark:text-silk-100 leading-snug whitespace-nowrap">
+                    {cap.name}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -105,7 +105,7 @@ export function WhySumyaSection() {
             <div
               key={card.number}
               style={{ top: `${110 + index * 28}px` }}
-              className="stack-card-item sticky rounded-3xl p-8 md:p-12 bg-white/95 dark:bg-[#120B24]/95 border-2 border-purple-900/15 dark:border-purple-500/30 shadow-2xl backdrop-blur-xl transition-transform duration-300 overflow-hidden"
+              className="stack-card-item sticky rounded-3xl p-8 md:p-12 bg-white/95 dark:bg-[#120B24]/95 border border-purple-900/10 dark:border-purple-500/20 shadow-[0_20px_60px_-15px_rgba(59,7,100,0.08)] backdrop-blur-xl transition-transform duration-300 overflow-hidden"
             >
               {/* Top Accent Gradient Bar */}
               <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${card.accentGradient}`} />

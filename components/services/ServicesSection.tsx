@@ -176,7 +176,7 @@ export function ServicesSection() {
           {services.map((service) => (
             <div
               key={service.id}
-              className="service-bento-card relative flex flex-col justify-between p-8 md:p-10 rounded-none bg-gradient-to-b from-white/95 via-purple-50/30 to-white/90 dark:from-[#130E26]/90 dark:via-[#110A22]/90 dark:to-[#0A0714]/90 border border-purple-900/15 dark:border-purple-500/25 shadow-xl hover:shadow-2xl hover:shadow-purple-900/15 hover:border-purple-500/50 transition-all duration-500 group overflow-hidden hover:-translate-y-1.5"
+              className="service-bento-card relative flex flex-col justify-between p-8 md:p-10 rounded-none bg-gradient-to-b from-white/95 via-purple-50/30 to-white/90 dark:from-[#130E26]/90 dark:via-[#110A22]/90 dark:to-[#0A0714]/90 border border-purple-900/10 dark:border-purple-500/20 shadow-[0_15px_45px_-10px_rgba(59,7,100,0.06)] hover:shadow-[0_25px_60px_-15px_rgba(59,7,100,0.16)] hover:border-purple-500/50 transition-all duration-500 group overflow-hidden hover:-translate-y-1.5"
             >
               {/* Ambient Corner Glow Effect */}
               <div className={`absolute -top-24 -right-24 w-64 h-64 bg-gradient-to-br ${service.gradient} rounded-none blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`} />
@@ -204,7 +204,7 @@ export function ServicesSection() {
                   {service.tags.map((tag, idx) => (
                     <span
                       key={idx}
-                      className="text-[11px] font-semibold text-[#3B0764] dark:text-purple-200 bg-purple-100/70 dark:bg-purple-900/30 border border-purple-200/80 dark:border-purple-500/30 px-3 py-1 rounded-none backdrop-blur-sm"
+                      className="text-[11px] font-semibold text-[#3B0764] dark:text-purple-200 bg-purple-100/70 dark:bg-purple-900/30 border border-purple-200/80 dark:border-purple-500/30 px-3.5 py-1.5 rounded-none backdrop-blur-sm"
                     >
                       {tag}
                     </span>

@@ -10,6 +10,8 @@ import { PixelCursorTrail } from '@/components/ui/pixel-trail';
 import { BotanicalParticles } from '@/components/botanical/BotanicalParticles';
 import { ChatbotWidget } from '@/components/chat/ChatbotWidget';
 
+import { JsonLd } from '@/components/seo/JsonLd';
+
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
@@ -29,20 +31,74 @@ const cormorant = Cormorant_Garamond({
   display: 'swap',
 });
 
+const baseUrl = 'https://sumyawebstudio.com';
+
 export const metadata: Metadata = {
-  title: 'Sumya Web Studio | Digital Products Built to Move Businesses Forward',
+  metadataBase: new URL(baseUrl),
+  title: {
+    default: 'Sumya Web Studio | Digital Products Built to Move Businesses Forward',
+    template: '%s | Sumya Web Studio',
+  },
   description:
-    'Sumya Web Studio designs and engineers high-performance websites, AI solutions, web applications, custom software, and executive portfolios for ambitious businesses.',
+    'Sumya Web Studio designs and engineers high-performance Next.js websites, 3D WebGL experiences, AI solutions, web applications, custom software, and executive portfolios in 7-day engineering sprints.',
   keywords: [
-    'Web Development',
-    'Executive Portfolios',
-    'AI Solutions',
-    'Custom Software',
-    'UI/UX Design',
+    'Sumya Web Studio',
+    'Web Development Studio India',
+    '3D WebGL Website Design',
+    'Executive Brand Portfolios',
+    'AI Agents & Solutions',
+    'Custom SaaS Software',
+    'Next.js Engineering Agency',
+    'UI/UX System Design',
     'Business Automation',
-    'SaaS Development',
-    'Next.js Studio',
+    '7 Day Website Sprint',
   ],
+  authors: [{ name: 'Sumya Web Studio', url: baseUrl }],
+  creator: 'Sumya Web Studio',
+  publisher: 'Sumya Web Studio',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  alternates: {
+    canonical: baseUrl,
+  },
+  openGraph: {
+    title: 'Sumya Web Studio | Digital Products Built to Move Businesses Forward',
+    description:
+      'High-performance Next.js websites, 3D WebGL experiences, AI solutions, custom software, and executive portfolios engineered for ambitious companies.',
+    url: baseUrl,
+    siteName: 'Sumya Web Studio',
+    images: [
+      {
+        url: `${baseUrl}/logo.png`,
+        width: 1200,
+        height: 630,
+        alt: 'Sumya Web Studio Logo Mark',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sumya Web Studio | Digital Products Built to Move Businesses Forward',
+    description:
+      'High-performance Next.js websites, 3D WebGL experiences, AI solutions, custom software, and executive portfolios.',
+    images: [`${baseUrl}/logo.png`],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -53,6 +109,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${syne.variable} ${cormorant.variable}`}>
       <head>
+        <JsonLd />
         <script
           dangerouslySetInnerHTML={{
             __html: `

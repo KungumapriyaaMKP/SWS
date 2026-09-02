@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Send, Mail, CheckCircle2, ArrowRight, Instagram, ChevronRight, User, Briefcase, MessageSquare, Lock, Sparkles, ChevronDown, Check } from 'lucide-react';
+import { Send, Mail, CheckCircle2, ArrowRight, Instagram, ChevronRight, User, Briefcase, MessageSquare, Lock, Sparkles, ChevronDown, Check, Phone, Linkedin } from 'lucide-react';
 
 interface CustomDropdownProps {
   label: string;
@@ -31,11 +31,11 @@ function CustomDropdown({ label, placeholder, value, options, onChange }: Custom
         {label}
       </label>
 
-      {/* Trigger Button - SHARP EDGES */}
+      {/* Trigger Button - ROUNDED */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-4 py-3.5 rounded-none bg-[#F9FAFB] dark:bg-white/5 border border-[#E5E7EB] dark:border-white/10 text-purple-950 dark:text-white flex items-center justify-between transition-all duration-200 text-xs font-semibold focus:outline-none focus:border-purple-600 focus:bg-white cursor-pointer"
+        className="w-full px-4 py-3.5 rounded-xl bg-[#F9FAFB] dark:bg-white/5 border border-[#E5E7EB] dark:border-white/10 text-purple-950 dark:text-white flex items-center justify-between transition-all duration-200 text-xs font-semibold focus:outline-none focus:border-purple-600 focus:bg-white cursor-pointer"
       >
         <span className={value ? 'text-purple-950 dark:text-white font-bold' : 'text-gray-400 dark:text-zinc-500'}>
           {value || placeholder}
@@ -43,9 +43,9 @@ function CustomDropdown({ label, placeholder, value, options, onChange }: Custom
         <ChevronDown className={`w-4 h-4 text-purple-500 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
-      {/* Dropdown Menu - SHARP EDGES */}
+      {/* Dropdown Menu - ROUNDED */}
       {isOpen && (
-        <div className="absolute left-0 right-0 top-full mt-2 z-50 bg-white dark:bg-[#1A112E] border border-purple-200 dark:border-purple-500/40 rounded-none shadow-2xl overflow-hidden max-h-60 overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="absolute left-0 right-0 top-full mt-2 z-50 bg-white dark:bg-[#1A112E] border border-purple-200 dark:border-purple-500/40 rounded-xl shadow-2xl overflow-hidden max-h-60 overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200">
           <div className="py-1">
             {options.map((opt) => (
               <button
@@ -145,7 +145,7 @@ export function ContactSection() {
             {/* Card 1: Email */}
             <a
               href="mailto:sumyawebstudio@gmail.com"
-              className="flex items-center justify-between p-4.5 rounded-none bg-white/90 dark:bg-[#130E26]/90 border border-purple-900/15 dark:border-purple-500/25 shadow-md hover:shadow-xl hover:border-purple-500/50 transition-all duration-300 group"
+              className="flex items-center justify-between p-4.5 rounded-none bg-white/90 dark:bg-[#130E26]/90 border border-purple-900/10 dark:border-purple-500/20 shadow-sm hover:shadow-xl hover:border-purple-500/50 hover:-translate-y-0.5 transition-all duration-300 group"
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-none bg-purple-100 dark:bg-purple-900/50 border border-purple-200 dark:border-purple-500/30 flex items-center justify-center text-purple-600 dark:text-purple-300 flex-shrink-0">
@@ -163,12 +163,33 @@ export function ContactSection() {
               <ChevronRight className="w-5 h-5 text-purple-400 group-hover:translate-x-1 transition-transform" />
             </a>
 
-            {/* Card 2: Instagram */}
+            {/* Card 2: Phone */}
+            <a
+              href="tel:7867896369"
+              className="flex items-center justify-between p-4.5 rounded-none bg-white/90 dark:bg-[#130E26]/90 border border-purple-900/10 dark:border-purple-500/20 shadow-sm hover:shadow-xl hover:border-purple-500/50 hover:-translate-y-0.5 transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-none bg-emerald-100 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 flex-shrink-0">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="text-xs font-black tracking-wider text-emerald-900/60 dark:text-emerald-300/70 block uppercase">
+                    CALL OR WHATSAPP
+                  </span>
+                  <span className="text-xs md:text-sm font-bold text-purple-950 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                    +91 7867896369
+                  </span>
+                </div>
+              </div>
+              <ChevronRight className="w-5 h-5 text-emerald-400 group-hover:translate-x-1 transition-transform" />
+            </a>
+
+            {/* Card 3: Instagram */}
             <a
               href="https://www.instagram.com/sumya.web.studio?igsi=ejlhYzg2dWliaDh4&utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between p-4.5 rounded-none bg-white/90 dark:bg-[#130E26]/90 border border-purple-900/15 dark:border-purple-500/25 shadow-md hover:shadow-xl hover:border-pink-500/50 transition-all duration-300 group"
+              className="flex items-center justify-between p-4.5 rounded-none bg-white/90 dark:bg-[#130E26]/90 border border-purple-900/10 dark:border-purple-500/20 shadow-sm hover:shadow-xl hover:border-pink-500/50 hover:-translate-y-0.5 transition-all duration-300 group"
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-none bg-pink-100 dark:bg-pink-950/50 border border-pink-200 dark:border-pink-500/30 flex items-center justify-center text-pink-600 dark:text-pink-400 flex-shrink-0">
@@ -198,7 +219,7 @@ export function ContactSection() {
 
         {/* Right White Card Form - SHARP EDGES */}
         <div className="lg:col-span-7">
-          <div className="bg-white dark:bg-[#120B24] p-8 md:p-10 rounded-none border-2 border-purple-900/15 dark:border-purple-500/30 shadow-2xl relative">
+          <div className="bg-white dark:bg-[#120B24] p-8 md:p-10 rounded-none border border-purple-900/10 dark:border-purple-500/25 shadow-[0_20px_60px_-15px_rgba(59,7,100,0.08)] relative">
             {submitted ? (
               <div className="py-16 text-center space-y-4">
                 <div className="w-16 h-16 rounded-none bg-purple-600/20 border-2 border-purple-500 flex items-center justify-center mx-auto text-purple-600 dark:text-purple-300">

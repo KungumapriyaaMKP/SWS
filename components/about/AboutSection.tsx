@@ -47,7 +47,7 @@ export function AboutSection() {
           <img
             src="/logo.png"
             alt="Sumya Web Studio Logo"
-            className="w-48 md:w-60 h-auto object-contain mb-6 hover:scale-105 transition-transform duration-500"
+            className="w-72 md:w-96 lg:w-[420px] h-auto object-contain mb-6 hover:scale-105 transition-transform duration-500"
           />
 
           <blockquote className="font-serif text-lg md:text-xl font-bold text-purple-950 leading-relaxed italic max-w-md">

@@ -85,7 +85,7 @@ export function ProcessSection() {
         <div className="mb-16 text-center max-w-3xl mx-auto">
           {/* Highlight Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-none bg-[#3B0764] text-white text-xs font-bold tracking-widest uppercase mb-4 shadow-lg border border-purple-400/30">
-            <span>⚡ DELIVERED WITHIN 7 DAYS</span>
+            <span>DELIVERED WITHIN 7 DAYS</span>
           </div>
 
           <h2 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-purple-950">

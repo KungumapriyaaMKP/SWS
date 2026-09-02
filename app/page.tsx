@@ -10,6 +10,7 @@ import { AboutSection } from '@/components/about/AboutSection';
 import { SocialProofSection } from '@/components/proof/SocialProofSection';
 import { FinalCTASection } from '@/components/cta/FinalCTASection';
 import { ContactSection } from '@/components/contact/ContactSection';
+import { FAQSection } from '@/components/faq/FAQSection';
 import { BotanicalFlourish } from '@/components/botanical/BotanicalFlourish';
 
 export default function Home() {
@@ -30,6 +31,8 @@ export default function Home() {
       <AboutSection />
       <BotanicalFlourish variant="divider" />
       <SocialProofSection />
+      <BotanicalFlourish variant="divider" />
+      <FAQSection />
       <BotanicalFlourish variant="divider" />
       <FinalCTASection />
       <ContactSection />

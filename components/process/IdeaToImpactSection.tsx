@@ -65,26 +65,26 @@ export function IdeaToImpactSection() {
   return (
     <section
       id="idea-to-impact"
-      className="relative min-h-screen flex flex-col justify-center py-16 px-4 md:px-8 overflow-hidden transition-colors duration-300"
+      className="relative flex flex-col justify-center pt-8 pb-16 px-4 md:px-8 overflow-hidden transition-colors duration-300"
     >
       <div className="ambient-glow-1 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 
       <div className="max-w-7xl mx-auto w-full z-10">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-none glass-panel border border-luxury-lavender/30 text-[11px] font-bold tracking-widest text-ebony dark:text-silk-100 uppercase mb-4 shadow-glass-silk">
+        <div className="text-center max-w-3xl mx-auto mb-2">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-none glass-panel border border-luxury-lavender/30 text-[11px] font-bold tracking-widest text-ebony dark:text-silk-100 uppercase mb-3 shadow-glass-silk">
             PRODUCT EVOLUTION
           </div>
           <h2 className="font-serif text-4xl md:text-6xl font-bold tracking-tight text-ebony dark:text-silk-100">
             FROM IDEA <span className="text-gradient-hero italic font-normal">TO IMPACT.</span>
           </h2>
-          <p className="text-ebony-muted dark:text-text-secondary text-sm md:text-base mt-3 font-medium">
+          <p className="text-ebony-muted dark:text-text-secondary text-sm md:text-base mt-2 font-medium">
             Click any orbital node to explore the interactive stages of your digital product transformation.
           </p>
         </div>
 
         {/* 3D Radial Orbital Interactive Timeline */}
-        <div className="w-full relative">
+        <div className="w-full relative -mt-4">
           <RadialOrbitalTimeline timelineData={timelineData} />
         </div>
       </div>

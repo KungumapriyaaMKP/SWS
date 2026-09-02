@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Bot, MessageSquare, X, Send, Sparkles, ArrowRight, RefreshCw, CheckCircle2 } from 'lucide-react';
+import { Bot, MessageSquare, X, Send, Sparkles, ArrowRight, ChevronRight, RefreshCw, CheckCircle2 } from 'lucide-react';
 
 interface Message {
   id: string;
@@ -127,53 +127,56 @@ export function ChatbotWidget() {
 
   return (
     <>
-      {/* Floating Trigger Button */}
-      <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
-        {!isOpen && (
-          <button
-            onClick={() => setIsOpen(true)}
-            className="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-none bg-[#3B0764] hover:bg-[#2A0548] text-white text-xs font-extrabold tracking-wide shadow-2xl border-2 border-purple-400/40 transition-all duration-300 animate-pulse cursor-pointer"
-          >
-            <Sparkles className="w-4 h-4 text-pink-300" />
-            <span>Need Help? Chat with AI</span>
-          </button>
-        )}
-
+      {/* Floating Trigger Button (Design 2: Clean Pill Widget with 3D Robot Avatar) */}
+      <div className="fixed bottom-6 right-6 z-50 flex items-center">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="relative w-14 h-14 rounded-none bg-[#3B0764] hover:bg-[#2A0548] text-white flex items-center justify-center shadow-2xl border-2 border-purple-400/40 transition-all duration-300 group cursor-pointer"
+          className="relative flex items-center pl-5 pr-1.5 py-1.5 rounded-full bg-gradient-to-r from-[#3B0764] via-[#5B1390] to-[#7E22CE] hover:from-[#4A0A7C] hover:to-[#9324C9] text-white shadow-[0_12px_35px_rgba(91,19,144,0.45)] border-2 border-purple-400/40 backdrop-blur-xl transition-all duration-300 hover:scale-105 group cursor-pointer"
           aria-label="Toggle Chatbot"
         >
-          {isOpen ? (
-            <X className="w-6 h-6 text-pink-300 transition-transform group-hover:rotate-90" />
-          ) : (
-            <>
-              <Bot className="w-7 h-7 text-pink-300 transition-transform group-hover:scale-110" />
-              {hasUnread && (
-                <span className="absolute -top-1 -right-1 w-4 h-4 rounded-none bg-pink-500 border-2 border-white text-[9px] font-black flex items-center justify-center animate-bounce">
-                  1
-                </span>
-              )}
-            </>
-          )}
+          {/* Chat Text & Chevron Arrow (Middle) */}
+          <div className="flex items-center gap-1.5 pr-2.5">
+            <span className="text-xs md:text-sm font-bold tracking-wide text-white drop-shadow-sm">
+              Chat with AI
+            </span>
+            <ChevronRight className="w-4 h-4 text-purple-200 group-hover:translate-x-1 transition-transform" />
+          </div>
+
+          {/* 3D Robot Avatar Container (Right side) */}
+          <div className="relative w-12 h-12 md:w-13 md:h-13 rounded-full border-2 border-purple-200/90 shadow-md overflow-hidden bg-[#E9D5FF] flex-shrink-0 flex items-center justify-center">
+            {isOpen ? (
+              <div className="w-full h-full bg-[#3B0764] flex items-center justify-center">
+                <X className="w-6 h-6 text-pink-300 group-hover:rotate-90 transition-transform" />
+              </div>
+            ) : (
+              <img
+                src="/ai-robot-avatar.jpg"
+                alt="AI Assistant"
+                className="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform"
+              />
+            )}
+            {hasUnread && !isOpen && (
+              <span className="absolute top-0 right-0 w-3.5 h-3.5 rounded-full bg-pink-500 border-2 border-white animate-ping" />
+            )}
+          </div>
         </button>
       </div>
 
       {/* Chat Window Panel */}
       {isOpen && (
-        <div className="fixed bottom-24 right-4 md:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[380px] h-[520px] max-h-[80vh] rounded-none bg-white dark:bg-[#18082D] border-2 border-purple-900/20 dark:border-purple-500/40 shadow-2xl flex flex-col overflow-hidden transition-all duration-300">
+        <div className="fixed bottom-24 right-4 md:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[380px] h-[520px] max-h-[80vh] rounded-2xl bg-white/95 dark:bg-[#150729]/95 backdrop-blur-2xl border border-purple-500/30 shadow-[0_25px_70px_rgba(0,0,0,0.35)] flex flex-col overflow-hidden transition-all duration-300">
           {/* Header */}
-          <div className="px-5 py-4 bg-[#3B0764] text-white flex items-center justify-between border-b border-purple-500/30">
+          <div className="px-5 py-4 bg-gradient-to-r from-[#2A0548] via-[#3B0764] to-[#5B1390] text-white flex items-center justify-between border-b border-purple-500/20">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-none bg-purple-950 border border-purple-400/40 flex items-center justify-center shadow-inner">
-                <Bot className="w-5 h-5 text-pink-300" />
+              <div className="w-10 h-10 rounded-full border-2 border-purple-300/50 overflow-hidden bg-purple-900 flex-shrink-0 shadow-sm">
+                <img src="/ai-robot-avatar.jpg" alt="SUMYA AI" className="w-full h-full object-cover" />
               </div>
               <div>
                 <h3 className="font-serif text-sm font-bold tracking-wide flex items-center gap-1.5">
                   SUMYA AI ASSISTANT
                 </h3>
                 <div className="flex items-center gap-1.5 text-[10px] text-pink-300 font-mono">
-                  <span className="w-2 h-2 rounded-none bg-emerald-400 animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   <span>Online • Instant Reply</span>
                 </div>
               </div>
@@ -181,24 +184,24 @@ export function ChatbotWidget() {
 
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1 rounded-none hover:bg-white/10 text-purple-200 transition-colors"
+              className="p-1.5 rounded-full hover:bg-white/10 text-purple-200 transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-purple-50/50 dark:bg-[#130326]/60">
+          <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-purple-50/40 dark:bg-[#100422]/60">
             {messages.map((msg) => (
               <div
                 key={msg.id}
                 className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}
               >
                 <div
-                  className={`max-w-[85%] p-3.5 rounded-none text-xs md:text-sm font-medium leading-relaxed shadow-sm ${
+                  className={`max-w-[85%] p-3.5 text-xs md:text-sm font-medium leading-relaxed shadow-sm ${
                     msg.sender === 'user'
-                      ? 'bg-[#3B0764] text-white border border-purple-500/30'
-                      : 'bg-white dark:bg-[#250C44] text-purple-950 dark:text-zinc-100 border border-purple-900/10 dark:border-purple-500/20'
+                      ? 'bg-gradient-to-r from-[#3B0764] to-[#5B1390] text-white rounded-2xl rounded-tr-sm border border-purple-400/30'
+                      : 'bg-white dark:bg-[#230C40] text-purple-950 dark:text-zinc-100 rounded-2xl rounded-tl-sm border border-purple-900/10 dark:border-purple-500/20'
                   }`}
                 >
                   <p className="whitespace-pre-line">{msg.text}</p>
@@ -210,7 +213,7 @@ export function ChatbotWidget() {
                         <button
                           key={idx}
                           onClick={() => handleAction(act.action)}
-                          className="px-2.5 py-1 rounded-none bg-[#3B0764] hover:bg-[#2A0548] text-white text-[11px] font-bold tracking-wider uppercase transition-all flex items-center gap-1 shadow-sm"
+                          className="px-3 py-1.5 rounded-full bg-gradient-to-r from-[#3B0764] to-[#5B1390] hover:from-[#4A0A7C] hover:to-[#6B18A5] text-white text-[11px] font-bold tracking-wider uppercase transition-all flex items-center gap-1 shadow-sm hover:scale-105"
                         >
                           <span>{act.label}</span>
                         </button>
@@ -226,10 +229,10 @@ export function ChatbotWidget() {
             ))}
 
             {isTyping && (
-              <div className="flex items-center gap-1.5 p-3 rounded-none bg-white dark:bg-[#250C44] border border-purple-900/10 w-16">
-                <span className="w-1.5 h-1.5 rounded-none bg-purple-600 animate-bounce" />
-                <span className="w-1.5 h-1.5 rounded-none bg-pink-500 animate-bounce [animation-delay:0.2s]" />
-                <span className="w-1.5 h-1.5 rounded-none bg-purple-400 animate-bounce [animation-delay:0.4s]" />
+              <div className="flex items-center gap-1.5 p-3 rounded-2xl rounded-tl-sm bg-white dark:bg-[#230C40] border border-purple-900/10 w-16">
+                <span className="w-1.5 h-1.5 rounded-full bg-purple-600 animate-bounce" />
+                <span className="w-1.5 h-1.5 rounded-full bg-pink-500 animate-bounce [animation-delay:0.2s]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-bounce [animation-delay:0.4s]" />
               </div>
             )}
 
@@ -237,22 +240,22 @@ export function ChatbotWidget() {
           </div>
 
           {/* Quick Prompt Chips */}
-          <div className="px-3 py-2 bg-white dark:bg-[#18082D] border-t border-purple-900/10 dark:border-purple-500/20 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+          <div className="px-3 py-2 bg-white dark:bg-[#150729] border-t border-purple-900/10 dark:border-purple-500/20 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
             <button
               onClick={() => handleSend('What services do you offer?')}
-              className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-purple-100 dark:bg-purple-950/60 text-purple-950 dark:text-purple-200 border border-purple-300/40 rounded-none whitespace-nowrap hover:bg-purple-200 transition-colors"
+              className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider bg-purple-100 dark:bg-purple-950/80 text-purple-950 dark:text-purple-200 border border-purple-300/40 rounded-full whitespace-nowrap hover:bg-purple-200 dark:hover:bg-purple-900/80 transition-colors"
             >
               ⚡ Services
             </button>
             <button
               onClick={() => handleSend('How fast can you launch?')}
-              className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-purple-100 dark:bg-purple-950/60 text-purple-950 dark:text-purple-200 border border-purple-300/40 rounded-none whitespace-nowrap hover:bg-purple-200 transition-colors"
+              className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider bg-purple-100 dark:bg-purple-950/80 text-purple-950 dark:text-purple-200 border border-purple-300/40 rounded-full whitespace-nowrap hover:bg-purple-200 dark:hover:bg-purple-900/80 transition-colors"
             >
               ⏱ 7-Day Sprint
             </button>
             <button
               onClick={() => handleSend('How do I start a project?')}
-              className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-purple-100 dark:bg-purple-950/60 text-purple-950 dark:text-purple-200 border border-purple-300/40 rounded-none whitespace-nowrap hover:bg-purple-200 transition-colors"
+              className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider bg-purple-100 dark:bg-purple-950/80 text-purple-950 dark:text-purple-200 border border-purple-300/40 rounded-full whitespace-nowrap hover:bg-purple-200 dark:hover:bg-purple-900/80 transition-colors"
             >
               🚀 Start Project
             </button>
@@ -264,18 +267,18 @@ export function ChatbotWidget() {
               e.preventDefault();
               handleSend();
             }}
-            className="p-3 bg-white dark:bg-[#18082D] border-t border-purple-900/10 dark:border-purple-500/20 flex items-center gap-2"
+            className="p-3 bg-white dark:bg-[#150729] border-t border-purple-900/10 dark:border-purple-500/20 flex items-center gap-2"
           >
             <input
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Ask anything about our studio..."
-              className="flex-1 px-3 py-2 text-xs rounded-none bg-purple-50 dark:bg-[#250C44] text-purple-950 dark:text-zinc-100 border border-purple-900/15 dark:border-purple-500/30 focus:outline-none focus:border-purple-600 font-medium"
+              className="flex-1 px-4 py-2.5 text-xs rounded-full bg-purple-50 dark:bg-[#230C40] text-purple-950 dark:text-zinc-100 border border-purple-900/15 dark:border-purple-500/30 focus:outline-none focus:border-purple-500 font-medium"
             />
             <button
               type="submit"
-              className="p-2 rounded-none bg-[#3B0764] hover:bg-[#2A0548] text-white transition-colors shadow-sm"
+              className="p-2.5 rounded-full bg-gradient-to-r from-[#3B0764] to-[#6B21A8] hover:scale-105 text-white transition-all shadow-md flex items-center justify-center cursor-pointer"
               aria-label="Send Message"
             >
               <Send className="w-4 h-4 text-pink-300" />

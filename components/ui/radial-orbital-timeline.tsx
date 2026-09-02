@@ -154,7 +154,7 @@ export default function RadialOrbitalTimeline({
 
   return (
     <div
-      className="w-full h-[600px] md:h-[680px] flex flex-col items-center justify-center relative overflow-hidden rounded-none"
+      className="w-full h-[480px] md:h-[530px] flex flex-col items-center justify-center relative overflow-hidden rounded-none"
       ref={containerRef}
       onClick={handleContainerClick}
     >
@@ -167,12 +167,12 @@ export default function RadialOrbitalTimeline({
             transform: `translate(${centerOffset.x}px, ${centerOffset.y}px)`,
           }}
         >
-          {/* Center Logo (No circles, transparent background) */}
+          {/* Center Logo (No circles, transparent background - Enlarged) */}
           <div className="absolute flex items-center justify-center z-10 pointer-events-none">
             <img
               src="/logo.png"
               alt="Sumya Web Studio Logo"
-              className="w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44 object-contain drop-shadow-xl dark:brightness-125"
+              className="w-56 h-56 sm:w-68 sm:h-68 md:w-80 md:h-80 object-contain drop-shadow-2xl dark:brightness-125 transition-all duration-300"
             />
           </div>
 
