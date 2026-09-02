@@ -30,6 +30,7 @@ export function Navbar() {
     { label: 'Work', href: '#work' },
     { label: 'Process', href: '#process' },
     { label: 'About', href: '#about' },
+    { label: 'FAQ', href: '#faq' },
   ];
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {

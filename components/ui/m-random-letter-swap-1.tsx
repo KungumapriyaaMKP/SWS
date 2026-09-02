@@ -12,6 +12,7 @@ const links = [
   { label: 'Work', href: '#work' },
   { label: 'Process', href: '#process' },
   { label: 'About', href: '#about' },
+  { label: 'FAQ', href: '#faq' },
 ];
 
 export default function RandomLetterSwapNav({ onNavClick }: RandomLetterSwapNavProps) {
