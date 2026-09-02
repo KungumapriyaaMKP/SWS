@@ -100,7 +100,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'google225153eb71d7cc8b',
+    google: 'w_5KZZqlknyxHR5PImL0SMXseBvnh8Q3BcLyV_OzGno',
   },
 };
 
