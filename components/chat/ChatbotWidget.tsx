@@ -15,12 +15,12 @@ const initialMessages: Message[] = [
   {
     id: '1',
     sender: 'bot',
-    text: "Hello! Welcome to Sumya Web Studio. ✦\nI'm your AI assistant. How can I help turn your idea into a high-converting digital product today?",
+    text: "Hello! Welcome to Sumya Web Studio.\nI'm your AI assistant. How can I help turn your idea into a high-converting digital product today?",
     timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     actions: [
-      { label: '⚡ 7-Day Sprint Details', action: 'sprint' },
-      { label: '💼 View Our Work', action: 'work' },
-      { label: '🚀 Start a Project', action: 'contact' },
+      { label: '7-Day Sprint Details', action: 'sprint' },
+      { label: 'View Our Work', action: 'work' },
+      { label: 'Start a Project', action: 'contact' },
     ],
   },
 ];
@@ -28,27 +28,27 @@ const initialMessages: Message[] = [
 const knowledgeBase: Record<string, { reply: string; actions?: { label: string; action: string }[] }> = {
   sprint: {
     reply: "Our 7-Day Engineering Sprint guarantees launch predictability:\n• Day 1: Discover & Blueprint\n• Day 2: UI/UX & Wireframing\n• Days 3-4: Next.js & 3D WebGL Build\n• Days 5-6: QA & Lighthouse 90+\n• Day 7: Global Edge Deployment!",
-    actions: [{ label: '📅 Book Sprint Discovery', action: 'contact' }],
+    actions: [{ label: 'Book Sprint Discovery', action: 'contact' }],
   },
   work: {
     reply: "We build premium WebGL 3D sites, executive portfolios, custom SaaS applications, and AI integrations. Check out our interactive showcase above!",
-    actions: [{ label: '✨ View Portfolio', action: 'portfolio' }],
+    actions: [{ label: 'View Portfolio', action: 'portfolio' }],
   },
   services: {
     reply: "We offer 5 core digital engineering services:\n1. 3D WebGL & Web Architecture\n2. AI & Business Automation\n3. Executive & Brand Portfolios\n4. Custom SaaS & Software\n5. High-Conversion UI/UX Systems",
-    actions: [{ label: '🚀 Start a Project', action: 'contact' }],
+    actions: [{ label: 'Start a Project', action: 'contact' }],
   },
   pricing: {
     reply: "We structure pricing based on your project goals with fixed 7-day sprint delivery. Tell us about your project requirements and we'll provide a clear, transparent blueprint!",
-    actions: [{ label: '💬 Request Proposal', action: 'contact' }],
+    actions: [{ label: 'Request Proposal', action: 'contact' }],
   },
   contact: {
     reply: "Awesome! Scroll down to our contact form or click below to start a conversation with our engineering team directly.",
-    actions: [{ label: '📬 Go to Contact Form', action: 'scrollToContact' }],
+    actions: [{ label: 'Go to Contact Form', action: 'scrollToContact' }],
   },
   default: {
     reply: "Thank you for asking! Our engineering team specializes in ultra-fast Next.js builds, 3D WebGL experiences, and AI solutions. Would you like to schedule a discovery call or discuss a project?",
-    actions: [{ label: '🚀 Start a Project', action: 'contact' }, { label: '⚡ Learn About Sprints', action: 'sprint' }],
+    actions: [{ label: 'Start a Project', action: 'contact' }, { label: 'Learn About Sprints', action: 'sprint' }],
   },
 };
 
@@ -245,19 +245,19 @@ export function ChatbotWidget() {
               onClick={() => handleSend('What services do you offer?')}
               className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider bg-purple-100 dark:bg-purple-950/80 text-purple-950 dark:text-purple-200 border border-purple-300/40 rounded-full whitespace-nowrap hover:bg-purple-200 dark:hover:bg-purple-900/80 transition-colors"
             >
-              ⚡ Services
+              Services
             </button>
             <button
               onClick={() => handleSend('How fast can you launch?')}
               className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider bg-purple-100 dark:bg-purple-950/80 text-purple-950 dark:text-purple-200 border border-purple-300/40 rounded-full whitespace-nowrap hover:bg-purple-200 dark:hover:bg-purple-900/80 transition-colors"
             >
-              ⏱ 7-Day Sprint
+              7-Day Sprint
             </button>
             <button
               onClick={() => handleSend('How do I start a project?')}
               className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider bg-purple-100 dark:bg-purple-950/80 text-purple-950 dark:text-purple-200 border border-purple-300/40 rounded-full whitespace-nowrap hover:bg-purple-200 dark:hover:bg-purple-900/80 transition-colors"
             >
-              🚀 Start Project
+              Start Project
             </button>
           </div>
 

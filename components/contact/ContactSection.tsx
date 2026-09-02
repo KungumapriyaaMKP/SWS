@@ -212,7 +212,7 @@ export function ContactSection() {
           <div className="pt-4 flex items-center gap-3 text-purple-700 dark:text-purple-300 group">
             <Send className="w-6 h-6 animate-paper-plane-fly text-purple-600 dark:text-purple-400 flex-shrink-0 drop-shadow-md" />
             <span className="font-serif font-bold text-sm sm:text-base whitespace-nowrap text-purple-950 dark:text-purple-300">
-              We can&apos;t wait to work with you! 💜
+              We can&apos;t wait to work with you!
             </span>
           </div>
         </div>
