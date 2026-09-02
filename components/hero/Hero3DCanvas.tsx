@@ -37,9 +37,7 @@ export function Hero3DCanvas({ scrollProgress = 0 }: Hero3DCanvasProps) {
         dpr={[1, 1.5]}
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
       >
-        <Suspense fallback={null}>
-          <Laptop3DObject scrollProgress={scrollProgress} mousePosRef={mousePosRef} />
-        </Suspense>
+        <Laptop3DObject scrollProgress={scrollProgress} mousePosRef={mousePosRef} />
       </Canvas>
     </div>
   );

@@ -44,6 +44,12 @@ class ScreenErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySta
   }
 }
 
+try {
+  useTexture.preload('/crumbs-and-coffee.png');
+} catch (e) {
+  // Preload fallback handle
+}
+
 function LaptopScreenContent() {
   const screenTexture = useTexture('/crumbs-and-coffee.png');
   return (
