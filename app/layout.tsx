@@ -8,6 +8,7 @@ import { ScrollProgressBar } from '@/components/animations/ScrollProgressBar';
 import { CustomCursor } from '@/components/animations/CustomCursor';
 import { PixelCursorTrail } from '@/components/ui/pixel-trail';
 import { BotanicalParticles } from '@/components/botanical/BotanicalParticles';
+import { ChatbotWidget } from '@/components/chat/ChatbotWidget';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -80,6 +81,7 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <ChatbotWidget />
       </body>
     </html>
   );

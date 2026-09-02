@@ -1,8 +1,9 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ChevronDown } from 'lucide-react';
 
 interface ProcessStep {
   number: string;
@@ -32,7 +33,7 @@ const steps: ProcessStep[] = [
     dayTag: 'DAYS 3 - 4',
     title: '3D & FULL-STACK BUILD',
     description: 'High-speed Next.js, 3D WebGL asset integration, and micro-interactions.',
-    details: ['Next.js App Router Architecture', '3D Model & WebGL Canvas Integration', 'GSAP Smooth Micro-Animations'],
+    details: ['High-Performance Web Architecture', '3D Interactive Model Integration', 'Smooth Micro-Animations'],
   },
   {
     number: '04',
@@ -51,52 +52,31 @@ const steps: ProcessStep[] = [
 ];
 
 export function ProcessSection() {
-  const lineRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     const container = containerRef.current;
-    const line = lineRef.current;
-    if (!container || !line) return;
+    if (!container) return;
 
     const ctx = gsap.context(() => {
-      // Timeline line fill animation
-      gsap.to(line, {
-        height: '100%',
-        ease: 'none',
-        scrollTrigger: {
-          trigger: container,
-          start: 'top center+=100',
-          end: 'bottom center+=100',
-          scrub: 0.5,
+      ScrollTrigger.create({
+        trigger: container,
+        start: 'top center+=100',
+        end: 'bottom center+=100',
+        scrub: 0.3,
+        onUpdate: (self) => {
+          setScrollProgress(self.progress);
         },
-      });
-
-      // Individual cards animate in
-      const cardEls = container.querySelectorAll('.process-card');
-      cardEls.forEach((card) => {
-        gsap.fromTo(
-          card,
-          { opacity: 0.3, y: 30, scale: 0.95 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.6,
-            scrollTrigger: {
-              trigger: card,
-              start: 'top center+=150',
-              toggleActions: 'play reverse play reverse',
-            },
-          }
-        );
       });
     }, container);
 
     return () => ctx.revert();
   }, []);
+
+  const lineFillPercent = Math.min(100, Math.max(0, scrollProgress * 100));
 
   return (
     <section id="process" ref={containerRef} className="relative py-24 px-4 md:px-8 bg-white transition-colors duration-300">
@@ -104,7 +84,7 @@ export function ProcessSection() {
         {/* Header */}
         <div className="mb-16 text-center max-w-3xl mx-auto">
           {/* Highlight Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#3B0764] text-white text-xs font-bold tracking-widest uppercase mb-4 shadow-lg border border-purple-400/30">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-none bg-[#3B0764] text-white text-xs font-bold tracking-widest uppercase mb-4 shadow-lg border border-purple-400/30">
             <span>⚡ DELIVERED WITHIN 7 DAYS</span>
           </div>
 
@@ -120,19 +100,28 @@ export function ProcessSection() {
         {/* Vertical Timeline Container */}
         <div className="relative max-w-4xl mx-auto">
           {/* Background Empty Line */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-purple-900/10 -translate-x-1/2 rounded-full" />
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1.5 bg-purple-900/10 -translate-x-1/2 rounded-none" />
 
-          {/* Animated Glowing Progress Line */}
+          {/* Dynamic Traveling Beam Line */}
           <div
-            ref={lineRef}
-            className="absolute left-4 md:left-1/2 top-0 w-1 bg-gradient-to-b from-purple-600 via-pink-600 to-rose-600 -translate-x-1/2 rounded-full shadow-md"
-            style={{ height: '0%' }}
+            className="absolute left-4 md:left-1/2 top-0 w-1 bg-gradient-to-b from-[#3B0764] via-purple-600 to-pink-500 -translate-x-1/2 rounded-none shadow-md transition-all duration-150 ease-out"
+            style={{ height: `${lineFillPercent}%` }}
           />
+
+          {/* Sleek Traveling Indicator Badge */}
+          <div
+            className="absolute left-4 md:left-1/2 -translate-x-1/2 w-7 h-7 rounded-none bg-[#3B0764] border-2 border-pink-400 text-white flex items-center justify-center shadow-lg shadow-purple-950/40 z-30 transition-all duration-150 ease-out"
+            style={{ top: `calc(${lineFillPercent}% - 14px)` }}
+          >
+            <ChevronDown className="w-4 h-4 text-pink-300 animate-pulse" />
+          </div>
 
           {/* Timeline Cards */}
           <div className="space-y-12">
             {steps.map((step, idx) => {
               const isEven = idx % 2 === 0;
+              const isPassed = lineFillPercent >= (idx / (steps.length - 1)) * 90;
+
               return (
                 <div
                   key={step.number}
@@ -141,15 +130,31 @@ export function ProcessSection() {
                   }`}
                 >
                   {/* Timeline Node Icon/Dot */}
-                  <div className="absolute left-4 md:left-1/2 top-8 -translate-x-1/2 w-8 h-8 rounded-full bg-[#3B0764] border-2 border-white text-white flex items-center justify-center shadow-lg z-20">
-                    <div className="w-2.5 h-2.5 rounded-full bg-pink-400 animate-pulse" />
+                  <div
+                    className={`absolute left-4 md:left-1/2 top-8 -translate-x-1/2 w-8 h-8 rounded-none border-2 transition-all duration-300 flex items-center justify-center z-20 ${
+                      isPassed
+                        ? 'bg-[#3B0764] border-pink-500 scale-110 shadow-lg shadow-purple-900/30'
+                        : 'bg-purple-100 border-purple-300 text-purple-900'
+                    }`}
+                  >
+                    <div
+                      className={`w-2.5 h-2.5 rounded-none transition-colors duration-300 ${
+                        isPassed ? 'bg-pink-400 animate-pulse' : 'bg-purple-400'
+                      }`}
+                    />
                   </div>
 
                   {/* Card Content */}
                   <div className="w-full md:w-1/2 pl-12 md:pl-0 md:px-8">
-                    <div className="process-card bg-white border border-purple-900/15 p-6 md:p-8 rounded-3xl relative shadow-xl hover:border-purple-600/40 transition-all duration-300">
+                    <div
+                      className={`process-card bg-white border p-6 md:p-8 rounded-none relative shadow-xl transition-all duration-300 ${
+                        isPassed
+                          ? 'border-purple-600 shadow-2xl scale-[1.01]'
+                          : 'border-purple-900/15 hover:border-purple-600/40'
+                      }`}
+                    >
                       <div className="flex items-center justify-between mb-4">
-                        <span className="font-mono text-sm font-extrabold tracking-wider text-white bg-[#3B0764] px-3 py-1 rounded-full shadow-sm">
+                        <span className="font-mono text-sm font-extrabold tracking-wider text-white bg-[#3B0764] px-3 py-1 rounded-none shadow-sm">
                           {step.dayTag}
                         </span>
                         <span className="text-[11px] font-extrabold tracking-wider text-purple-900/60 uppercase font-mono">
@@ -168,7 +173,11 @@ export function ProcessSection() {
                       <div className="space-y-2 pt-4 border-t border-purple-900/10">
                         {step.details.map((item, i) => (
                           <div key={i} className="flex items-center gap-2.5 text-xs text-purple-950 font-medium">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#3B0764]" />
+                            <span
+                              className={`w-1.5 h-1.5 rounded-none ${
+                                isPassed ? 'bg-pink-500' : 'bg-[#3B0764]'
+                              }`}
+                            />
                             <span>{item}</span>
                           </div>
                         ))}

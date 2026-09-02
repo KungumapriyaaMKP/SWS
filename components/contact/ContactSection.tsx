@@ -1,17 +1,84 @@
 'use client';
 
-import { useState } from 'react';
-import { Send, Mail, MapPin, CheckCircle2, ArrowRight } from 'lucide-react';
-import { RatingInteraction } from '@/components/ui/emoji-rating';
+import { useState, useRef, useEffect } from 'react';
+import { Send, Mail, CheckCircle2, ArrowRight, Instagram, ChevronRight, User, Briefcase, MessageSquare, Lock, Sparkles, ChevronDown, Check } from 'lucide-react';
+
+interface CustomDropdownProps {
+  label: string;
+  placeholder: string;
+  value: string;
+  options: string[];
+  onChange: (value: string) => void;
+}
+
+function CustomDropdown({ label, placeholder, value, options, onChange }: CustomDropdownProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <label className="block text-xs font-extrabold tracking-wider text-purple-950 dark:text-zinc-300 mb-2 uppercase">
+        {label}
+      </label>
+
+      {/* Trigger Button - SHARP EDGES */}
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full px-4 py-3.5 rounded-none bg-[#F9FAFB] dark:bg-white/5 border border-[#E5E7EB] dark:border-white/10 text-purple-950 dark:text-white flex items-center justify-between transition-all duration-200 text-xs font-semibold focus:outline-none focus:border-purple-600 focus:bg-white cursor-pointer"
+      >
+        <span className={value ? 'text-purple-950 dark:text-white font-bold' : 'text-gray-400 dark:text-zinc-500'}>
+          {value || placeholder}
+        </span>
+        <ChevronDown className={`w-4 h-4 text-purple-500 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+
+      {/* Dropdown Menu - SHARP EDGES */}
+      {isOpen && (
+        <div className="absolute left-0 right-0 top-full mt-2 z-50 bg-white dark:bg-[#1A112E] border border-purple-200 dark:border-purple-500/40 rounded-none shadow-2xl overflow-hidden max-h-60 overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200">
+          <div className="py-1">
+            {options.map((opt) => (
+              <button
+                type="button"
+                key={opt}
+                onClick={() => {
+                  onChange(opt);
+                  setIsOpen(false);
+                }}
+                className={`w-full px-4 py-3 text-left text-xs font-semibold transition-colors flex items-center justify-between cursor-pointer ${
+                  value === opt
+                    ? 'bg-purple-100/70 dark:bg-purple-900/50 text-purple-900 dark:text-purple-300 font-bold'
+                    : 'text-purple-950 dark:text-zinc-200 hover:bg-purple-50 dark:hover:bg-white/10'
+                }`}
+              >
+                <span>{opt}</span>
+                {value === opt && <Check className="w-4 h-4 text-purple-600 dark:text-purple-400" />}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     company: '',
-    serviceType: 'Website Development',
-    budget: '$10k - $25k',
-    message: '',
+    serviceType: '',
+    budget: '',
+    timeline: '',
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -23,11 +90,10 @@ export function ContactSection() {
       setSubmitted(false);
       setFormData({
         name: '',
-        email: '',
         company: '',
-        serviceType: 'Website Development',
-        budget: '$10k - $25k',
-        message: '',
+        serviceType: '',
+        budget: '',
+        timeline: '',
       });
     }, 4000);
   };
@@ -37,183 +103,204 @@ export function ContactSection() {
     'Personal & Executive Portfolios',
     'Web Applications',
     'AI Solutions',
-    'Custom Software',
+    'Custom Software & ERP Systems',
     'UI/UX Design',
     'Business Automation',
+    'E-Commerce & Storefronts',
+    '3D WebGL & Interactive',
+    'Mobile App Development',
+    'Brand Strategy & Identity',
   ];
 
-  const budgetOptions = ['$5k - $10k', '$10k - $25k', '$25k - $50k', '$50k+'];
+  const budgetOptions = [
+    '₹10,000 - ₹25,000 ($120 - $300)',
+    '₹25,000 - ₹50,000 ($300 - $600)',
+    '₹50,000 - ₹1,50,000 ($600 - $1.8k)',
+    '₹1,50,000 - ₹3,00,000 ($1.8k - $3.6k)',
+    '₹3,00,000+ ($3.6k+)',
+  ];
+  const timelineOptions = ['1-2 Weeks', '2-4 Weeks', '1-2 Months', '3+ Months'];
 
   return (
-    <section id="contact" className="relative py-24 px-4 md:px-8 overflow-hidden transition-colors duration-300">
+    <section id="contact" className="relative py-28 px-4 md:px-8 overflow-hidden transition-colors duration-300">
       <div className="ambient-glow-2 top-0 left-10" />
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 z-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start z-10">
         {/* Left Info Column */}
         <div className="lg:col-span-5 space-y-8">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-purple-500/20 text-[11px] font-bold tracking-widest text-purple-800 dark:text-purple-300 uppercase mb-4 shadow-glass-light">
-              START A CONVERSATION
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-none glass-panel border border-purple-500/20 text-[11px] font-bold tracking-widest text-purple-800 dark:text-purple-300 uppercase mb-4 shadow-glass-light">
+              <Sparkles className="w-3.5 h-3.5 text-pink-500" />
+              <span>LET&apos;S CONNECT</span>
             </div>
-            <h2 className="font-display text-4xl md:text-5xl font-extrabold tracking-tight text-purple-950 dark:text-white leading-tight">
-              LET&apos;S BUILD YOUR <span className="text-gradient-hero">NEXT PRODUCT.</span>
+
+            <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-purple-950 dark:text-white leading-[1.1]">
+              LET&apos;S BUILD <br />
+              <span className="text-gradient-hero italic font-normal">SOMETHING AMAZING TOGETHER.</span>
             </h2>
-            <p className="text-purple-900/70 dark:text-text-secondary text-sm md:text-base mt-4 leading-relaxed font-medium">
-              Have a project in mind or need technical guidance? Fill out the form or reach out directly. We respond within 24 hours.
-            </p>
           </div>
 
-          <div className="space-y-4 pt-4">
-            <div className="flex items-center gap-4 p-4 rounded-2xl glass-panel border border-purple-500/15 shadow-glass-light">
-              <div className="p-3 rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-700 dark:text-purple-300">
-                <Mail className="w-5 h-5" />
+          {/* Contact Info Cards */}
+          <div className="space-y-4 pt-2">
+            {/* Card 1: Email */}
+            <a
+              href="mailto:sumyawebstudio@gmail.com"
+              className="flex items-center justify-between p-4.5 rounded-none bg-white/90 dark:bg-[#130E26]/90 border border-purple-900/15 dark:border-purple-500/25 shadow-md hover:shadow-xl hover:border-purple-500/50 transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-none bg-purple-100 dark:bg-purple-900/50 border border-purple-200 dark:border-purple-500/30 flex items-center justify-center text-purple-600 dark:text-purple-300 flex-shrink-0">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="text-xs font-black tracking-wider text-purple-900/60 dark:text-purple-300/70 block uppercase">
+                    EMAIL US
+                  </span>
+                  <span className="text-xs md:text-sm font-bold text-purple-950 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                    sumyawebstudio@gmail.com
+                  </span>
+                </div>
               </div>
-              <div>
-                <span className="text-xs text-purple-900/60 dark:text-text-secondary block font-semibold">Direct Email</span>
-                <a
-                  href="mailto:hello@sumyawebstudio.com"
-                  className="text-sm font-bold text-purple-950 dark:text-white hover:text-pink-600 dark:hover:text-purple-400 transition-colors"
-                >
-                  hello@sumyawebstudio.com
-                </a>
-              </div>
-            </div>
+              <ChevronRight className="w-5 h-5 text-purple-400 group-hover:translate-x-1 transition-transform" />
+            </a>
 
-            <div className="flex items-center gap-4 p-4 rounded-2xl glass-panel border border-white/5">
-              <div className="p-3 rounded-xl bg-indigo-600/20 border border-indigo-500/30 text-indigo-300">
-                <MapPin className="w-5 h-5" />
+            {/* Card 2: Instagram */}
+            <a
+              href="https://www.instagram.com/sumya.web.studio?igsi=ejlhYzg2dWliaDh4&utm_source=qr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between p-4.5 rounded-none bg-white/90 dark:bg-[#130E26]/90 border border-purple-900/15 dark:border-purple-500/25 shadow-md hover:shadow-xl hover:border-pink-500/50 transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-none bg-pink-100 dark:bg-pink-950/50 border border-pink-200 dark:border-pink-500/30 flex items-center justify-center text-pink-600 dark:text-pink-400 flex-shrink-0">
+                  <Instagram className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="text-xs font-black tracking-wider text-pink-900/60 dark:text-pink-300/70 block uppercase">
+                    INSTAGRAM
+                  </span>
+                  <span className="text-xs md:text-sm font-bold text-purple-950 dark:text-white group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">
+                    @sumya.web.studio
+                  </span>
+                </div>
               </div>
-              <div>
-                <span className="text-xs text-text-secondary block">Studio Presence</span>
-                <span className="text-sm font-semibold text-white">Global Remote Studio</span>
-              </div>
-            </div>
+              <ChevronRight className="w-5 h-5 text-pink-400 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
+
+          {/* Bottom Left Paper Plane & Note - PERFECTLY ALIGNED SINGLE LINE */}
+          <div className="pt-4 flex items-center gap-3 text-purple-700 dark:text-purple-300 group">
+            <Send className="w-6 h-6 animate-paper-plane-fly text-purple-600 dark:text-purple-400 flex-shrink-0 drop-shadow-md" />
+            <span className="font-serif font-bold text-sm sm:text-base whitespace-nowrap text-purple-950 dark:text-purple-300">
+              We can&apos;t wait to work with you! 💜
+            </span>
           </div>
         </div>
 
-        {/* Right Glass Contact Form */}
+        {/* Right White Card Form - SHARP EDGES */}
         <div className="lg:col-span-7">
-          <div className="glass-panel p-8 md:p-10 rounded-3xl border border-white/10 relative">
+          <div className="bg-white dark:bg-[#120B24] p-8 md:p-10 rounded-none border-2 border-purple-900/15 dark:border-purple-500/30 shadow-2xl relative">
             {submitted ? (
               <div className="py-16 text-center space-y-4">
-                <div className="w-16 h-16 rounded-full bg-purple-600/30 border border-purple-400 flex items-center justify-center mx-auto text-purple-300">
+                <div className="w-16 h-16 rounded-none bg-purple-600/20 border-2 border-purple-500 flex items-center justify-center mx-auto text-purple-600 dark:text-purple-300">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
-                <h3 className="font-display text-2xl font-bold text-white">Project Inquiry Received!</h3>
-                <p className="text-text-secondary text-sm max-w-md mx-auto">
-                  Thank you for reaching out to Sumya Web Studio. Our technical lead will review your details and reply shortly.
+                <h3 className="font-serif text-3xl font-bold text-purple-950 dark:text-white">Project Inquiry Received!</h3>
+                <p className="text-purple-900/80 dark:text-zinc-300 text-sm max-w-md mx-auto font-medium">
+                  Thank you for reaching out to Sumya Web Studio. Our technical team will review your project details and reply within 24 hours.
                 </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-xs font-semibold tracking-wider text-zinc-300 mb-2 uppercase">
-                      Your Name *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="Alex Rivera"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-purple-500 transition-colors text-sm"
-                    />
+                {/* Form Header */}
+                <div className="flex items-center gap-4 mb-6 pb-4 border-b border-purple-900/10 dark:border-white/10">
+                  <div className="w-12 h-12 rounded-none bg-purple-100 dark:bg-purple-900/50 border border-purple-200 dark:border-purple-500/30 flex items-center justify-center text-purple-600 dark:text-purple-300 shadow-sm flex-shrink-0">
+                    <MessageSquare className="w-6 h-6" />
                   </div>
-
                   <div>
-                    <label className="block text-xs font-semibold tracking-wider text-zinc-300 mb-2 uppercase">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="alex@company.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-purple-500 transition-colors text-sm"
-                    />
+                    <h3 className="font-serif text-2xl md:text-3xl font-bold text-purple-950 dark:text-white">
+                      Send us a message
+                    </h3>
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-semibold tracking-wider text-zinc-300 mb-2 uppercase">
-                    Company Name
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Acme Inc."
-                    value={formData.company}
-                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-purple-500 transition-colors text-sm"
+                {/* Grid Inputs: Name & Company Name */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-xs font-extrabold tracking-wider text-purple-950 dark:text-zinc-300 mb-2 uppercase">
+                      YOUR NAME *
+                    </label>
+                    <div className="relative">
+                      <User className="absolute left-4 top-3.5 w-4 h-4 text-purple-500/70" />
+                      <input
+                        type="text"
+                        required
+                        placeholder="Enter your full name"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="w-full pl-11 pr-4 py-3.5 rounded-none bg-[#F9FAFB] dark:bg-white/5 border border-[#E5E7EB] dark:border-white/10 text-purple-950 dark:text-white placeholder-gray-400 dark:placeholder-zinc-500 focus:outline-none focus:border-purple-600 focus:bg-white transition-colors text-xs font-semibold"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-extrabold tracking-wider text-purple-950 dark:text-zinc-300 mb-2 uppercase">
+                      COMPANY NAME
+                    </label>
+                    <div className="relative">
+                      <Briefcase className="absolute left-4 top-3.5 w-4 h-4 text-purple-500/70" />
+                      <input
+                        type="text"
+                        placeholder="Enter your company name"
+                        value={formData.company}
+                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                        className="w-full pl-11 pr-4 py-3.5 rounded-none bg-[#F9FAFB] dark:bg-white/5 border border-[#E5E7EB] dark:border-white/10 text-purple-950 dark:text-white placeholder-gray-400 dark:placeholder-zinc-500 focus:outline-none focus:border-purple-600 focus:bg-white transition-colors text-xs font-semibold"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Custom Dropdown: Service Type */}
+                <CustomDropdown
+                  label="WHAT ARE YOU LOOKING TO BUILD? *"
+                  placeholder="Select a service"
+                  value={formData.serviceType}
+                  options={serviceOptions}
+                  onChange={(val) => setFormData({ ...formData, serviceType: val })}
+                />
+
+                {/* 2-Column Custom Dropdowns: Budget & Timeline */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <CustomDropdown
+                    label="ESTIMATED BUDGET"
+                    placeholder="Select your budget range"
+                    value={formData.budget}
+                    options={budgetOptions}
+                    onChange={(val) => setFormData({ ...formData, budget: val })}
+                  />
+
+                  <CustomDropdown
+                    label="PROJECT TIMELINE"
+                    placeholder="Select timeline"
+                    value={formData.timeline}
+                    options={timelineOptions}
+                    onChange={(val) => setFormData({ ...formData, timeline: val })}
                   />
                 </div>
 
-                <div>
-                  <label className="block text-xs font-semibold tracking-wider text-zinc-300 mb-2 uppercase">
-                    What are you looking to build?
-                  </label>
-                  <div className="flex flex-wrap gap-2">
-                    {serviceOptions.map((opt) => (
-                      <button
-                        type="button"
-                        key={opt}
-                        onClick={() => setFormData({ ...formData, serviceType: opt })}
-                        className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-colors border ${
-                          formData.serviceType === opt
-                            ? 'bg-purple-600 text-white border-purple-400'
-                            : 'bg-white/5 text-zinc-400 border-white/10 hover:text-white'
-                        }`}
-                      >
-                        {opt}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold tracking-wider text-zinc-300 mb-2 uppercase">
-                    Estimated Budget
-                  </label>
-                  <div className="flex flex-wrap gap-2">
-                    {budgetOptions.map((opt) => (
-                      <button
-                        type="button"
-                        key={opt}
-                        onClick={() => setFormData({ ...formData, budget: opt })}
-                        className={`px-4 py-1.5 rounded-full text-xs font-medium transition-colors border ${
-                          formData.budget === opt
-                            ? 'bg-indigo-600 text-white border-indigo-400'
-                            : 'bg-white/5 text-zinc-400 border-white/10 hover:text-white'
-                        }`}
-                      >
-                        {opt}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold tracking-wider text-zinc-300 mb-2 uppercase">
-                    Project Details & Goals *
-                  </label>
-                  <textarea
-                    rows={4}
-                    required
-                    placeholder="Tell us about your project vision, target timeline, and core requirements..."
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-purple-500 transition-colors text-sm resize-none"
-                  />
-                </div>
-
+                {/* Submit Button - SHARP EDGES */}
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-xl text-sm font-semibold tracking-wider text-white bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 shadow-violet-glow hover:shadow-violet-glow-lg transition-all duration-300 flex items-center justify-center gap-2"
+                  className="w-full py-4 rounded-none text-xs font-extrabold tracking-widest uppercase text-white bg-gradient-to-r from-[#3B0764] via-purple-700 to-indigo-700 hover:from-purple-900 hover:to-indigo-800 shadow-xl transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer"
                 >
                   <span>SEND PROJECT ENQUIRY</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 text-pink-300 group-hover:translate-x-1 transition-transform" />
                 </button>
+
+                {/* Security Footer Note */}
+                <div className="flex items-center justify-center gap-2 pt-2 text-xs font-medium text-purple-900/60 dark:text-zinc-400">
+                  <Lock className="w-3.5 h-3.5 text-purple-500" />
+                  <span>Your information is 100% secure and confidential.</span>
+                </div>
               </form>
             )}
           </div>

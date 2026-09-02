@@ -5,7 +5,6 @@ import { HeroSection } from '@/components/hero/HeroSection';
 import { ServicesSection } from '@/components/services/ServicesSection';
 import { IdeaToImpactSection } from '@/components/process/IdeaToImpactSection';
 import { PortfolioSection } from '@/components/portfolio/PortfolioSection';
-import { WhySumyaSection } from '@/components/why-sumya/WhySumyaSection';
 import { ProcessSection } from '@/components/timeline/ProcessSection';
 import { AboutSection } from '@/components/about/AboutSection';
 import { SocialProofSection } from '@/components/proof/SocialProofSection';
@@ -25,8 +24,6 @@ export default function Home() {
       <IdeaToImpactSection />
       <BotanicalFlourish variant="divider" />
       <PortfolioSection />
-      <BotanicalFlourish variant="divider" />
-      <WhySumyaSection />
       <BotanicalFlourish variant="divider" />
       <ProcessSection />
       <BotanicalFlourish variant="divider" />

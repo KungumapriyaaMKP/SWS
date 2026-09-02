@@ -5,61 +5,76 @@ import gsap from 'gsap';
 import { Logo } from '../navigation/Logo';
 
 export function PageLoader() {
+  const [mounted, setMounted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Fast progress ticker (under 1 sec)
+    setMounted(true);
+
+    // Fast progress ticker (reaches 100% in ~400ms)
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
           return 100;
         }
-        return prev + 5;
+        return prev + 10;
       });
-    }, 30);
+    }, 20);
 
-    return () => clearInterval(interval);
+    // Safety fallback: guaranteed hide after 1 second max
+    const safetyTimeout = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(safetyTimeout);
+    };
   }, []);
 
   useEffect(() => {
     if (progress >= 100) {
       const timer = setTimeout(() => {
-        gsap.to('#page-loader', {
-          clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
-          duration: 0.8,
-          ease: 'power4.inOut',
-          onComplete: () => {
-            setLoading(false);
-          },
-        });
-      }, 150);
+        const loaderEl = document.getElementById('page-loader');
+        if (loaderEl) {
+          gsap.to(loaderEl, {
+            opacity: 0,
+            duration: 0.35,
+            ease: 'power2.out',
+            onComplete: () => {
+              setLoading(false);
+            },
+          });
+        } else {
+          setLoading(false);
+        }
+      }, 80);
 
       return () => clearTimeout(timer);
     }
   }, [progress]);
 
-  if (!loading) return null;
+  if (!mounted || !loading) return null;
 
   return (
     <div
       id="page-loader"
-      className="fixed inset-0 z-[9999] bg-[#050509] flex flex-col items-center justify-center pointer-events-auto"
-      style={{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)' }}
+      className="fixed inset-0 z-[9999] bg-[#050509] flex flex-col items-center justify-center pointer-events-none transition-opacity duration-300"
     >
       <div className="flex flex-col items-center gap-6">
-        <Logo size="lg" />
+        <Logo size="lg" variant="light" />
 
         {/* Dynamic loading progress line */}
         <div className="w-48 h-1 bg-white/10 rounded-full overflow-hidden relative">
           <div
-            className="h-full bg-gradient-to-r from-purple-600 via-indigo-500 to-purple-400 transition-all duration-75 ease-out"
+            className="h-full bg-gradient-to-r from-purple-600 via-pink-500 to-purple-400 transition-all duration-75 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>
 
-        <div className="text-xs font-mono text-zinc-500 tracking-widest">{progress}%</div>
+        <div className="text-xs font-mono text-purple-300 tracking-widest font-bold">{progress}%</div>
       </div>
     </div>
   );

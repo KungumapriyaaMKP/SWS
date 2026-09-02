@@ -20,6 +20,11 @@ export default function Error({
         <p className="text-sm text-text-secondary">
           An unexpected error occurred. Click below to reload the page.
         </p>
+        {error?.message && (
+          <p className="text-xs text-rose-400 bg-rose-950/40 p-3 rounded-lg border border-rose-500/20 text-left font-mono break-words">
+            {error.message}
+          </p>
+        )}
         <button
           onClick={() => reset()}
           className="w-full py-3 rounded-full text-xs font-bold text-white bg-gradient-to-r from-purple-600 to-rose-600 shadow-rose-glow"

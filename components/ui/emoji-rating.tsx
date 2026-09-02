@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { Frown, Meh, Smile, Laugh, Heart } from 'lucide-react';
 
 interface RatingInteractionProps {
   onChange?: (rating: number) => void;
@@ -9,11 +10,46 @@ interface RatingInteractionProps {
 }
 
 const ratingData = [
-  { emoji: '😔', label: 'Terrible', color: 'from-red-400 to-red-500', shadowColor: 'shadow-red-500/30' },
-  { emoji: '😕', label: 'Poor', color: 'from-orange-400 to-orange-500', shadowColor: 'shadow-orange-500/30' },
-  { emoji: '😐', label: 'Okay', color: 'from-yellow-400 to-yellow-500', shadowColor: 'shadow-yellow-500/30' },
-  { emoji: '🙂', label: 'Good', color: 'from-lime-400 to-lime-500', shadowColor: 'shadow-lime-500/30' },
-  { emoji: '😍', label: 'Amazing', color: 'from-emerald-400 to-emerald-500', shadowColor: 'shadow-emerald-500/30' },
+  {
+    icon: Frown,
+    label: 'Terrible',
+    activeBg: 'bg-rose-50 dark:bg-rose-950/40',
+    border: 'border-rose-500',
+    text: 'text-rose-600 dark:text-rose-400',
+    glow: 'shadow-rose-500/30',
+  },
+  {
+    icon: Meh,
+    label: 'Poor',
+    activeBg: 'bg-orange-50 dark:bg-orange-950/40',
+    border: 'border-orange-500',
+    text: 'text-orange-600 dark:text-orange-400',
+    glow: 'shadow-orange-500/30',
+  },
+  {
+    icon: Smile,
+    label: 'Okay',
+    activeBg: 'bg-yellow-50 dark:bg-yellow-950/40',
+    border: 'border-amber-500',
+    text: 'text-amber-600 dark:text-amber-400',
+    glow: 'shadow-amber-500/30',
+  },
+  {
+    icon: Laugh,
+    label: 'Good',
+    activeBg: 'bg-purple-50 dark:bg-purple-950/40',
+    border: 'border-purple-500',
+    text: 'text-purple-600 dark:text-purple-300',
+    glow: 'shadow-purple-500/30',
+  },
+  {
+    icon: Heart,
+    label: 'Amazing',
+    activeBg: 'bg-pink-50 dark:bg-pink-950/40',
+    border: 'border-pink-500',
+    text: 'text-pink-600 dark:text-pink-400',
+    glow: 'shadow-pink-500/40',
+  },
 ];
 
 export function RatingInteraction({ onChange, className }: RatingInteractionProps) {
@@ -28,12 +64,14 @@ export function RatingInteraction({ onChange, className }: RatingInteractionProp
   const displayRating = hoverRating || rating;
 
   return (
-    <div className={cn('flex flex-col items-center gap-5', className)}>
-      {/* Emoji rating buttons */}
-      <div className="flex items-center gap-2 sm:gap-3">
+    <div className={cn('flex flex-col items-center justify-center gap-4 w-full', className)}>
+      {/* Reaction Icon Buttons */}
+      <div className="flex items-center justify-center gap-3 sm:gap-4">
         {ratingData.map((item, i) => {
           const value = i + 1;
           const isActive = value <= displayRating;
+          const isSelected = value === displayRating;
+          const Icon = item.icon;
 
           return (
             <button
@@ -41,56 +79,65 @@ export function RatingInteraction({ onChange, className }: RatingInteractionProp
               onClick={() => handleClick(value)}
               onMouseEnter={() => setHoverRating(value)}
               onMouseLeave={() => setHoverRating(0)}
-              className="group relative focus:outline-none"
+              className="group relative focus:outline-none cursor-pointer"
               aria-label={`Rate ${value}: ${item.label}`}
             >
               <div
                 className={cn(
-                  'relative flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-none glass-panel border border-luxury-lavender/25 transition-all duration-300 ease-out shadow-xs',
-                  isActive ? 'scale-110 border-luxury-dustyrose/60 bg-white dark:bg-ebony-light' : 'scale-100 group-hover:scale-105'
+                  'relative flex h-13 w-13 sm:h-16 sm:w-16 items-center justify-center rounded-none border-2 transition-all duration-300 ease-out shadow-md',
+                  isSelected
+                    ? `${item.activeBg} ${item.border} ${item.glow} scale-110 shadow-xl`
+                    : isActive
+                    ? `${item.activeBg} ${item.border} opacity-90 scale-105`
+                    : 'bg-white dark:bg-[#130E26] border-purple-900/20 dark:border-purple-500/30 group-hover:scale-105 group-hover:border-purple-500 group-hover:bg-purple-50/40 dark:group-hover:bg-white/10'
                 )}
               >
-                {/* Emoji with smooth grayscale transition */}
-                <span
+                <Icon
                   className={cn(
-                    'text-2xl sm:text-3xl transition-all duration-300 ease-out select-none',
+                    'w-7 h-7 sm:w-8 sm:h-8 transition-all duration-300 ease-out',
                     isActive
-                      ? 'grayscale-0 drop-shadow-lg'
-                      : 'grayscale opacity-40 group-hover:opacity-75 group-hover:grayscale-[0.3]'
+                      ? item.text
+                      : 'text-purple-900/60 dark:text-purple-300/60 group-hover:text-purple-950 dark:group-hover:text-white'
                   )}
-                >
-                  {item.emoji}
-                </span>
+                />
               </div>
             </button>
           );
         })}
       </div>
 
-      <div className="relative h-7 w-36">
-        {/* Default "Rate us" text */}
+      {/* Centered Wording */}
+      <div className="relative h-8 w-full max-w-sm flex items-center justify-center text-center">
+        {/* Default "RATE YOUR EXPERIENCE" text */}
         <div
           className={cn(
-            'absolute inset-0 flex items-center justify-center transition-all duration-300 ease-out',
-            displayRating > 0 ? 'opacity-0 blur-md scale-95' : 'opacity-100 blur-0 scale-100'
+            'absolute inset-0 flex items-center justify-center transition-all duration-300 ease-out whitespace-nowrap',
+            displayRating > 0 ? 'opacity-0 blur-sm scale-95' : 'opacity-100 blur-0 scale-100'
           )}
         >
-          <span className="text-xs font-bold tracking-widest text-ebony-muted dark:text-text-secondary uppercase">
+          <span className="text-xs sm:text-sm font-extrabold tracking-widest text-purple-950 dark:text-purple-200 uppercase">
             RATE YOUR EXPERIENCE
           </span>
         </div>
 
-        {/* Rating labels with blur in/out effect */}
+        {/* Rating labels */}
         {ratingData.map((item, i) => (
           <div
             key={i}
             className={cn(
-              'absolute inset-0 flex items-center justify-center transition-all duration-300 ease-out',
-              displayRating === i + 1 ? 'opacity-100 blur-0 scale-100' : 'opacity-0 blur-md scale-105'
+              'absolute inset-0 flex items-center justify-center transition-all duration-300 ease-out whitespace-nowrap',
+              displayRating === i + 1 ? 'opacity-100 blur-0 scale-100' : 'opacity-0 blur-sm scale-105'
             )}
           >
-            <span className="text-xs font-bold tracking-wider text-ebony dark:text-silk-100 uppercase">
-              {item.label}
+            <span
+              className={cn(
+                'text-xs sm:text-sm font-extrabold tracking-widest uppercase px-4 py-1 border rounded-none shadow-sm',
+                item.activeBg,
+                item.border,
+                item.text
+              )}
+            >
+              {item.label} ({i + 1}/5)
             </span>
           </div>
         ))}

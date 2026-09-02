@@ -10,59 +10,37 @@ interface Hero3DCanvasProps {
 
 export function Hero3DCanvas({ scrollProgress = 0 }: Hero3DCanvasProps) {
   const [mounted, setMounted] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isVisible, setIsVisible] = useState(true);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const mousePosRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.05 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!isVisible) return;
 
     const handleMouseMove = (e: MouseEvent) => {
-      const x = (e.clientX / window.innerWidth) * 2 - 1;
-      const y = -(e.clientY / window.innerHeight) * 2 + 1;
-      setMousePos({ x, y });
+      mousePosRef.current = {
+        x: (e.clientX / window.innerWidth) * 2 - 1,
+        y: -(e.clientY / window.innerHeight) * 2 + 1,
+      };
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [isVisible]);
+  }, []);
 
   if (!mounted) {
-    return <div ref={containerRef} className="w-full h-full min-h-[400px] md:min-h-[600px]" />;
+    return <div className="w-full h-full min-h-[400px] md:min-h-[500px] lg:min-h-[580px]" />;
   }
 
   return (
-    <div ref={containerRef} className="w-full h-full min-h-[400px] md:min-h-[600px] relative pointer-events-auto flex items-center justify-center">
-      {isVisible && (
-        <Canvas
-          camera={{ position: [0, 0, 9.2], fov: 38 }}
-          dpr={[1, 1.5]}
-          gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
-        >
-          <Suspense fallback={null}>
-            <Laptop3DObject scrollProgress={scrollProgress} mousePos={mousePos} />
-          </Suspense>
-        </Canvas>
-      )}
+    <div className="w-full h-full min-h-[400px] md:min-h-[500px] lg:min-h-[580px] relative pointer-events-auto flex items-center justify-center z-10">
+      <Canvas
+        camera={{ position: [0, 0, 9.2], fov: 38 }}
+        dpr={[1, 1.5]}
+        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+      >
+        <Suspense fallback={null}>
+          <Laptop3DObject scrollProgress={scrollProgress} mousePosRef={mousePosRef} />
+        </Suspense>
+      </Canvas>
     </div>
   );
 }

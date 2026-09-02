@@ -1,36 +1,119 @@
 'use client';
 
-import { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useRef, useState, Suspense } from 'react';
+import { useFrame, ThreeEvent } from '@react-three/fiber';
 import { Float, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface Laptop3DObjectProps {
   scrollProgress?: number;
   mousePos?: { x: number; y: number };
+  mousePosRef?: React.RefObject<{ x: number; y: number }>;
 }
 
-export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }: Laptop3DObjectProps) {
-  const laptopGroupRef = useRef<THREE.Group>(null);
-  
-  // Load the user's authentic Crumbs & Coffee project showcase image texture
+import React, { Component, ReactNode } from 'react';
+
+interface ErrorBoundaryProps {
+  fallback: ReactNode;
+  children: ReactNode;
+}
+
+interface ErrorBoundaryState {
+  hasError: boolean;
+}
+
+class ScreenErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: any) {
+    console.warn('Laptop screen texture fallback activated:', error);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+    return this.props.children;
+  }
+}
+
+function LaptopScreenContent() {
   const screenTexture = useTexture('/crumbs-and-coffee.png');
+  return (
+    <mesh position={[0, 1.15, 0.046]}>
+      <planeGeometry args={[3.38, 2.12]} />
+      <meshBasicMaterial map={screenTexture} />
+    </mesh>
+  );
+}
+
+function LaptopScreenFallback() {
+  return (
+    <mesh position={[0, 1.15, 0.046]}>
+      <planeGeometry args={[3.38, 2.12]} />
+      <meshStandardMaterial color="#2A0548" roughness={0.3} metalness={0.2} />
+    </mesh>
+  );
+}
+
+export function Laptop3DObject({
+  scrollProgress = 0,
+  mousePos = { x: 0, y: 0 },
+  mousePosRef,
+}: Laptop3DObjectProps) {
+  const laptopGroupRef = useRef<THREE.Group>(null);
+  const [hovered, setHovered] = useState(false);
 
   useFrame((state, delta) => {
     if (laptopGroupRef.current) {
+      const mx = mousePosRef?.current?.x ?? mousePos.x;
+      const my = mousePosRef?.current?.y ?? mousePos.y;
       // Natural 3/4 perspective matching user reference image
-      const targetRotX = 0.25 + mousePos.y * 0.15 + scrollProgress * 0.15;
-      const targetRotY = -0.42 + mousePos.x * 0.25 + Math.sin(state.clock.elapsedTime * 0.5) * 0.03;
+      const targetRotX = 0.25 + my * 0.15 + scrollProgress * 0.15;
+      const targetRotY = -0.42 + mx * 0.25 + Math.sin(state.clock.elapsedTime * 0.5) * 0.03;
       
       laptopGroupRef.current.rotation.x = THREE.MathUtils.lerp(laptopGroupRef.current.rotation.x, targetRotX, delta * 3);
       laptopGroupRef.current.rotation.y = THREE.MathUtils.lerp(laptopGroupRef.current.rotation.y, targetRotY, delta * 3);
       
       laptopGroupRef.current.position.y = THREE.MathUtils.lerp(laptopGroupRef.current.position.y, scrollProgress * 0.5, delta * 3);
+
+      const targetScale = hovered ? 0.94 : 0.88;
+      laptopGroupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), delta * 4);
     }
   });
 
+  const handleClick = (e: ThreeEvent<MouseEvent>) => {
+    e.stopPropagation();
+    window.open('https://crumbsandcoffee.netlify.app/', '_blank', 'noopener,noreferrer');
+  };
+
+  const handlePointerOver = (e: ThreeEvent<PointerEvent>) => {
+    e.stopPropagation();
+    setHovered(true);
+    document.body.style.cursor = 'pointer';
+  };
+
+  const handlePointerOut = () => {
+    setHovered(false);
+    document.body.style.cursor = 'auto';
+  };
+
   return (
-    <group ref={laptopGroupRef} position={[0, -0.2, 0]} scale={[0.88, 0.88, 0.88]}>
+    <group
+      ref={laptopGroupRef}
+      position={[0, -0.2, 0]}
+      scale={[0.88, 0.88, 0.88]}
+      onClick={handleClick}
+      onPointerOver={handlePointerOver}
+      onPointerOut={handlePointerOut}
+    >
       {/* Studio Lighting */}
       <ambientLight intensity={1.6} />
       <directionalLight position={[5, 8, 6]} intensity={3.0} color="#ffffff" />
@@ -122,11 +205,12 @@ export function Laptop3DObject({ scrollProgress = 0, mousePos = { x: 0, y: 0 } }
             <meshStandardMaterial color="#FFFFFF" roughness={0.1} />
           </mesh>
 
-          {/* User's Project Screen Texture Plane (100% Native WebGL - Fixed to Lid Mesh) */}
-          <mesh position={[0, 1.15, 0.046]}>
-            <planeGeometry args={[3.38, 2.12]} />
-            <meshBasicMaterial map={screenTexture} />
-          </mesh>
+          {/* User's Project Screen Texture Plane */}
+          <ScreenErrorBoundary fallback={<LaptopScreenFallback />}>
+            <Suspense fallback={<LaptopScreenFallback />}>
+              <LaptopScreenContent />
+            </Suspense>
+          </ScreenErrorBoundary>
         </group>
       </Float>
     </group>

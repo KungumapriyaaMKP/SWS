@@ -10,13 +10,13 @@ export function AboutSection() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10">
         {/* Left Column Text */}
         <div className="lg:col-span-7 space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-purple-500/20 text-[11px] font-bold tracking-widest text-purple-800 dark:text-purple-300 uppercase shadow-glass-light">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-none glass-panel border border-purple-500/20 text-[11px] font-bold tracking-widest text-purple-800 dark:text-purple-300 uppercase shadow-glass-light">
             ABOUT SUMYA
           </div>
 
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-purple-950 dark:text-white leading-tight">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-purple-950 dark:text-white leading-tight">
             SMALL STUDIO.{' '}
-            <span className="text-gradient-hero inline-block">BIG DIGITAL THINKING.</span>
+            <span className="text-gradient-hero italic font-normal inline-block">BIG DIGITAL THINKING.</span>
           </h2>
 
           <p className="font-serif text-lg md:text-xl text-purple-950 leading-relaxed font-bold">
@@ -32,9 +32,9 @@ export function AboutSection() {
               'Direct access to senior engineers',
               'AI & custom software specialists',
               'Fast 4-to-8 week delivery cycles',
-              '100% clean TypeScript codebases',
+              'Clean, secure & scalable builds',
             ].map((item, i) => (
-              <div key={i} className="flex items-center gap-3 p-3 rounded-xl glass-panel border border-purple-500/10 shadow-glass-light">
+              <div key={i} className="flex items-center gap-3 p-3 rounded-none glass-panel border border-purple-500/10 shadow-glass-light">
                 <CheckCircle className="w-5 h-5 text-rose-500 flex-shrink-0" />
                 <span className="text-xs font-bold text-purple-950 dark:text-zinc-200">{item}</span>
               </div>
