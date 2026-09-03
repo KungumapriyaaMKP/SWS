@@ -157,7 +157,7 @@ export function ChatbotWidget() {
       <div className="fixed bottom-5 right-5 z-50 flex items-center">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="relative w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-gradient-to-r from-[#3B0764] via-[#5B1390] to-[#7E22CE] hover:from-[#4A0A7C] hover:to-[#9324C9] text-white shadow-[0_10px_30px_rgba(91,19,144,0.5)] border-2 border-purple-400/50 backdrop-blur-xl transition-all duration-300 hover:scale-110 active:scale-95 group cursor-pointer flex items-center justify-center p-0.5"
+          className="relative w-14 h-14 rounded-full bg-gradient-to-r from-[#3B0764] via-[#5B1390] to-[#7E22CE] hover:from-[#4A0A7C] hover:to-[#9324C9] text-white shadow-[0_10px_30px_rgba(91,19,144,0.5)] border-2 border-purple-400/50 backdrop-blur-xl transition-all duration-300 hover:scale-110 active:scale-95 group cursor-pointer flex items-center justify-center p-0.5"
           aria-label="Toggle AI Assistant Chat"
           title="Chat with SUMYA AI"
         >
@@ -182,7 +182,7 @@ export function ChatbotWidget() {
 
       {/* Chat Window Panel */}
       {isOpen && (
-        <div className="fixed bottom-22 right-4 md:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[380px] h-[520px] max-h-[80vh] rounded-2xl bg-white/95 dark:bg-[#150729]/95 backdrop-blur-2xl border border-purple-500/30 shadow-[0_25px_70px_rgba(0,0,0,0.35)] flex flex-col overflow-hidden transition-all duration-300">
+        <div className="fixed bottom-24 right-4 md:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[380px] h-[520px] max-h-[80vh] rounded-2xl bg-white/95 dark:bg-[#150729]/95 backdrop-blur-2xl border border-purple-500/30 shadow-[0_25px_70px_rgba(0,0,0,0.35)] flex flex-col overflow-hidden transition-all duration-300">
           {/* Header */}
           <div className="px-5 py-4 bg-gradient-to-r from-[#2A0548] via-[#3B0764] to-[#5B1390] text-white flex items-center justify-between border-b border-purple-500/20">
             <div className="flex items-center gap-3">

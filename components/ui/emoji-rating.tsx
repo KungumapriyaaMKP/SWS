@@ -84,7 +84,7 @@ export function RatingInteraction({ onChange, className }: RatingInteractionProp
             >
               <div
                 className={cn(
-                  'relative flex h-13 w-13 sm:h-16 sm:w-16 items-center justify-center rounded-none border-2 transition-all duration-300 ease-out shadow-md',
+                  'relative flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-none border-2 transition-all duration-300 ease-out shadow-md',
                   isSelected
                     ? `${item.activeBg} ${item.border} ${item.glow} scale-110 shadow-xl`
                     : isActive

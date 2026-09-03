@@ -196,7 +196,7 @@ export function HeroSection() {
                   // @ts-ignore
                   fetchPriority="high"
                   decoding="async"
-                  className="h-10 sm:h-13 w-auto object-contain"
+                  className="h-10 sm:h-12 w-auto object-contain"
                 />
               </a>
 
@@ -215,7 +215,7 @@ export function HeroSection() {
                   // @ts-ignore
                   fetchPriority="high"
                   decoding="async"
-                  className="h-10 sm:h-13 w-auto object-contain"
+                  className="h-10 sm:h-12 w-auto object-contain"
                 />
               </a>
 
@@ -234,7 +234,7 @@ export function HeroSection() {
                   // @ts-ignore
                   fetchPriority="high"
                   decoding="async"
-                  className="h-10 sm:h-13 w-auto object-contain"
+                  className="h-10 sm:h-12 w-auto object-contain"
                 />
               </a>
             </div>
