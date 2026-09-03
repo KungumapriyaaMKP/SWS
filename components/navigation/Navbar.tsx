@@ -5,10 +5,12 @@ import { useMagneticButton } from '@/hooks/useMagneticButton';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { Logo } from './Logo';
 import RandomLetterSwapNav from '@/components/ui/m-random-letter-swap-1';
+import { AnnouncementBar } from './AnnouncementBar';
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [hasAnnouncement, setHasAnnouncement] = useState(true);
   const btnRef = useMagneticButton<HTMLButtonElement>(0.3);
 
   useEffect(() => {
@@ -44,61 +46,66 @@ export function Navbar() {
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-[5000] transition-all duration-500 py-4 px-4 md:px-8 ${
-          scrolled
-            ? 'glass-navbar py-3 shadow-glass-card'
-            : 'bg-transparent'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Logo */}
-          <a
-            href="#hero"
-            onClick={(e) => handleSmoothScroll(e, '#hero')}
-            className="group focus:outline-none"
-          >
-            <Logo size="sm" />
-          </a>
-
-          {/* Desktop Nav Links using RandomLetterSwapNav */}
-          <div className="hidden md:block px-8 py-3 rounded-none glass-panel border border-luxury-lavender/25 shadow-glass-silk">
-            <RandomLetterSwapNav
-              onNavClick={(href) => {
-                const target = document.querySelector(href);
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
-              }}
-            />
-          </div>
-
-          {/* Right Controls: Desktop CTA */}
-          <div className="hidden md:flex items-center gap-4">
-            <button
-              ref={btnRef}
-              data-cursor="cta"
-              onClick={(e) => {
-                const target = document.querySelector('#contact');
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="group relative px-7 py-3 rounded-none text-xs font-bold tracking-widest uppercase text-white bg-[#3B0764] hover:bg-purple-950 shadow-md transition-all duration-300 flex items-center gap-2 overflow-hidden"
+      <div className="fixed top-0 left-0 right-0 z-[5000] flex flex-col">
+        {hasAnnouncement && (
+          <AnnouncementBar onDismiss={() => setHasAnnouncement(false)} />
+        )}
+        <header
+          className={`transition-all duration-500 py-3.5 px-4 md:px-8 ${
+            scrolled
+              ? 'glass-navbar py-3 shadow-glass-card'
+              : 'bg-transparent'
+          }`}
+        >
+          <div className="max-w-7xl mx-auto flex items-center justify-between">
+            {/* Logo */}
+            <a
+              href="#hero"
+              onClick={(e) => handleSmoothScroll(e, '#hero')}
+              className="group focus:outline-none"
             >
-              <span className="relative z-10">Start a Project</span>
-              <ArrowRight className="w-3.5 h-3.5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
-            </button>
-          </div>
+              <Logo size="sm" />
+            </a>
 
-          {/* Mobile Right Controls */}
-          <div className="md:hidden flex items-center gap-3">
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-none glass-panel text-purple-950 focus:outline-none"
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6 text-purple-600" /> : <Menu className="w-6 h-6 text-purple-950" />}
-            </button>
+            {/* Desktop Nav Links using RandomLetterSwapNav */}
+            <div className="hidden md:block px-8 py-3 rounded-none glass-panel border border-luxury-lavender/25 shadow-glass-silk">
+              <RandomLetterSwapNav
+                onNavClick={(href) => {
+                  const target = document.querySelector(href);
+                  if (target) target.scrollIntoView({ behavior: 'smooth' });
+                }}
+              />
+            </div>
+
+            {/* Right Controls: Desktop CTA */}
+            <div className="hidden md:flex items-center gap-4">
+              <button
+                ref={btnRef}
+                data-cursor="cta"
+                onClick={(e) => {
+                  const target = document.querySelector('#contact');
+                  if (target) target.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="group relative px-7 py-3 rounded-none text-xs font-bold tracking-widest uppercase text-white bg-[#3B0764] hover:bg-purple-950 shadow-md transition-all duration-300 flex items-center gap-2 overflow-hidden cursor-pointer"
+              >
+                <span className="relative z-10">Start a Project</span>
+                <ArrowRight className="w-3.5 h-3.5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
+            </div>
+
+            {/* Mobile Right Controls */}
+            <div className="md:hidden flex items-center gap-3">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 rounded-none glass-panel text-purple-950 dark:text-white focus:outline-none cursor-pointer"
+                aria-label="Toggle menu"
+              >
+                {mobileMenuOpen ? <X className="w-6 h-6 text-purple-600" /> : <Menu className="w-6 h-6 text-purple-950 dark:text-white" />}
+              </button>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
+      </div>
 
       {/* Fullscreen Mobile Glass Navigation Overlay */}
       {mobileMenuOpen && (
@@ -122,7 +129,7 @@ export function Navbar() {
                   const target = document.querySelector('#contact');
                   if (target) target.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="w-full max-w-xs py-4 rounded-none text-xs font-bold tracking-widest uppercase text-white bg-[#3B0764] hover:bg-purple-950 shadow-md flex items-center justify-center gap-2"
+                className="w-full max-w-xs py-4 rounded-none text-xs font-bold tracking-widest uppercase text-white bg-[#3B0764] hover:bg-purple-950 shadow-md flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Start a Project</span>
                 <ArrowRight className="w-4 h-4" />

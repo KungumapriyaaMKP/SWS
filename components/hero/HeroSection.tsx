@@ -119,7 +119,7 @@ export function HeroSection() {
     <section
       id="hero"
       ref={containerRef}
-      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-28 pb-8 transition-colors duration-300"
+      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-36 sm:pt-40 pb-8 transition-colors duration-300"
     >
       {/* Background ambient lighting */}
       <div className="ambient-glow-1 top-10 -left-20" />
