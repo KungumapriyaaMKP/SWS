@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://sumyawebstudio.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sumyawebstudio.netlify.app';
 
   return {
     rules: [
