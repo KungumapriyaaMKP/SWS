@@ -31,11 +31,11 @@ function CustomDropdown({ label, placeholder, value, options, onChange }: Custom
         {label}
       </label>
 
-      {/* Trigger Button - ROUNDED */}
+      {/* Trigger Button */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-4 py-3.5 rounded-xl bg-[#F9FAFB] dark:bg-white/5 border border-[#E5E7EB] dark:border-white/10 text-purple-950 dark:text-white flex items-center justify-between transition-all duration-200 text-xs font-semibold focus:outline-none focus:border-purple-600 focus:bg-white cursor-pointer"
+        className="w-full px-4 py-3.5 rounded-none bg-[#F9FAFB] dark:bg-white/5 border border-[#E5E7EB] dark:border-white/10 text-purple-950 dark:text-white flex items-center justify-between transition-all duration-200 text-xs font-semibold focus:outline-none focus:border-purple-600 focus:bg-white cursor-pointer"
       >
         <span className={value ? 'text-purple-950 dark:text-white font-bold' : 'text-gray-400 dark:text-zinc-500'}>
           {value || placeholder}
@@ -43,9 +43,9 @@ function CustomDropdown({ label, placeholder, value, options, onChange }: Custom
         <ChevronDown className={`w-4 h-4 text-purple-500 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
-      {/* Dropdown Menu - ROUNDED */}
+      {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute left-0 right-0 top-full mt-2 z-50 bg-white dark:bg-[#1A112E] border border-purple-200 dark:border-purple-500/40 rounded-xl shadow-2xl overflow-hidden max-h-60 overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="absolute left-0 right-0 top-full mt-1 z-50 bg-white dark:bg-[#1A112E] border border-purple-200 dark:border-purple-500/40 rounded-none shadow-2xl overflow-hidden max-h-60 overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200">
           <div className="py-1">
             {options.map((opt) => (
               <button
@@ -86,6 +86,20 @@ export function ContactSection() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
+
+    const message = `Hello Sumya Web Studio! I would like to inquire about a project:\n\n` +
+      `• Name: ${formData.name}\n` +
+      `• Company: ${formData.company || 'N/A'}\n` +
+      `• Service: ${formData.serviceType || 'General Inquiry'}\n` +
+      `• Budget: ${formData.budget || 'Not specified'}\n` +
+      `• Timeline: ${formData.timeline || 'Not specified'}`;
+
+    const whatsappUrl = `https://wa.me/917867896369?text=${encodeURIComponent(message)}`;
+
+    setTimeout(() => {
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    }, 600);
+
     setTimeout(() => {
       setSubmitted(false);
       setFormData({
@@ -95,7 +109,7 @@ export function ContactSection() {
         budget: '',
         timeline: '',
       });
-    }, 4000);
+    }, 6000);
   };
 
   const serviceOptions = [
@@ -122,7 +136,7 @@ export function ContactSection() {
   const timelineOptions = ['1-2 Weeks', '2-4 Weeks', '1-2 Months', '3+ Months'];
 
   return (
-    <section id="contact" className="relative py-28 px-4 md:px-8 overflow-hidden transition-colors duration-300">
+    <section id="contact" className="relative py-28 px-4 md:px-8 overflow-hidden transition-colors duration-300 scroll-mt-24">
       <div className="ambient-glow-2 top-0 left-10" />
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start z-10">

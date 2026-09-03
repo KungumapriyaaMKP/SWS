@@ -79,7 +79,7 @@ export function ProcessSection() {
   const lineFillPercent = Math.min(100, Math.max(0, scrollProgress * 100));
 
   return (
-    <section id="process" ref={containerRef} className="relative py-24 px-4 md:px-8 bg-white transition-colors duration-300">
+    <section id="process" ref={containerRef} className="relative py-24 px-4 md:px-8 bg-white transition-colors duration-300 scroll-mt-24">
       <div className="max-w-7xl mx-auto z-10">
         {/* Header */}
         <div className="mb-16 text-center max-w-3xl mx-auto">

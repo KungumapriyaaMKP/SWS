@@ -4,7 +4,7 @@ import { CheckCircle } from 'lucide-react';
 
 export function AboutSection() {
   return (
-    <section id="about" className="relative py-24 px-4 md:px-8 overflow-hidden transition-colors duration-300">
+    <section id="about" className="relative py-24 px-4 md:px-8 overflow-hidden transition-colors duration-300 scroll-mt-24">
       <div className="ambient-glow-1 bottom-10 left-10" />
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10">

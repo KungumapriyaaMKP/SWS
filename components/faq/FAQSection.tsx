@@ -50,7 +50,7 @@ export function FAQSection() {
   };
 
   return (
-    <section id="faq" className="relative py-24 px-4 md:px-8 bg-white dark:bg-[#0A0810] transition-colors duration-300">
+    <section id="faq" className="relative py-24 px-4 md:px-8 bg-white dark:bg-[#0A0810] transition-colors duration-300 scroll-mt-24">
       <div className="ambient-glow-1 top-10 right-10" />
 
       <div className="max-w-5xl mx-auto z-10">

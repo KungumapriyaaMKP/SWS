@@ -65,7 +65,7 @@ export function IdeaToImpactSection() {
   return (
     <section
       id="idea-to-impact"
-      className="relative flex flex-col justify-center pt-8 pb-16 px-4 md:px-8 overflow-hidden transition-colors duration-300"
+      className="relative flex flex-col justify-center pt-8 pb-16 px-4 md:px-8 overflow-hidden transition-colors duration-300 scroll-mt-24"
     >
       <div className="ambient-glow-1 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 

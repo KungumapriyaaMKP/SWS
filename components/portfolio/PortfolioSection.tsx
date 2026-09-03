@@ -57,7 +57,7 @@ export function PortfolioSection() {
   };
 
   return (
-    <section id="work" className="relative py-24 px-4 md:px-8 bg-white dark:bg-[#0A0810] transition-colors duration-300">
+    <section id="work" className="relative py-24 px-4 md:px-8 bg-white dark:bg-[#0A0810] transition-colors duration-300 scroll-mt-24">
       <div className="max-w-7xl mx-auto mb-16">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
           <div>

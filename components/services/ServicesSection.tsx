@@ -149,7 +149,7 @@ export function ServicesSection() {
   };
 
   return (
-    <section id="services" ref={containerRef} className="relative py-28 px-4 md:px-8 overflow-hidden transition-colors duration-300">
+    <section id="services" ref={containerRef} className="relative py-28 px-4 md:px-8 overflow-hidden transition-colors duration-300 scroll-mt-24">
       {/* Background Glows */}
       <div className="ambient-glow-1 top-20 right-10" />
       <div className="ambient-glow-2 bottom-20 left-10" />
