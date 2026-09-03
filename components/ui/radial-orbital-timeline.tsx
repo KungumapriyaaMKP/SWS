@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { ArrowRight, Link, Zap } from "lucide-react";
+import { ArrowRight, Link, Zap, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -24,9 +24,7 @@ export interface RadialOrbitalTimelineProps {
 export default function RadialOrbitalTimeline({
   timelineData,
 }: RadialOrbitalTimelineProps) {
-  const [expandedItems, setExpandedItems] = useState<Record<number, boolean>>(
-    {}
-  );
+  const [expandedItems, setExpandedItems] = useState<Record<number, boolean>>({});
   const [viewMode, setViewMode] = useState<"orbital">("orbital");
   const [rotationAngle, setRotationAngle] = useState<number>(0);
   const [autoRotate, setAutoRotate] = useState<boolean>(true);
@@ -36,31 +34,56 @@ export default function RadialOrbitalTimeline({
     y: 0,
   });
   const [activeNodeId, setActiveNodeId] = useState<number | null>(null);
+  const [radius, setRadius] = useState<number>(200);
+
   const containerRef = useRef<HTMLDivElement>(null);
   const orbitRef = useRef<HTMLDivElement>(null);
   const nodeRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
+  // Calculate radius dynamically based on screen width so nodes never clip on mobile
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (typeof window !== "undefined") {
+        const w = window.innerWidth;
+        if (w < 380) {
+          setRadius(120);
+        } else if (w < 480) {
+          setRadius(135);
+        } else if (w < 640) {
+          setRadius(160);
+        } else if (w < 768) {
+          setRadius(175);
+        } else {
+          setRadius(200);
+        }
+      }
+    };
+
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, []);
+
+  const handleCloseActiveCard = () => {
+    setExpandedItems({});
+    setActiveNodeId(null);
+    setPulseEffect({});
+    setAutoRotate(true);
+  };
+
   const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === containerRef.current || e.target === orbitRef.current) {
-      setExpandedItems({});
-      setActiveNodeId(null);
-      setPulseEffect({});
-      setAutoRotate(true);
+      handleCloseActiveCard();
     }
   };
 
   const toggleItem = (id: number) => {
     setExpandedItems((prev) => {
-      const newState = { ...prev };
-      Object.keys(newState).forEach((key) => {
-        if (parseInt(key) !== id) {
-          newState[parseInt(key)] = false;
-        }
-      });
+      const newState: Record<number, boolean> = {};
+      const isCurrentlyExpanded = !!prev[id];
 
-      newState[id] = !prev[id];
-
-      if (!prev[id]) {
+      if (!isCurrentlyExpanded) {
+        newState[id] = true;
         setActiveNodeId(id);
         setAutoRotate(false);
 
@@ -70,7 +93,6 @@ export default function RadialOrbitalTimeline({
           newPulseEffect[relId] = true;
         });
         setPulseEffect(newPulseEffect);
-
         centerViewOnNode(id);
       } else {
         setActiveNodeId(null);
@@ -113,7 +135,6 @@ export default function RadialOrbitalTimeline({
 
   const calculateNodePosition = (index: number, total: number) => {
     const angle = ((index / total) * 360 + rotationAngle) % 360;
-    const radius = 200;
     const radian = (angle * Math.PI) / 180;
 
     const x = radius * Math.cos(radian) + centerOffset.x;
@@ -152,9 +173,13 @@ export default function RadialOrbitalTimeline({
     }
   };
 
+  const activeItem = activeNodeId !== null
+    ? timelineData.find((item) => item.id === activeNodeId)
+    : null;
+
   return (
     <div
-      className="w-full h-[480px] md:h-[530px] flex flex-col items-center justify-center relative overflow-hidden rounded-none"
+      className="w-full h-[440px] sm:h-[480px] md:h-[530px] flex flex-col items-center justify-center relative overflow-hidden rounded-none select-none"
       ref={containerRef}
       onClick={handleContainerClick}
     >
@@ -167,16 +192,27 @@ export default function RadialOrbitalTimeline({
             transform: `translate(${centerOffset.x}px, ${centerOffset.y}px)`,
           }}
         >
-          {/* Center Logo (No circles, transparent background - Enlarged) */}
+          {/* Dynamic Center Lotus Logo */}
           <div className="absolute flex items-center justify-center z-10 pointer-events-none">
             <img
               src="/logo.png"
               alt="Sumya Web Studio Logo"
-              className="w-56 h-56 sm:w-68 sm:h-68 md:w-80 md:h-80 object-contain drop-shadow-2xl dark:brightness-125 transition-all duration-300"
+              className="object-contain drop-shadow-2xl dark:brightness-125 transition-all duration-300"
+              style={{
+                width: `${Math.min(radius * 1.25, 270)}px`,
+                height: `${Math.min(radius * 1.25, 270)}px`,
+              }}
             />
           </div>
 
-          <div className="absolute w-[400px] h-[400px] rounded-full border-2 border-purple-900/30 dark:border-purple-500/30"></div>
+          {/* Dynamic Orbital Ring Circle */}
+          <div
+            className="absolute rounded-full border-2 border-purple-900/30 dark:border-purple-500/30 transition-all duration-300 pointer-events-none"
+            style={{
+              width: `${radius * 2}px`,
+              height: `${radius * 2}px`,
+            }}
+          />
 
           {timelineData.map((item, index) => {
             const position = calculateNodePosition(index, timelineData.length);
@@ -210,16 +246,16 @@ export default function RadialOrbitalTimeline({
                   }`}
                   style={{
                     background: `radial-gradient(circle, rgba(59,7,100,0.4) 0%, rgba(0,0,0,0) 70%)`,
-                    width: `${item.energy * 0.5 + 40}px`,
-                    height: `${item.energy * 0.5 + 40}px`,
-                    left: `-${(item.energy * 0.5 + 40 - 40) / 2}px`,
-                    top: `-${(item.energy * 0.5 + 40 - 40) / 2}px`,
+                    width: `${item.energy * 0.5 + 36}px`,
+                    height: `${item.energy * 0.5 + 36}px`,
+                    left: `-${(item.energy * 0.5 + 36 - 36) / 2}px`,
+                    top: `-${(item.energy * 0.5 + 36 - 36) / 2}px`,
                   }}
-                ></div>
+                />
 
                 <div
                   className={`
-                  w-12 h-12 rounded-full flex items-center justify-center
+                  w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center
                   ${
                     isExpanded
                       ? "bg-[#3B0764] text-white shadow-xl shadow-purple-900/60 scale-125 border-pink-500"
@@ -230,105 +266,121 @@ export default function RadialOrbitalTimeline({
                   border-2 transition-all duration-300 transform shadow-lg
                 `}
                 >
-                  <Icon size={18} className="text-white" />
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </div>
 
                 <div
                   className={`
-                  absolute top-14 left-1/2 -translate-x-1/2 whitespace-nowrap
-                  text-xs font-bold tracking-wider uppercase
+                  absolute top-11 sm:top-14 left-1/2 -translate-x-1/2 whitespace-nowrap
+                  text-[10px] sm:text-xs font-bold tracking-wider uppercase
                   transition-all duration-300
                   ${isExpanded ? "text-purple-950 dark:text-white scale-110 font-extrabold" : "text-purple-950 dark:text-zinc-200"}
                 `}
                 >
                   {item.title}
                 </div>
-
-                {isExpanded && (
-                  <Card className="absolute top-20 left-1/2 -translate-x-1/2 w-72 bg-[#120B24]/95 backdrop-blur-xl border-purple-500/30 text-white shadow-2xl shadow-purple-950/50 overflow-visible z-[300]">
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-purple-400/50"></div>
-                    <CardHeader className="pb-2">
-                      <div className="flex justify-between items-center">
-                        <Badge
-                          className={`px-2 py-0.5 text-[10px] font-extrabold uppercase rounded-none ${getStatusStyles(
-                            item.status
-                          )}`}
-                        >
-                          {item.status === "completed"
-                            ? "COMPLETE"
-                            : item.status === "in-progress"
-                            ? "IN PROGRESS"
-                            : "PENDING"}
-                        </Badge>
-                        <span className="text-xs font-mono text-purple-300/80">
-                          {item.date}
-                        </span>
-                      </div>
-                      <CardTitle className="text-base font-serif font-bold mt-2 text-white">
-                        {item.title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="text-xs text-zinc-300 leading-relaxed">
-                      <p>{item.content}</p>
-
-                      <div className="mt-4 pt-3 border-t border-purple-500/20">
-                        <div className="flex justify-between items-center text-xs mb-1 font-semibold">
-                          <span className="flex items-center text-pink-400">
-                            <Zap size={12} className="mr-1 text-pink-400" />
-                            Completion Level
-                          </span>
-                          <span className="font-mono text-white">{item.energy}%</span>
-                        </div>
-                        <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
-                          <div
-                            className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500"
-                            style={{ width: `${item.energy}%` }}
-                          ></div>
-                        </div>
-                      </div>
-
-                      {item.relatedIds.length > 0 && (
-                        <div className="mt-4 pt-3 border-t border-purple-500/20">
-                          <div className="flex items-center mb-2">
-                            <Link size={10} className="text-purple-300/70 mr-1" />
-                            <h4 className="text-[10px] uppercase tracking-wider font-bold text-purple-300/80">
-                              Connected Stage Nodes
-                            </h4>
-                          </div>
-                          <div className="flex flex-wrap gap-1.5">
-                            {item.relatedIds.map((relatedId) => {
-                              const relatedItem = timelineData.find(
-                                (i) => i.id === relatedId
-                              );
-                              return (
-                                <Button
-                                  key={relatedId}
-                                  variant="outline"
-                                  size="sm"
-                                  className="flex items-center h-6 px-2 py-0 text-[10px] font-bold uppercase rounded-none border-purple-500/30 bg-purple-950/40 hover:bg-purple-900/80 text-purple-200 hover:text-white transition-all"
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    toggleItem(relatedId);
-                                  }}
-                                >
-                                  {relatedItem?.title}
-                                  <ArrowRight
-                                    size={8}
-                                    className="ml-1 text-pink-400"
-                                  />
-                                </Button>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                )}
               </div>
             );
           })}
         </div>
+
+        {/* Modal Backdrop & Centered Floating Card for Active Stage */}
+        {activeItem && expandedItems[activeItem.id] && (
+          <>
+            <div
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm z-[250] transition-opacity duration-300"
+              onClick={handleCloseActiveCard}
+            />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] max-w-sm z-[300] transition-all duration-300 px-2">
+              <Card className="bg-[#120B24]/95 backdrop-blur-xl border-purple-500/40 text-white shadow-2xl shadow-purple-950/80 overflow-visible relative">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute top-2 right-2 h-7 w-7 rounded-full text-zinc-400 hover:text-white hover:bg-white/10"
+                  onClick={handleCloseActiveCard}
+                >
+                  <X size={14} />
+                </Button>
+                <CardHeader className="pb-2 pr-10">
+                  <div className="flex justify-between items-center gap-2">
+                    <Badge
+                      className={`px-2 py-0.5 text-[10px] font-extrabold uppercase rounded-none ${getStatusStyles(
+                        activeItem.status
+                      )}`}
+                    >
+                      {activeItem.status === "completed"
+                        ? "COMPLETE"
+                        : activeItem.status === "in-progress"
+                        ? "IN PROGRESS"
+                        : "PENDING"}
+                    </Badge>
+                    <span className="text-xs font-mono text-purple-300/80">
+                      {activeItem.date}
+                    </span>
+                  </div>
+                  <CardTitle className="text-base sm:text-lg font-serif font-bold mt-2 text-white">
+                    {activeItem.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-xs text-zinc-300 leading-relaxed">
+                  <p>{activeItem.content}</p>
+
+                  <div className="mt-4 pt-3 border-t border-purple-500/20">
+                    <div className="flex justify-between items-center text-xs mb-1 font-semibold">
+                      <span className="flex items-center text-pink-400">
+                        <Zap size={12} className="mr-1 text-pink-400" />
+                        Completion Level
+                      </span>
+                      <span className="font-mono text-white">{activeItem.energy}%</span>
+                    </div>
+                    <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500"
+                        style={{ width: `${activeItem.energy}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  {activeItem.relatedIds.length > 0 && (
+                    <div className="mt-4 pt-3 border-t border-purple-500/20">
+                      <div className="flex items-center mb-2">
+                        <Link size={10} className="text-purple-300/70 mr-1" />
+                        <h4 className="text-[10px] uppercase tracking-wider font-bold text-purple-300/80">
+                          Connected Stage Nodes
+                        </h4>
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {activeItem.relatedIds.map((relatedId) => {
+                          const relatedItem = timelineData.find(
+                            (i) => i.id === relatedId
+                          );
+                          return (
+                            <Button
+                              key={relatedId}
+                              variant="outline"
+                              size="sm"
+                              className="flex items-center h-6 px-2 py-0 text-[10px] font-bold uppercase rounded-none border-purple-500/30 bg-purple-950/40 hover:bg-purple-900/80 text-purple-200 hover:text-white transition-all"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toggleItem(relatedId);
+                              }}
+                            >
+                              {relatedItem?.title}
+                              <ArrowRight
+                                size={8}
+                                className="ml-1 text-pink-400"
+                              />
+                            </Button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

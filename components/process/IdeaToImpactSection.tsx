@@ -13,7 +13,7 @@ const timelineData: TimelineItem[] = [
     icon: Lightbulb,
     relatedIds: [2],
     status: "completed",
-    energy: 100,
+    energy: 25,
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const timelineData: TimelineItem[] = [
     icon: Compass,
     relatedIds: [1, 3],
     status: "completed",
-    energy: 90,
+    energy: 50,
   },
   {
     id: 3,
@@ -46,7 +46,7 @@ const timelineData: TimelineItem[] = [
     icon: Rocket,
     relatedIds: [3, 5],
     status: "pending",
-    energy: 40,
+    energy: 90,
   },
   {
     id: 5,
@@ -57,7 +57,7 @@ const timelineData: TimelineItem[] = [
     icon: TrendingUp,
     relatedIds: [4],
     status: "pending",
-    energy: 20,
+    energy: 100,
   },
 ];
 
