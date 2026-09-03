@@ -197,6 +197,10 @@ export default function RadialOrbitalTimeline({
             <img
               src="/logo.png"
               alt="Sumya Web Studio Logo"
+              loading="eager"
+              // @ts-ignore
+              fetchPriority="high"
+              decoding="async"
               className="object-contain drop-shadow-2xl dark:brightness-125 transition-all duration-300"
               style={{
                 width: `${Math.min(radius * 1.25, 270)}px`,

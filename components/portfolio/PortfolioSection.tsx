@@ -88,6 +88,8 @@ export function PortfolioSection() {
               <img
                 src={project.image}
                 alt={project.name}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto max-h-[380px] object-contain rounded-none group-hover:scale-105 transition-transform duration-500"
               />
 

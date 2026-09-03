@@ -192,6 +192,10 @@ export function HeroSection() {
                 <img
                   src="/images/clients/toppers-academy.png"
                   alt="Toppers Academy"
+                  loading="eager"
+                  // @ts-ignore
+                  fetchPriority="high"
+                  decoding="async"
                   className="h-10 sm:h-13 w-auto object-contain"
                 />
               </a>
@@ -207,6 +211,10 @@ export function HeroSection() {
                 <img
                   src="/images/clients/sri-kungumayi.png"
                   alt="Sri Kungumayi Traders"
+                  loading="eager"
+                  // @ts-ignore
+                  fetchPriority="high"
+                  decoding="async"
                   className="h-10 sm:h-13 w-auto object-contain"
                 />
               </a>
@@ -222,6 +230,10 @@ export function HeroSection() {
                 <img
                   src="/images/clients/cnc.png"
                   alt="Crumbs & Coffee"
+                  loading="eager"
+                  // @ts-ignore
+                  fetchPriority="high"
+                  decoding="async"
                   className="h-10 sm:h-13 w-auto object-contain"
                 />
               </a>
