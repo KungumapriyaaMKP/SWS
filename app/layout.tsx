@@ -31,7 +31,7 @@ const cormorant = Cormorant_Garamond({
   display: 'swap',
 });
 
-const baseUrl = 'https://sumyawebstudio.com';
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sumyawebstudio.netlify.app';
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -112,6 +112,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${syne.variable} ${cormorant.variable}`}>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://sumyawebstudio.netlify.app" />
         <JsonLd />
         <script
           dangerouslySetInnerHTML={{
