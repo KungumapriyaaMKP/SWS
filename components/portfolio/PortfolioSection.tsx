@@ -113,11 +113,11 @@ export function PortfolioSection() {
             <div className="w-full lg:w-1/2 flex flex-col justify-between space-y-6">
               <div>
                 {/* Header Category & Project Number */}
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[11px] font-extrabold tracking-widest uppercase text-pink-600 dark:text-pink-400 px-3.5 py-1.5 rounded-none bg-pink-100/70 dark:bg-pink-950/50 border border-pink-200 dark:border-pink-500/30">
+                <div className="flex items-start sm:items-center justify-between gap-3 mb-3">
+                  <span className="text-[10px] sm:text-[11px] font-extrabold tracking-wider uppercase text-pink-600 dark:text-pink-400 px-3 py-1.5 rounded-none bg-pink-100/70 dark:bg-pink-950/50 border border-pink-200 dark:border-pink-500/30 leading-snug">
                     {project.category}
                   </span>
-                  <span className="font-serif text-base md:text-lg font-extrabold text-purple-950 dark:text-purple-200 tracking-wider">
+                  <span className="font-serif text-sm sm:text-base md:text-lg font-extrabold text-purple-950 dark:text-purple-200 tracking-wider shrink-0 whitespace-nowrap pt-0.5 sm:pt-0">
                     0{index + 1} / 0{projects.length}
                   </span>
                 </div>
