@@ -40,17 +40,23 @@ export default function RadialOrbitalTimeline({
   const orbitRef = useRef<HTMLDivElement>(null);
   const nodeRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
+  const isDraggingRef = useRef(false);
+  const dragStartXRef = useRef(0);
+  const dragStartAngleRef = useRef(0);
+  const animFrameRef = useRef<number | null>(null);
+  const lastTimeRef = useRef<number>(0);
+
   // Calculate radius dynamically based on screen width so nodes never clip on mobile
   useEffect(() => {
     const updateDimensions = () => {
       if (typeof window !== "undefined") {
         const w = window.innerWidth;
         if (w < 380) {
-          setRadius(120);
+          setRadius(115);
         } else if (w < 480) {
-          setRadius(135);
+          setRadius(130);
         } else if (w < 640) {
-          setRadius(160);
+          setRadius(155);
         } else if (w < 768) {
           setRadius(175);
         } else {
@@ -104,24 +110,77 @@ export default function RadialOrbitalTimeline({
     });
   };
 
+  // Hardware-accelerated 60fps rotation loop using requestAnimationFrame
   useEffect(() => {
-    let rotationTimer: NodeJS.Timeout;
+    let active = true;
+
+    const animate = (time: number) => {
+      if (!lastTimeRef.current) lastTimeRef.current = time;
+      const delta = time - lastTimeRef.current;
+      lastTimeRef.current = time;
+
+      if (autoRotate && viewMode === "orbital" && !isDraggingRef.current) {
+        setRotationAngle((prev) => (prev + delta * 0.015) % 360);
+      }
+
+      if (active) {
+        animFrameRef.current = requestAnimationFrame(animate);
+      }
+    };
 
     if (autoRotate && viewMode === "orbital") {
-      rotationTimer = setInterval(() => {
-        setRotationAngle((prev) => {
-          const newAngle = (prev + 0.3) % 360;
-          return Number(newAngle.toFixed(3));
-        });
-      }, 50);
+      lastTimeRef.current = performance.now();
+      animFrameRef.current = requestAnimationFrame(animate);
     }
 
     return () => {
-      if (rotationTimer) {
-        clearInterval(rotationTimer);
+      active = false;
+      if (animFrameRef.current) {
+        cancelAnimationFrame(animFrameRef.current);
       }
     };
   }, [autoRotate, viewMode]);
+
+  // Touch Swipe & Drag Support for Mobile & Mouse
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches.length === 1) {
+      isDraggingRef.current = true;
+      dragStartXRef.current = e.touches[0].clientX;
+      dragStartAngleRef.current = rotationAngle;
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (isDraggingRef.current && e.touches.length === 1) {
+      const deltaX = e.touches[0].clientX - dragStartXRef.current;
+      const newAngle = (dragStartAngleRef.current + deltaX * 0.4) % 360;
+      setRotationAngle(newAngle < 0 ? newAngle + 360 : newAngle);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    isDraggingRef.current = false;
+  };
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.button === 0) {
+      isDraggingRef.current = true;
+      dragStartXRef.current = e.clientX;
+      dragStartAngleRef.current = rotationAngle;
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isDraggingRef.current) {
+      const deltaX = e.clientX - dragStartXRef.current;
+      const newAngle = (dragStartAngleRef.current + deltaX * 0.4) % 360;
+      setRotationAngle(newAngle < 0 ? newAngle + 360 : newAngle);
+    }
+  };
+
+  const handleMouseUp = () => {
+    isDraggingRef.current = false;
+  };
 
   const centerViewOnNode = (nodeId: number) => {
     if (viewMode !== "orbital" || !nodeRefs.current[nodeId]) return;
@@ -179,9 +238,16 @@ export default function RadialOrbitalTimeline({
 
   return (
     <div
-      className="w-full h-[440px] sm:h-[480px] md:h-[530px] flex flex-col items-center justify-center relative overflow-hidden rounded-none select-none"
+      className="w-full h-[420px] sm:h-[480px] md:h-[530px] flex flex-col items-center justify-center relative overflow-hidden rounded-none select-none touch-pan-y cursor-grab active:cursor-grabbing"
       ref={containerRef}
       onClick={handleContainerClick}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
     >
       <div className="relative w-full max-w-4xl h-full flex items-center justify-center">
         <div
@@ -201,7 +267,7 @@ export default function RadialOrbitalTimeline({
               // @ts-ignore
               fetchPriority="high"
               decoding="async"
-              className="object-contain drop-shadow-2xl dark:brightness-125 transition-all duration-300"
+              className="object-contain drop-shadow-2xl dark:brightness-125 transition-all duration-300 pointer-events-none"
               style={{
                 width: `${Math.min(radius * 1.25, 270)}px`,
                 height: `${Math.min(radius * 1.25, 270)}px`,
@@ -226,9 +292,10 @@ export default function RadialOrbitalTimeline({
             const Icon = item.icon;
 
             const nodeStyle = {
-              transform: `translate(${position.x}px, ${position.y}px)`,
+              transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
               zIndex: isExpanded ? 200 : position.zIndex,
               opacity: 1,
+              willChange: "transform",
             };
 
             return (
@@ -237,7 +304,7 @@ export default function RadialOrbitalTimeline({
                 ref={(el) => {
                   nodeRefs.current[item.id] = el;
                 }}
-                className="absolute transition-all duration-700 cursor-pointer"
+                className="absolute transition-transform duration-75 ease-out cursor-pointer"
                 style={nodeStyle}
                 onClick={(e) => {
                   e.stopPropagation();
