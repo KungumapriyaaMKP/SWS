@@ -220,6 +220,29 @@ export function ContactSection() {
               </div>
               <ChevronRight className="w-5 h-5 text-pink-400 group-hover:translate-x-1 transition-transform" />
             </a>
+
+            {/* Card 4: LinkedIn */}
+            <a
+              href="https://www.linkedin.com/in/sumya-web-studio-undefined-0961aa434/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between p-4.5 rounded-none bg-white/90 dark:bg-[#130E26]/90 border border-purple-900/10 dark:border-purple-500/20 shadow-sm hover:shadow-xl hover:border-blue-500/50 hover:-translate-y-0.5 transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-none bg-blue-100 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 flex-shrink-0">
+                  <Linkedin className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="text-xs font-black tracking-wider text-blue-900/60 dark:text-blue-300/70 block uppercase">
+                    LINKEDIN
+                  </span>
+                  <span className="text-xs md:text-sm font-bold text-purple-950 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    Sumya Web Studio
+                  </span>
+                </div>
+              </div>
+              <ChevronRight className="w-5 h-5 text-blue-400 group-hover:translate-x-1 transition-transform" />
+            </a>
           </div>
 
           {/* Bottom Left Paper Plane & Note - PERFECTLY ALIGNED SINGLE LINE */}

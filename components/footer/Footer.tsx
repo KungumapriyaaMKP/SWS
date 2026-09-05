@@ -43,7 +43,7 @@ export function Footer() {
     },
     {
       label: 'LinkedIn',
-      href: 'https://www.linkedin.com/in/kungumapriyaa-m/?skipRedirect=true',
+      href: 'https://www.linkedin.com/in/sumya-web-studio-undefined-0961aa434/',
       icon: Linkedin,
     },
     {

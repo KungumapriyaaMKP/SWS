@@ -187,7 +187,7 @@ export function HeroSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Visit Toppers Academy"
-                className="h-14 sm:h-16 flex items-center justify-center transition-all hover:scale-105 cursor-pointer"
+                className="h-16 sm:h-20 md:h-22 px-5 py-3 bg-white dark:bg-white/5 border border-purple-900/15 dark:border-white/10 shadow-sm hover:shadow-md hover:border-purple-500/50 transition-all hover:scale-105 cursor-pointer flex items-center justify-center"
               >
                 <img
                   src="/images/clients/toppers-academy.png"
@@ -196,7 +196,7 @@ export function HeroSection() {
                   // @ts-ignore
                   fetchPriority="high"
                   decoding="async"
-                  className="h-10 sm:h-12 w-auto object-contain"
+                  className="h-12 sm:h-16 md:h-18 w-auto object-contain"
                 />
               </a>
 
@@ -206,7 +206,7 @@ export function HeroSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Visit Sri Kungumayi Traders"
-                className="h-14 sm:h-16 flex items-center justify-center transition-all hover:scale-105 cursor-pointer"
+                className="h-16 sm:h-20 md:h-22 px-5 py-3 bg-white dark:bg-white/5 border border-purple-900/15 dark:border-white/10 shadow-sm hover:shadow-md hover:border-purple-500/50 transition-all hover:scale-105 cursor-pointer flex items-center justify-center"
               >
                 <img
                   src="/images/clients/sri-kungumayi.png"
@@ -215,7 +215,7 @@ export function HeroSection() {
                   // @ts-ignore
                   fetchPriority="high"
                   decoding="async"
-                  className="h-10 sm:h-12 w-auto object-contain"
+                  className="h-12 sm:h-16 md:h-18 w-auto object-contain"
                 />
               </a>
 
@@ -225,7 +225,7 @@ export function HeroSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Visit Crumbs & Coffee"
-                className="h-14 sm:h-16 flex items-center justify-center transition-all hover:scale-105 cursor-pointer"
+                className="h-16 sm:h-20 md:h-22 px-5 py-3 bg-white dark:bg-white/5 border border-purple-900/15 dark:border-white/10 shadow-sm hover:shadow-md hover:border-purple-500/50 transition-all hover:scale-105 cursor-pointer flex items-center justify-center"
               >
                 <img
                   src="/images/clients/cnc.png"
@@ -234,7 +234,7 @@ export function HeroSection() {
                   // @ts-ignore
                   fetchPriority="high"
                   decoding="async"
-                  className="h-10 sm:h-12 w-auto object-contain"
+                  className="h-12 sm:h-16 md:h-18 w-auto object-contain"
                 />
               </a>
             </div>
