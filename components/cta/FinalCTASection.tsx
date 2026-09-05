@@ -99,14 +99,16 @@ export function FinalCTASection() {
           <div className="relative flex items-center justify-center max-w-[280px] sm:max-w-[340px] lg:max-w-[360px]">
             <video
               ref={videoRef}
-              src="/mascot-video.mp4"
               autoPlay
               loop
               muted={isMuted}
               playsInline
               onClick={toggleAudio}
-              className="w-full h-auto max-h-[340px] sm:max-h-[400px] object-contain mix-blend-multiply cursor-pointer transition-all duration-300"
-            />
+              className="w-full h-auto max-h-[340px] sm:max-h-[400px] object-contain cursor-pointer transition-all duration-300 drop-shadow-xl"
+            >
+              <source src="/mascot-video.webm" type="video/webm" />
+              <source src="/mascot-video.mp4" type="video/mp4" />
+            </video>
 
             {/* Sound Toggle Button Badge */}
             <button
