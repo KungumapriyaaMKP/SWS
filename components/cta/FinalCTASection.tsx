@@ -95,36 +95,38 @@ export function FinalCTASection() {
         </div>
 
         {/* Right Video Player with Audio Controls */}
-        <div className="lg:col-span-5 relative flex items-center justify-center w-full py-4 group">
-          <video
-            ref={videoRef}
-            src="/mascot-video.mp4"
-            autoPlay
-            loop
-            muted={isMuted}
-            playsInline
-            onClick={toggleAudio}
-            className="w-full h-auto max-w-md sm:max-w-lg object-contain mix-blend-multiply cursor-pointer"
-          />
+        <div className="lg:col-span-5 relative flex items-center justify-center w-full py-2 group">
+          <div className="relative flex items-center justify-center max-w-[280px] sm:max-w-[340px] lg:max-w-[360px]">
+            <video
+              ref={videoRef}
+              src="/mascot-video.mp4"
+              autoPlay
+              loop
+              muted={isMuted}
+              playsInline
+              onClick={toggleAudio}
+              className="w-full h-auto max-h-[340px] sm:max-h-[400px] object-contain mix-blend-multiply cursor-pointer transition-all duration-300"
+            />
 
-          {/* Sound Toggle Button Badge */}
-          <button
-            onClick={toggleAudio}
-            className="absolute bottom-6 right-6 z-30 px-3.5 py-2 rounded-none bg-[#3B0764] text-white text-[11px] font-extrabold tracking-wider uppercase flex items-center gap-2 border border-purple-400/40 shadow-2xl hover:bg-pink-600 transition-all cursor-pointer"
-            aria-label="Toggle Audio"
-          >
-            {isMuted ? (
-              <>
-                <VolumeX className="w-4 h-4 text-pink-400" />
-                <span>UNMUTE AUDIO</span>
-              </>
-            ) : (
-              <>
-                <Volume2 className="w-4 h-4 text-emerald-400 animate-pulse" />
-                <span>AUDIO ON 🔊</span>
-              </>
-            )}
-          </button>
+            {/* Sound Toggle Button Badge */}
+            <button
+              onClick={toggleAudio}
+              className="absolute bottom-2 right-2 z-30 px-3 py-1.5 rounded-none bg-[#3B0764] text-white text-[10px] sm:text-[11px] font-extrabold tracking-wider uppercase flex items-center gap-1.5 border border-purple-400/40 shadow-2xl hover:bg-pink-600 transition-all cursor-pointer"
+              aria-label="Toggle Audio"
+            >
+              {isMuted ? (
+                <>
+                  <VolumeX className="w-3.5 h-3.5 text-pink-400" />
+                  <span>UNMUTE AUDIO</span>
+                </>
+              ) : (
+                <>
+                  <Volume2 className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+                  <span>AUDIO ON 🔊</span>
+                </>
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </section>
